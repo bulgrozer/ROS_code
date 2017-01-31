@@ -1,0 +1,8 @@
+prefix=/home/danieloche/Documents/ROS_code/devel
+
+Name: sensors
+Description: Description of sensors
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/danieloche/Documents/ROS_code/devel/lib 
+Requires: 

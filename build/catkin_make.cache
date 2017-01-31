@@ -1,0 +1,2 @@
+sensors
+-DCATKIN_DEVEL_PREFIX=/home/danieloche/Documents/ROS_code/devel -DCMAKE_INSTALL_PREFIX=/home/danieloche/Documents/ROS_code/install -G Unix Makefiles
