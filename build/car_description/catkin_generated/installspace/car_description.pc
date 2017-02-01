@@ -1,0 +1,8 @@
+prefix=/home/danieloche/Documents/ROS_code/install
+
+Name: car_description
+Description: Description of car_description
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/danieloche/Documents/ROS_code/install/lib 
+Requires: 

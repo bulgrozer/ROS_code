@@ -1,0 +1,8 @@
+prefix=/home/danieloche/Documents/ROS_code/install
+
+Name: car_gazebo
+Description: Description of car_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/danieloche/Documents/ROS_code/install/lib 
+Requires: 

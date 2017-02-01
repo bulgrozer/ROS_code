@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
+find_package(gazebo REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -100,8 +100,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES sensors
+  INCLUDE_DIRS include
+  LIBRARIES sensors
   CATKIN_DEPENDS roscpp std_msgs
   DEPENDS 
 	gazebo_ros
@@ -115,8 +115,10 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
+include_directories(include 
+	${catkin_INCLUDE_DIRS} 
+	${GAZEBO_INCLUDE_DIRS} 
+	${SDFormat_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
