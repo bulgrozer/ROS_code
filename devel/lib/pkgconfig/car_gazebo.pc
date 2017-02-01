@@ -2,7 +2,7 @@ prefix=/home/danieloche/Documents/ROS_code/devel
 
 Name: car_gazebo
 Description: Description of car_gazebo
-Version: 0.0.0
+Version: 0.1.4
 Cflags: 
 Libs: -L/home/danieloche/Documents/ROS_code/devel/lib 
-Requires: 
+Requires: gazebo_ros roscpp std_msgs
