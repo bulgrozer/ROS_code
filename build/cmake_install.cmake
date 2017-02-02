@@ -117,9 +117,15 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/danieloche/Documents/ROS_code/build/gtest/cmake_install.cmake")
+  include("/home/danieloche/Documents/ROS_code/build/baxter_common/cmake_install.cmake")
+  include("/home/danieloche/Documents/ROS_code/build/baxter_description/cmake_install.cmake")
+  include("/home/danieloche/Documents/ROS_code/build/rethink_ee_description/cmake_install.cmake")
+  include("/home/danieloche/Documents/ROS_code/build/baxter_maintenance_msgs/cmake_install.cmake")
+  include("/home/danieloche/Documents/ROS_code/build/baxter_core_msgs/cmake_install.cmake")
   include("/home/danieloche/Documents/ROS_code/build/car_description/cmake_install.cmake")
   include("/home/danieloche/Documents/ROS_code/build/car_gazebo/cmake_install.cmake")
   include("/home/danieloche/Documents/ROS_code/build/sensors/cmake_install.cmake")
+  include("/home/danieloche/Documents/ROS_code/build/car_control/cmake_install.cmake")
 
 endif()
 

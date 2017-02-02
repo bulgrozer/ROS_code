@@ -3,6 +3,6 @@ prefix=/home/danieloche/Documents/ROS_code/devel
 Name: sensors
 Description: Description of sensors
 Version: 0.0.0
-Cflags: -I/home/danieloche/Documents/ROS_code/src/sensors/include
-Libs: -L/home/danieloche/Documents/ROS_code/devel/lib -lsensors
+Cflags: 
+Libs: -L/home/danieloche/Documents/ROS_code/devel/lib 
 Requires: roscpp std_msgs gazebo_ros

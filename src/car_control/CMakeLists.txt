@@ -5,8 +5,8 @@ project(car_control)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  ros_control
-  ros_controllers
+ # ros_control
+ # ros_controllers
 )
 
 ## System dependencies are found with CMake's conventions
@@ -101,7 +101,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES car_control
-#  CATKIN_DEPENDS ros_control ros_controllers
+  CATKIN_DEPENDS ros_control ros_controllers
 #  DEPENDS system_lib
 )
 

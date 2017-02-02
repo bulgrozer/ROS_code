@@ -1,2 +1,2 @@
-car_description:car_gazebo:sensors
+baxter_common:baxter_core_msgs:baxter_description:baxter_maintenance_msgs:car_control:car_description:car_gazebo:rethink_ee_description:sensors
 -DCATKIN_DEVEL_PREFIX=/home/danieloche/Documents/ROS_code/devel -DCMAKE_INSTALL_PREFIX=/home/danieloche/Documents/ROS_code/install -G Unix Makefiles
