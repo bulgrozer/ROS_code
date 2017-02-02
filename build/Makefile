@@ -1894,6 +1894,19 @@ gazebo_msgs_generate_messages_lisp/fast:
 	$(MAKE) -f car_description/CMakeFiles/gazebo_msgs_generate_messages_lisp.dir/build.make car_description/CMakeFiles/gazebo_msgs_generate_messages_lisp.dir/build
 .PHONY : gazebo_msgs_generate_messages_lisp/fast
 
+#=============================================================================
+# Target rules for targets named gazebo_tutorials
+
+# Build rule for target.
+gazebo_tutorials: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gazebo_tutorials
+.PHONY : gazebo_tutorials
+
+# fast build rule for target.
+gazebo_tutorials/fast:
+	$(MAKE) -f gazebo_ros_demos/custom_plugin_tutorial/CMakeFiles/gazebo_tutorials.dir/build.make gazebo_ros_demos/custom_plugin_tutorial/CMakeFiles/gazebo_tutorials.dir/build
+.PHONY : gazebo_tutorials/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -2040,6 +2053,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... gazebo_msgs_generate_messages_eus"
 	@echo "... gazebo_msgs_generate_messages_lisp"
+	@echo "... gazebo_tutorials"
 .PHONY : help
 
 
