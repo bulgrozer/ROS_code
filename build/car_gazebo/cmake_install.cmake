@@ -1,8 +1,8 @@
-# Install script for directory: /home/danieloche/Documents/ROS_code/src/car_gazebo
+# Install script for directory: /home/dloche/ROS_code/src/car_gazebo
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/danieloche/Documents/ROS_code/install")
+  set(CMAKE_INSTALL_PREFIX "/home/dloche/ROS_code/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/danieloche/Documents/ROS_code/build/car_gazebo/catkin_generated/installspace/car_gazebo.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/dloche/ROS_code/build/car_gazebo/catkin_generated/installspace/car_gazebo.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/car_gazebo/cmake" TYPE FILE FILES
-    "/home/danieloche/Documents/ROS_code/build/car_gazebo/catkin_generated/installspace/car_gazeboConfig.cmake"
-    "/home/danieloche/Documents/ROS_code/build/car_gazebo/catkin_generated/installspace/car_gazeboConfig-version.cmake"
+    "/home/dloche/ROS_code/build/car_gazebo/catkin_generated/installspace/car_gazeboConfig.cmake"
+    "/home/dloche/ROS_code/build/car_gazebo/catkin_generated/installspace/car_gazeboConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/car_gazebo" TYPE FILE FILES "/home/danieloche/Documents/ROS_code/src/car_gazebo/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/car_gazebo" TYPE FILE FILES "/home/dloche/ROS_code/src/car_gazebo/package.xml")
 endif()
 

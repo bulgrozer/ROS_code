@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/danieloche/Documents/ROS_code/src
+CMAKE_SOURCE_DIR = /home/dloche/ROS_code/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/danieloche/Documents/ROS_code/build
+CMAKE_BINARY_DIR = /home/dloche/ROS_code/build
 
 # Utility rule file for doxygen.
 
@@ -67,6 +67,6 @@ CMakeFiles/doxygen.dir/clean:
 .PHONY : CMakeFiles/doxygen.dir/clean
 
 CMakeFiles/doxygen.dir/depend:
-	cd /home/danieloche/Documents/ROS_code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/danieloche/Documents/ROS_code/src /home/danieloche/Documents/ROS_code/src /home/danieloche/Documents/ROS_code/build /home/danieloche/Documents/ROS_code/build /home/danieloche/Documents/ROS_code/build/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dloche/ROS_code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dloche/ROS_code/src /home/dloche/ROS_code/src /home/dloche/ROS_code/build /home/dloche/ROS_code/build /home/dloche/ROS_code/build/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/doxygen.dir/depend
 

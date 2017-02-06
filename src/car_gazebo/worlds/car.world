@@ -1,5 +1,7 @@
-  <sdf version="1.4">
-    <world name="default">
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <!-- We use a custom world for the rrbot so that the camera angle is launched correctly -->
+     <world name="default">
       <include>
         <uri>model://sun</uri>
       </include>
@@ -7,4 +9,4 @@
         <uri>model://ground_plane</uri>
       </include>
     </world>
-  </sdf>
+</sdf>

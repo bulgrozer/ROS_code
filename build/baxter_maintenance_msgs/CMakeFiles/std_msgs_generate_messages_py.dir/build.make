@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/danieloche/Documents/ROS_code/src
+CMAKE_SOURCE_DIR = /home/dloche/ROS_code/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/danieloche/Documents/ROS_code/build
+CMAKE_BINARY_DIR = /home/dloche/ROS_code/build
 
 # Utility rule file for std_msgs_generate_messages_py.
 
@@ -63,10 +63,10 @@ baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build: std_
 .PHONY : baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build
 
 baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/clean:
-	cd /home/danieloche/Documents/ROS_code/build/baxter_maintenance_msgs && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/dloche/ROS_code/build/baxter_maintenance_msgs && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/clean
 
 baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/depend:
-	cd /home/danieloche/Documents/ROS_code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/danieloche/Documents/ROS_code/src /home/danieloche/Documents/ROS_code/src/baxter_maintenance_msgs /home/danieloche/Documents/ROS_code/build /home/danieloche/Documents/ROS_code/build/baxter_maintenance_msgs /home/danieloche/Documents/ROS_code/build/baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dloche/ROS_code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dloche/ROS_code/src /home/dloche/ROS_code/src/baxter_maintenance_msgs /home/dloche/ROS_code/build /home/dloche/ROS_code/build/baxter_maintenance_msgs /home/dloche/ROS_code/build/baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : baxter_maintenance_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/depend
 

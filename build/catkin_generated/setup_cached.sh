@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/danieloche/Documents/ROS_code/build"
+export PWD="/home/dloche/ROS_code/build"

@@ -1,8 +1,8 @@
-prefix=/home/danieloche/Documents/ROS_code/devel
+prefix=/home/dloche/ROS_code/devel
 
 Name: rrbot_description
 Description: Description of rrbot_description
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/danieloche/Documents/ROS_code/devel/lib 
+Libs: -L/home/dloche/ROS_code/devel/lib 
 Requires: 
