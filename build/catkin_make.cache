@@ -1,2 +1,2 @@
-baxter_core_msgs:baxter_description:baxter_maintenance_msgs:car_control:car_description:car_gazebo:custom_plugin_tutorial:rethink_ee_description:rrbot_control:rrbot_description:rrbot_gazebo:sensors
+baxter_core_msgs:baxter_description:baxter_gazebo:baxter_maintenance_msgs:car_control:car_description:car_gazebo:rrbot_control:rrbot_description:rrbot_gazebo:sensors
 -DCATKIN_DEVEL_PREFIX=/home/dloche/ROS_code/devel -DCMAKE_INSTALL_PREFIX=/home/dloche/ROS_code/install -G Unix Makefiles
