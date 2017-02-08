@@ -56,28 +56,6 @@ CMAKE_BINARY_DIR = /home/dloche/ROS_code/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -88,16 +66,27 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
 
-# Special rule for the target install/strip
-install/strip/fast: install/strip
+# Special rule for the target test
+test/fast: test
 
-.PHONY : install/strip/fast
+.PHONY : test/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
 
 # Special rule for the target install
 install: preinstall
@@ -111,27 +100,38 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
 
-# Special rule for the target install/local
-install/local/fast: install/local
+# Special rule for the target install/strip
+install/strip/fast: install/strip
 
-.PHONY : install/local/fast
+.PHONY : install/strip/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
 
-# Special rule for the target test
-test/fast: test
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
 
-.PHONY : test/fast
+.PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,199 +166,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-sensors/CMakeFiles/getData.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/getData.dir/rule
-.PHONY : sensors/CMakeFiles/getData.dir/rule
+sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-getData: sensors/CMakeFiles/getData.dir/rule
+sensors_generate_messages_lisp: sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule
 
-.PHONY : getData
+.PHONY : sensors_generate_messages_lisp
 
 # fast build rule for target.
-getData/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/getData.dir/build.make sensors/CMakeFiles/getData.dir/build
-.PHONY : getData/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensor.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensor.dir/rule
-.PHONY : sensors/CMakeFiles/sensor.dir/rule
-
-# Convenience name for target.
-sensor: sensors/CMakeFiles/sensor.dir/rule
-
-.PHONY : sensor
-
-# fast build rule for target.
-sensor/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensor.dir/build.make sensors/CMakeFiles/sensor.dir/build
-.PHONY : sensor/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_genpy.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_genpy.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_genpy.dir/rule
-
-# Convenience name for target.
-sensors_genpy: sensors/CMakeFiles/sensors_genpy.dir/rule
-
-.PHONY : sensors_genpy
-
-# fast build rule for target.
-sensors_genpy/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_genpy.dir/build.make sensors/CMakeFiles/sensors_genpy.dir/build
-.PHONY : sensors_genpy/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_gennodejs.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_gennodejs.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_gennodejs.dir/rule
-
-# Convenience name for target.
-sensors_gennodejs: sensors/CMakeFiles/sensors_gennodejs.dir/rule
-
-.PHONY : sensors_gennodejs
-
-# fast build rule for target.
-sensors_gennodejs/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_gennodejs.dir/build.make sensors/CMakeFiles/sensors_gennodejs.dir/build
-.PHONY : sensors_gennodejs/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-sensors_generate_messages_cpp: sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule
-
-.PHONY : sensors_generate_messages_cpp
-
-# fast build rule for target.
-sensors_generate_messages_cpp/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_cpp.dir/build.make sensors/CMakeFiles/sensors_generate_messages_cpp.dir/build
-.PHONY : sensors_generate_messages_cpp/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule
-.PHONY : sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule
-
-# Convenience name for target.
-_sensors_generate_messages_check_deps_AddTwoInts: sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule
-
-.PHONY : _sensors_generate_messages_check_deps_AddTwoInts
-
-# fast build rule for target.
-_sensors_generate_messages_check_deps_AddTwoInts/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/build.make sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/build
-.PHONY : _sensors_generate_messages_check_deps_AddTwoInts/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_generate_messages_py.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_py.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_generate_messages_py.dir/rule
-
-# Convenience name for target.
-sensors_generate_messages_py: sensors/CMakeFiles/sensors_generate_messages_py.dir/rule
-
-.PHONY : sensors_generate_messages_py
-
-# fast build rule for target.
-sensors_generate_messages_py/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_py.dir/build.make sensors/CMakeFiles/sensors_generate_messages_py.dir/build
-.PHONY : sensors_generate_messages_py/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-sensors_generate_messages_nodejs: sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule
-
-.PHONY : sensors_generate_messages_nodejs
-
-# fast build rule for target.
-sensors_generate_messages_nodejs/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/build.make sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/build
-.PHONY : sensors_generate_messages_nodejs/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule
-.PHONY : sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule
-
-# Convenience name for target.
-_sensors_generate_messages_check_deps_Num: sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule
-
-.PHONY : _sensors_generate_messages_check_deps_Num
-
-# fast build rule for target.
-_sensors_generate_messages_check_deps_Num/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/build.make sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/build
-.PHONY : _sensors_generate_messages_check_deps_Num/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_genlisp.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_genlisp.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_genlisp.dir/rule
-
-# Convenience name for target.
-sensors_genlisp: sensors/CMakeFiles/sensors_genlisp.dir/rule
-
-.PHONY : sensors_genlisp
-
-# fast build rule for target.
-sensors_genlisp/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_genlisp.dir/build.make sensors/CMakeFiles/sensors_genlisp.dir/build
-.PHONY : sensors_genlisp/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_generate_messages.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_generate_messages.dir/rule
-
-# Convenience name for target.
-sensors_generate_messages: sensors/CMakeFiles/sensors_generate_messages.dir/rule
-
-.PHONY : sensors_generate_messages
-
-# fast build rule for target.
-sensors_generate_messages/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages.dir/build.make sensors/CMakeFiles/sensors_generate_messages.dir/build
-.PHONY : sensors_generate_messages/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_gencpp.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_gencpp.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_gencpp.dir/rule
-
-# Convenience name for target.
-sensors_gencpp: sensors/CMakeFiles/sensors_gencpp.dir/rule
-
-.PHONY : sensors_gencpp
-
-# fast build rule for target.
-sensors_gencpp/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_gencpp.dir/build.make sensors/CMakeFiles/sensors_gencpp.dir/build
-.PHONY : sensors_gencpp/fast
-
-# Convenience name for target.
-sensors/CMakeFiles/sensors_geneus.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_geneus.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_geneus.dir/rule
-
-# Convenience name for target.
-sensors_geneus: sensors/CMakeFiles/sensors_geneus.dir/rule
-
-.PHONY : sensors_geneus
-
-# fast build rule for target.
-sensors_geneus/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_geneus.dir/build.make sensors/CMakeFiles/sensors_geneus.dir/build
-.PHONY : sensors_geneus/fast
+sensors_generate_messages_lisp/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_lisp.dir/build.make sensors/CMakeFiles/sensors_generate_messages_lisp.dir/build
+.PHONY : sensors_generate_messages_lisp/fast
 
 # Convenience name for target.
 sensors/CMakeFiles/sensors_generate_messages_eus.dir/rule:
@@ -376,19 +196,241 @@ sensors_generate_messages_eus/fast:
 .PHONY : sensors_generate_messages_eus/fast
 
 # Convenience name for target.
-sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule
-.PHONY : sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule
+sensors/CMakeFiles/sensors_geneus.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_geneus.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_geneus.dir/rule
 
 # Convenience name for target.
-sensors_generate_messages_lisp: sensors/CMakeFiles/sensors_generate_messages_lisp.dir/rule
+sensors_geneus: sensors/CMakeFiles/sensors_geneus.dir/rule
 
-.PHONY : sensors_generate_messages_lisp
+.PHONY : sensors_geneus
 
 # fast build rule for target.
-sensors_generate_messages_lisp/fast:
-	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_lisp.dir/build.make sensors/CMakeFiles/sensors_generate_messages_lisp.dir/build
-.PHONY : sensors_generate_messages_lisp/fast
+sensors_geneus/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_geneus.dir/build.make sensors/CMakeFiles/sensors_geneus.dir/build
+.PHONY : sensors_geneus/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_gencpp.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_gencpp.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_gencpp.dir/rule
+
+# Convenience name for target.
+sensors_gencpp: sensors/CMakeFiles/sensors_gencpp.dir/rule
+
+.PHONY : sensors_gencpp
+
+# fast build rule for target.
+sensors_gencpp/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_gencpp.dir/build.make sensors/CMakeFiles/sensors_gencpp.dir/build
+.PHONY : sensors_gencpp/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_generate_messages.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_generate_messages.dir/rule
+
+# Convenience name for target.
+sensors_generate_messages: sensors/CMakeFiles/sensors_generate_messages.dir/rule
+
+.PHONY : sensors_generate_messages
+
+# fast build rule for target.
+sensors_generate_messages/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages.dir/build.make sensors/CMakeFiles/sensors_generate_messages.dir/build
+.PHONY : sensors_generate_messages/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_genlisp.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_genlisp.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_genlisp.dir/rule
+
+# Convenience name for target.
+sensors_genlisp: sensors/CMakeFiles/sensors_genlisp.dir/rule
+
+.PHONY : sensors_genlisp
+
+# fast build rule for target.
+sensors_genlisp/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_genlisp.dir/build.make sensors/CMakeFiles/sensors_genlisp.dir/build
+.PHONY : sensors_genlisp/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule
+.PHONY : sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule
+
+# Convenience name for target.
+_sensors_generate_messages_check_deps_Num: sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/rule
+
+.PHONY : _sensors_generate_messages_check_deps_Num
+
+# fast build rule for target.
+_sensors_generate_messages_check_deps_Num/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/build.make sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num.dir/build
+.PHONY : _sensors_generate_messages_check_deps_Num/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+sensors_generate_messages_nodejs: sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/rule
+
+.PHONY : sensors_generate_messages_nodejs
+
+# fast build rule for target.
+sensors_generate_messages_nodejs/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/build.make sensors/CMakeFiles/sensors_generate_messages_nodejs.dir/build
+.PHONY : sensors_generate_messages_nodejs/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_generate_messages_py.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_py.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_generate_messages_py.dir/rule
+
+# Convenience name for target.
+sensors_generate_messages_py: sensors/CMakeFiles/sensors_generate_messages_py.dir/rule
+
+.PHONY : sensors_generate_messages_py
+
+# fast build rule for target.
+sensors_generate_messages_py/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_py.dir/build.make sensors/CMakeFiles/sensors_generate_messages_py.dir/build
+.PHONY : sensors_generate_messages_py/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/control.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/control.dir/rule
+.PHONY : sensors/CMakeFiles/control.dir/rule
+
+# Convenience name for target.
+control: sensors/CMakeFiles/control.dir/rule
+
+.PHONY : control
+
+# fast build rule for target.
+control/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/control.dir/build.make sensors/CMakeFiles/control.dir/build
+.PHONY : control/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule
+.PHONY : sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule
+
+# Convenience name for target.
+_sensors_generate_messages_check_deps_AddTwoInts: sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/rule
+
+.PHONY : _sensors_generate_messages_check_deps_AddTwoInts
+
+# fast build rule for target.
+_sensors_generate_messages_check_deps_AddTwoInts/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/build.make sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts.dir/build
+.PHONY : _sensors_generate_messages_check_deps_AddTwoInts/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+sensors_generate_messages_cpp: sensors/CMakeFiles/sensors_generate_messages_cpp.dir/rule
+
+.PHONY : sensors_generate_messages_cpp
+
+# fast build rule for target.
+sensors_generate_messages_cpp/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_generate_messages_cpp.dir/build.make sensors/CMakeFiles/sensors_generate_messages_cpp.dir/build
+.PHONY : sensors_generate_messages_cpp/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_gennodejs.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_gennodejs.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_gennodejs.dir/rule
+
+# Convenience name for target.
+sensors_gennodejs: sensors/CMakeFiles/sensors_gennodejs.dir/rule
+
+.PHONY : sensors_gennodejs
+
+# fast build rule for target.
+sensors_gennodejs/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_gennodejs.dir/build.make sensors/CMakeFiles/sensors_gennodejs.dir/build
+.PHONY : sensors_gennodejs/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensors_genpy.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_genpy.dir/rule
+.PHONY : sensors/CMakeFiles/sensors_genpy.dir/rule
+
+# Convenience name for target.
+sensors_genpy: sensors/CMakeFiles/sensors_genpy.dir/rule
+
+.PHONY : sensors_genpy
+
+# fast build rule for target.
+sensors_genpy/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_genpy.dir/build.make sensors/CMakeFiles/sensors_genpy.dir/build
+.PHONY : sensors_genpy/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/sensor.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensor.dir/rule
+.PHONY : sensors/CMakeFiles/sensor.dir/rule
+
+# Convenience name for target.
+sensor: sensors/CMakeFiles/sensor.dir/rule
+
+.PHONY : sensor
+
+# fast build rule for target.
+sensor/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensor.dir/build.make sensors/CMakeFiles/sensor.dir/build
+.PHONY : sensor/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/getData.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/getData.dir/rule
+.PHONY : sensors/CMakeFiles/getData.dir/rule
+
+# Convenience name for target.
+getData: sensors/CMakeFiles/getData.dir/rule
+
+.PHONY : getData
+
+# fast build rule for target.
+getData/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/getData.dir/build.make sensors/CMakeFiles/getData.dir/build
+.PHONY : getData/fast
+
+src/control.o: src/control.cpp.o
+
+.PHONY : src/control.o
+
+# target to build an object file
+src/control.cpp.o:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/control.dir/build.make sensors/CMakeFiles/control.dir/src/control.cpp.o
+.PHONY : src/control.cpp.o
+
+src/control.i: src/control.cpp.i
+
+.PHONY : src/control.i
+
+# target to preprocess a source file
+src/control.cpp.i:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/control.dir/build.make sensors/CMakeFiles/control.dir/src/control.cpp.i
+.PHONY : src/control.cpp.i
+
+src/control.s: src/control.cpp.s
+
+.PHONY : src/control.s
+
+# target to generate assembly for a file
+src/control.cpp.s:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/control.dir/build.make sensors/CMakeFiles/control.dir/src/control.cpp.s
+.PHONY : src/control.cpp.s
 
 src/getData.o: src/getData.cpp.o
 
@@ -450,28 +492,32 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... list_install_components"
-	@echo "... install/strip"
-	@echo "... getData"
-	@echo "... sensor"
-	@echo "... sensors_genpy"
+	@echo "... sensors_generate_messages_lisp"
+	@echo "... sensors_generate_messages_eus"
+	@echo "... sensors_geneus"
+	@echo "... sensors_gencpp"
+	@echo "... sensors_generate_messages"
+	@echo "... test"
+	@echo "... sensors_genlisp"
+	@echo "... _sensors_generate_messages_check_deps_Num"
+	@echo "... install/local"
+	@echo "... sensors_generate_messages_nodejs"
+	@echo "... sensors_generate_messages_py"
+	@echo "... control"
+	@echo "... _sensors_generate_messages_check_deps_AddTwoInts"
+	@echo "... sensors_generate_messages_cpp"
 	@echo "... sensors_gennodejs"
 	@echo "... install"
-	@echo "... sensors_generate_messages_cpp"
-	@echo "... _sensors_generate_messages_check_deps_AddTwoInts"
-	@echo "... sensors_generate_messages_py"
-	@echo "... sensors_generate_messages_nodejs"
-	@echo "... install/local"
-	@echo "... _sensors_generate_messages_check_deps_Num"
-	@echo "... sensors_genlisp"
-	@echo "... test"
-	@echo "... sensors_generate_messages"
-	@echo "... sensors_gencpp"
-	@echo "... sensors_geneus"
-	@echo "... sensors_generate_messages_eus"
-	@echo "... sensors_generate_messages_lisp"
+	@echo "... sensors_genpy"
+	@echo "... sensor"
+	@echo "... getData"
+	@echo "... install/strip"
+	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... src/control.o"
+	@echo "... src/control.i"
+	@echo "... src/control.s"
 	@echo "... src/getData.o"
 	@echo "... src/getData.i"
 	@echo "... src/getData.s"

@@ -1,0 +1,8 @@
+prefix=/home/dloche/ROS_code/install
+
+Name: baxter_gazebo
+Description: Description of baxter_gazebo
+Version: 0.1.4
+Cflags: 
+Libs: -L/home/dloche/ROS_code/install/lib 
+Requires: gazebo_ros roscpp std_msgs

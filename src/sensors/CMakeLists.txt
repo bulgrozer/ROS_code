@@ -202,3 +202,7 @@ add_dependencies(sensor beginner_tutorials_generate_messages_cpp)
 add_executable(getData src/getData.cpp)
 target_link_libraries(getData ${catkin_LIBRARIES})
 add_dependencies(getData beginner_tutorials_generate_messages_cpp)
+
+add_executable(control src/control.cpp)
+target_link_libraries(control ${catkin_LIBRARIES})
+

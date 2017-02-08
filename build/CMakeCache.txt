@@ -607,6 +607,12 @@ baxter_description_BINARY_DIR:STATIC=/home/dloche/ROS_code/build/baxter_descript
 baxter_description_SOURCE_DIR:STATIC=/home/dloche/ROS_code/src/baxter_description
 
 //Value Computed by CMake
+baxter_gazebo_BINARY_DIR:STATIC=/home/dloche/ROS_code/build/baxter_gazebo
+
+//Value Computed by CMake
+baxter_gazebo_SOURCE_DIR:STATIC=/home/dloche/ROS_code/src/baxter_gazebo
+
+//Value Computed by CMake
 baxter_maintenance_msgs_BINARY_DIR:STATIC=/home/dloche/ROS_code/build/baxter_maintenance_msgs
 
 //Value Computed by CMake
@@ -961,7 +967,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=14
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=13
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
