@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="our_car_model_master">
+<robot name="our_car_master_model">
 
 	<!-- Chassis -->
 	<link name="chassis">
@@ -136,7 +136,7 @@
 	</link>
 
 	<gazebo>
-	<plugin name="wheel_controller" filename="libcommande_roues_master_plugin.so"/>
+	<plugin name="wheel_controller_master" filename="libcommande_roues_master_plugin.so"/>
 	</gazebo>
 
 	<!-- Mise en place des liens -->

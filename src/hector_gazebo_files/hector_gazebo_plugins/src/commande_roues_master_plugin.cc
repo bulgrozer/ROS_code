@@ -83,7 +83,7 @@ namespace gazebo
 			// Create a named topic, and subscribe to it.
 			ros::SubscribeOptions so =
 				ros::SubscribeOptions::create<std_msgs::Float64>(
-						"/" + this->model->GetName() + "/velocity_master_cmd",
+						"/" + this->model->GetName() + "/velocity_cmd",
 						1,
 						boost::bind(&CommandeRouesPlugin::OnRosMsg, this, _1),
 						ros::VoidPtr(), &this->rosQueue);

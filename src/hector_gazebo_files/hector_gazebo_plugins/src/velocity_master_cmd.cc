@@ -19,7 +19,7 @@ int main(int _argc, char **_argv)
 
   // Publish to the wheel topic
   gazebo::transport::PublisherPtr pub =
-    node->Advertise<gazebo::msgs::Vector3d>("/car_model_master/velocity_master_cmd");
+    node->Advertise<gazebo::msgs::Vector3d>("/car_master_model/velocity_master_cmd");
 
   // Wait for a subscriber to connect to this publisher
   pub->WaitForConnection();

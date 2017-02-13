@@ -133,10 +133,10 @@ namespace gazebo
 		public: void OnRosMsg(const std_msgs::Float64ConstPtr &_msg)
 		{
 
-			//this->joint_right_wheel->SetVelocity(0,(-1)*_msg->data);
-			//this->joint_left_wheel->SetVelocity(0,(-1)*_msg->data);
+		  this->joint_right_wheel->SetVelocity(0,(-1)*_msg->data);
+			this->joint_left_wheel->SetVelocity(0,(-1)*_msg->data);
 
-			this->model->SetLinearVel(math::Vector3(_msg->data, 0, 0));
+			//this->model->SetLinearVel(math::Vector3(_msg->data, 0, 0));
 
 		}
 
@@ -159,10 +159,10 @@ namespace gazebo
     private: void OnMsg(ConstVector3dPtr &_msg)
     {
 
-		  //this->joint_right_wheel->SetVelocity(0,(-1)*_msg->x());
-      //this->joint_left_wheel->SetVelocity(0,(-1)*_msg->x());
+		  this->joint_right_wheel->SetVelocity(0,(-1)*_msg->x());
+      this->joint_left_wheel->SetVelocity(0,(-1)*_msg->x());
 
-			this->model->SetLinearVel(math::Vector3(_msg->x(), 0, 0));
+			//this->model->SetLinearVel(math::Vector3(_msg->x(), 0, 0));
 
     }
 

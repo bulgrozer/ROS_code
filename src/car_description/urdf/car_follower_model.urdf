@@ -183,20 +183,7 @@
 	</gazebo>
 
 <gazebo>
-  <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-    <alwaysOn>true</alwaysOn>
-    <updateRate>100</updateRate>
-    <leftJoint>chassis_to_front_left_wheel</leftJoint>
-    <rightJoint>chassis_to_front_right_wheel</rightJoint>
-    <wheelSeparation>1.65</wheelSeparation>
-    <wheelDiameter>0.4</wheelDiameter>
-    <torque>20</torque>
-    <commandTopic>car_follower_model/velocity_follower_cmd</commandTopic>
-    <odometryTopic>car_follower_model/odom_diffdrive</odometryTopic>
-    <odometryFrame>odom</odometryFrame>
-    <robotBaseFrame>footprint</robotBaseFrame>
-		<legacyMode>true</legacyMode>
-  </plugin>
+  <plugin name="wheel_controller_follower" filename="libcommande_roues_follower_plugin.so"/>
 </gazebo>
 
 	<!-- Mise en place des liens -->
