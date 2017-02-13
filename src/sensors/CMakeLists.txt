@@ -212,4 +212,7 @@ target_link_libraries(control ${catkin_LIBRARIES})
 add_executable(distanceSecurityCalculator src/distanceSecurityCalculator.cpp)
 target_link_libraries(distanceSecurityCalculator ${catkin_LIBRARIES})
 
+add_executable(distanceSecurityCalculatorClass src/distanceSecurityCalculatorClass.cpp)
+target_link_libraries(distanceSecurityCalculatorClass ${catkin_LIBRARIES})
+
 
