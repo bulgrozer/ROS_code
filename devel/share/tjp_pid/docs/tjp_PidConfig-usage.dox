@@ -1,0 +1,12 @@
+\subsubsection usage Usage
+\verbatim
+<node name="tjp_pid" pkg="tjp_pid" type="tjp_pid">
+  <param name="Kp_scale" type="double" value="10.0" />
+  <param name="Kp" type="double" value="0.1" />
+  <param name="Ki_scale" type="double" value="10.0" />
+  <param name="Ki" type="double" value="0.1" />
+  <param name="Kd_scale" type="double" value="10.0" />
+  <param name="Kd" type="double" value="0.1" />
+</node>
+\endverbatim
+

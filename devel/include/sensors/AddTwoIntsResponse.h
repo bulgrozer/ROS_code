@@ -139,7 +139,6 @@ struct Definition< ::sensors::AddTwoIntsResponse_<ContainerAllocator> >
   {
     return "int64 sum\n\
 \n\
-\n\
 ";
   }
 

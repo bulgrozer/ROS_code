@@ -209,3 +209,7 @@ target_link_libraries(getDataRrbot ${catkin_LIBRARIES})
 add_executable(control src/control.cpp)
 target_link_libraries(control ${catkin_LIBRARIES})
 
+add_executable(distanceSecurityCalculator src/distanceSecurityCalculator.cpp)
+target_link_libraries(distanceSecurityCalculator ${catkin_LIBRARIES})
+
+
