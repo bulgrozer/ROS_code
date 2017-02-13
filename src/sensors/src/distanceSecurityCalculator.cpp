@@ -20,14 +20,6 @@ void sensorCallback(const gazebo_msgs::LinkStates::ConstPtr& vel)
 	ROS_INFO("velocity x: [%f]", vel->twist[1].linear.x);
 	ROS_INFO("velocity y: [%f]", vel->twist[1].linear.y);
 
-
-	// PUBLISHER
-	ros::NodeHandle np;    //handle for the publisher
-
-	// %Tag(PUBLISHER)%
- 	 ros::Publisher sonar_pub = np.advertise<std_msgs::Float64>("distanceOrder_topic", 1000);
-	// %EndTag(PUBLISHER)%
-
 	// compute of distance setpoints
 	  std_msgs::Float64 d_setpoint;
 
@@ -37,7 +29,7 @@ void sensorCallback(const gazebo_msgs::LinkStates::ConstPtr& vel)
     	   sonar_pub.publish(d_setpoint);
 	// %EndTag(PUBLISH)%
 
-          ROS_INFO("j'ai ecrit : [%f]", d_setpoint );
+         ROS_INFO("j'ai ecrit : [%f]", d_setpoint );
 
 	// %Tag(SPINONCE)%
 	    ros::spinOnce();
@@ -57,13 +49,18 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "distanceSecurityCalculator");
 
  
-  ros::NodeHandle ns;    /*handle for the subscriber*/
-
-	 
+  ros::NodeHandle ns;    /*handle for the subscriber*/	 
  
-// %Tag(SUBSCRIBER)%
-  ros::Subscriber sonar_sub = ns.subscribe("/gazebo/link_states",1000,sensorCallback);
-// %EndTag(SUBSCRIBER)%
+  // %Tag(SUBSCRIBER)%
+  ros::Subscriber sonar_sub = ns.subscribe("/gazebo/link_states",1,sensorCallback);
+  // %EndTag(SUBSCRIBER)%
+	// PUBLISHER
+	ros::NodeHandle np;    //handle for the publisher
+
+	// %Tag(PUBLISHER)%
+ 	 sonar_pub = np.advertise<std_msgs::Float64>("distanceOrder_topic", 1);
+	// %EndTag(PUBLISHER)%
+
 
 	
  
