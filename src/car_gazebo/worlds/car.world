@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
-  <!-- We use a custom world for the rrbot so that the camera angle is launched correctly -->
+
     <world name="default">
 
 			<scene>
@@ -23,8 +23,8 @@
 		        <surface>
 		          <friction>
 		            <ode>
-		              <mu>100</mu>
-		              <mu2>50</mu2>
+		              <mu>0</mu>
+		              <mu2>0</mu2>
 		            </ode>
 		          </friction>
 		        </surface>

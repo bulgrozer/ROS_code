@@ -1,9 +1,35 @@
 <?xml version="1.0"?>
 <launch>
-    <include file="$(find gazebo_ros)/launch/empty_world.launch">
-      <arg name="world_name" value="$(find car_gazebo)/worlds/car.world"/>
-      <!-- more default parameters can be changed here -->
-    </include>
-<!-- Spawn a robot into Gazebo -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find car_description)/urdf/car_model.urdf -urdf -z 1 -model car_model" />
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find car_gazebo)/worlds/car.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+	<!-- Spawn the master car -->
+  <node name="spawn_master_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find car_description)/urdf/car_master_model.urdf -urdf -x 10 -y 0 -z 1 -model car_master" />
+
+
+
+
+<!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find car_control)/config/car_config.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" 
+				pkg="controller_manager" 
+				type="spawner" 
+				respawn="false" 
+				output="screen"
+				args="joint_state_controller left_wheel_torque_controller right_wheel_torque_controller"/>
+
+
+
+
+
+<!-- Spawn the follower car -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find car_description)/urdf/car_follower_model.urdf -urdf -x 0 -y 0 -z 1 -model car_follower_model" />
+
+
+
+
 </launch>                         

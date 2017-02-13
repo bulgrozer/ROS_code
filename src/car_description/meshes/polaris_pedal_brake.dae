@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Cole</author>
+      <authoring_tool>OpenCOLLADA for 3ds Max;  Version: 1.3.1;  Revision: 847M;  Platform: x64;  Configuration: Release_Max2012_static</authoring_tool>
+    </contributor>
+    <created>2013-05-01T23:48:37</created>
+    <modified>2013-05-01T23:48:37</modified>
+    <unit name="inch" meter="0.0254"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Ranger">
+      <profile_COMMON>
+        <newparam sid="Ranger_Diffuse_tga-surface">
+          <surface type="2D">
+            <init_from>Ranger_Diffuse_tga</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Ranger_Diffuse_tga-sampler">
+          <sampler2D>
+            <source>Ranger_Diffuse_tga-surface</source>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Ranger_Spec_tga-surface">
+          <surface type="2D">
+            <init_from>Ranger_Spec_tga</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Ranger_Spec_tga-sampler">
+          <sampler2D>
+            <source>Ranger_Spec_tga-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>1 1 1 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Ranger_Diffuse_tga-sampler" texcoord="CHANNEL1"/>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>9.999999</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </phong>
+          <extra>
+            <technique profile="OpenCOLLADA3dsMax">
+              <specularLevel>
+                <texture texture="Ranger_Spec_tga-sampler" texcoord="CHANNEL1"/>
+              </specularLevel>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADA3dsMax">
+          <extended_shader>
+            <apply_reflection_dimming>0</apply_reflection_dimming>
+            <dim_level>0</dim_level>
+            <falloff_type>0</falloff_type>
+            <index_of_refraction>1.5</index_of_refraction>
+            <opacity_type>0</opacity_type>
+            <reflection_level>3</reflection_level>
+            <wire_size>1</wire_size>
+            <wire_units>0</wire_units>
+          </extended_shader>
+          <shader>
+            <ambient_diffuse_lock>1</ambient_diffuse_lock>
+            <ambient_diffuse_texture_lock>1</ambient_diffuse_texture_lock>
+            <diffuse_specular_lock>0</diffuse_specular_lock>
+            <soften>0.1</soften>
+            <use_self_illum_color>0</use_self_illum_color>
+          </shader>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="Ranger-material" name="Ranger">
+      <instance_effect url="#Ranger"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="geom-Pedal_brake" name="Pedal_brake">
+      <mesh>
+        <source id="geom-Pedal_brake-positions">
+          <float_array id="geom-Pedal_brake-positions-array" count="66">-10.12405 59.05963 6.354758 -10.60321 59.05963 6.354758 -10.12405 61.56773 8.864574 -10.60321 61.56773 8.864574 -10.12405 57.56537 -1.025965 -10.60321 57.56537 -1.025965 -10.12405 61.75723 5.223791 -10.60321 61.75723 5.223791 -10.60321 60.3397 0.9246387 -10.12405 60.3397 0.9246383 -10.60321 58.84885 1.801077 -10.12405 58.84885 1.801077 -11.76741 57.21672 -0.5047631 -8.959846 57.21696 -0.5042644 -8.959846 58.2346 1.737241 -11.76741 58.23436 1.736742 -8.593142 57.56551 -1.02566 -8.593143 58.84899 1.801383 -12.13412 58.84869 1.800754 -12.13412 57.56522 -1.026289 -10.12405 57.56537 -1.025965 -10.60321 57.56537 -1.025965</float_array>
+          <technique_common>
+            <accessor source="#geom-Pedal_brake-positions-array" count="22" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Pedal_brake-normals">
+          <float_array id="geom-Pedal_brake-normals-array" count="234">0 -0.7073494 0.7068642 0 -0.7073493 0.7068641 0 -0.7073494 0.7068642 0 -0.7073494 0.7068642 0 -0.7073493 0.7068641 0 -0.7073494 0.7068642 -3.0679e-9 -0.9989304 0.04623939 -4.60156e-8 -0.9989303 0.04623939 -4.29477e-8 -0.9989304 0.04623939 -4.29477e-8 -0.9989304 0.04623939 0 -0.9989303 0.0462394 -3.0679e-9 -0.9989304 0.04623939 -0.9999999 5.47016e-7 -3.52331e-7 -1 4.9829e-7 -4.97949e-7 -1 5.71435e-7 -3.23485e-7 -0.9999999 5.47016e-7 -3.52331e-7 -1 5.71435e-7 -3.23485e-7 -1 4.58233e-7 -3.4676e-7 -0.9999999 5.47016e-7 -3.52331e-7 -1 4.58233e-7 -3.4676e-7 -1 4.38586e-7 -3.42074e-7 1 -5.47016e-7 3.52331e-7 1 -4.38586e-7 3.42074e-7 1 -4.58233e-7 3.4676e-7 1 -5.47016e-7 3.52331e-7 1 -4.58233e-7 3.4676e-7 1 -5.71434e-7 3.23485e-7 1 -4.9829e-7 4.97949e-7 1 -5.47016e-7 3.52331e-7 1 -5.71434e-7 3.23485e-7 2.58598e-6 -0.9105538 0.4133905 3.26586e-6 -0.9105541 0.4133899 2.69071e-6 -0.9105539 0.4133905 2.69071e-6 -0.9105539 0.4133905 2.01084e-6 -0.9105535 0.4133911 2.58598e-6 -0.9105538 0.4133905 -1 4.58233e-7 -3.4676e-7 -1 3.48386e-7 -4.95507e-7 -1 4.38586e-7 -3.42074e-7 1 -4.38586e-7 3.42074e-7 1 -3.48386e-7 4.95507e-7 1 -4.58233e-7 3.4676e-7 0 -0.8316006 -0.5553743 0 -0.8316005 -0.5553743 0 -0.8316004 -0.5553743 1.68763e-4 -0.8313549 -0.5557418 1.68763e-4 -0.8313549 -0.5557418 1.68763e-4 -0.831355 -0.5557419 0.8238122 -0.5161586 0.2343364 0.8238122 -0.5161587 0.2343364 0.8238123 -0.5161587 0.2343364 0.8238094 -0.516163 0.234337 0.8238094 -0.516163 0.234337 0.8238094 -0.516163 0.234337 -9.8975e-7 -0.1041268 0.9945641 -9.8975e-7 -0.1041268 0.9945641 -9.8975e-7 -0.1041268 0.9945641 -1.68144e-4 -0.1036846 0.9946101 -1.68144e-4 -0.1036846 0.9946102 -1.68144e-4 -0.1036846 0.9946102 -0.8238094 -0.5161628 0.2343377 -0.8238093 -0.5161627 0.2343377 -0.8238094 -0.5161628 0.2343377 -0.8238091 -0.5161629 0.2343379 -0.8238091 -0.5161629 0.2343379 -0.8238091 -0.5161629 0.2343379 -1.88835e-4 -0.1037234 0.9946063 -1.88835e-4 -0.1037234 0.9946062 -1.88835e-4 -0.1037234 0.9946061 1.89665e-4 -0.8314049 -0.5556669 1.89665e-4 -0.831405 -0.5556669 1.89665e-4 -0.831405 -0.5556669 2.0021e-4 -0.8313873 -0.5556933 2.0021e-4 -0.8313873 -0.5556933 2.0021e-4 -0.8313873 -0.5556933 -1.99465e-4 -0.1037548 0.9946029 -1.99465e-4 -0.1037548 0.9946029 -1.99465e-4 -0.1037548 0.9946029</float_array>
+          <technique_common>
+            <accessor source="#geom-Pedal_brake-normals-array" count="78" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Pedal_brake-map1">
+          <float_array id="geom-Pedal_brake-map1-array" count="90">0.7924304 0.8814776 0 0.7792443 0.8903577 0 0.7792443 0.8903335 0 0.7924752 0.88152 0 0.939816 0.8556235 0 0.939816 0.8421147 0 0.776646 0.8774881 0 0.759038 0.8873841 0 0.7565126 0.8799384 0 0.759053 0.8872584 0 0.7564607 0.8800768 0 0.7765813 0.877526 0 0.745505 0.8904129 0 0.7455059 0.8906071 0 0.9533275 0.842118 0 0.9533275 0.8556263 0 0.9454188 0.8403204 0 0.9477252 0.8403204 0 0.9550935 0.8403226 0 0.9550935 0.8573599 0 0.9477252 0.8573576 0 0.9454188 0.8573576 0 0.9380516 0.8573558 0 0.9380516 0.8403187 0 0.917354 0.6067557 0 0.917354 0.5790503 0 0.9212539 0.5790503 0 0.9212539 0.6067557 0 0.9212539 0.642352 0 0.917354 0.642352 0</float_array>
+          <technique_common>
+            <accessor source="#geom-Pedal_brake-map1-array" count="30" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="geom-Pedal_brake-vertices">
+          <input semantic="POSITION" source="#geom-Pedal_brake-positions"/>
+        </vertices>
+        <triangles material="Ranger" count="26">
+          <input semantic="VERTEX" source="#geom-Pedal_brake-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#geom-Pedal_brake-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#geom-Pedal_brake-map1" offset="2" set="0"/>
+          <p>0 0 24 2 1 25 3 2 26 3 3 26 1 4 27 0 5 24 1 6 27 10 7 28 11 8 29 11 9 29 0 10 24 1 11 27 1 12 2 3 13 3 7 14 6 1 15 2 7 16 6 8 17 8 1 18 2 8 19 8 10 20 9 0 21 1 11 22 7 9 23 10 0 24 1 9 25 10 6 26 11 2 27 0 0 28 1 6 29 11 12 30 5 13 31 14 14 32 15 14 33 15 15 34 4 12 35 5 8 36 8 5 37 12 10 38 9 11 39 7 4 40 13 9 41 10 21 42 16 20 43 17 13 44 14 13 45 14 12 46 5 21 47 16 16 48 18 17 49 19 14 50 15 14 51 15 13 52 14 16 53 18 11 54 20 10 55 21 15 56 4 15 57 4 14 58 15 11 59 20 18 60 22 19 61 23 12 62 5 12 63 5 15 64 4 18 65 22 11 66 20 14 67 15 17 68 19 13 69 14 20 70 17 16 71 18 21 72 16 12 73 5 19 74 23 15 75 4 10 76 21 18 77 22</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_lights>
+    <light id="EnvironmentAmbientLight" name="EnvironmentAmbientLight">
+      <technique_common>
+        <ambient>
+          <color>0 0 0</color>
+        </ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+  <library_images>
+    <image id="Ranger_Diffuse_tga">
+      <init_from>../materials/textures/Ranger_Diffuse.png</init_from>
+    </image>
+    <image id="Ranger_Spec_tga">
+      <init_from>../materials/textures/Ranger_Diffuse.png</init_from>
+    </image>
+  </library_images>
+  <library_visual_scenes>
+    <visual_scene id="MaxScene">
+      <node name="EnvironmentAmbientLight">
+        <instance_light url="#EnvironmentAmbientLight"/>
+      </node>
+      <node id="node-Pedal_brake" name="Pedal_brake">
+        <translate>0.01402044 27.28861 28.62035</translate>
+        <scale>1.004074 1.004074 1.004074</scale>
+        <node>
+          <matrix>1 0 0 -2.69113e-6 0 1 0 -61.56597 0 0 1 -8.740331 0 0 0 1</matrix>
+          <instance_geometry url="#geom-Pedal_brake">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="Ranger" target="#Ranger-material">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="0"/>
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#MaxScene"/>
+  </scene>
+</COLLADA>
+

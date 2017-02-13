@@ -80,7 +80,7 @@ void GazeboRosSonar::Load(sensors::SensorPtr _sensor, sdf::ElementPtr _sdf)
 
   // default parameters
   namespace_.clear();
-  topic_ = "/" + this->sensor_->GetName() + "/sonar";
+  topic_ = "/distanceMesure_topic";
   frame_id_ = "/sonar_link";
 
   // load parameters

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Cole</author>
+      <authoring_tool>OpenCOLLADA for 3ds Max;  Version: 1.3.1;  Revision: 847M;  Platform: x64;  Configuration: Release_Max2012_static</authoring_tool>
+    </contributor>
+    <created>2013-05-01T23:48:37</created>
+    <modified>2013-05-01T23:48:37</modified>
+    <unit name="inch" meter="0.0254"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Ranger">
+      <profile_COMMON>
+        <newparam sid="Ranger_Diffuse_tga-surface">
+          <surface type="2D">
+            <init_from>Ranger_Diffuse_tga</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Ranger_Diffuse_tga-sampler">
+          <sampler2D>
+            <source>Ranger_Diffuse_tga-surface</source>
+          </sampler2D>
+        </newparam>
+        <newparam sid="Ranger_Spec_tga-surface">
+          <surface type="2D">
+            <init_from>Ranger_Spec_tga</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Ranger_Spec_tga-sampler">
+          <sampler2D>
+            <source>Ranger_Spec_tga-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>1 1 1 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Ranger_Diffuse_tga-sampler" texcoord="CHANNEL1"/>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>9.999999</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </phong>
+          <extra>
+            <technique profile="OpenCOLLADA3dsMax">
+              <specularLevel>
+                <texture texture="Ranger_Spec_tga-sampler" texcoord="CHANNEL1"/>
+              </specularLevel>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADA3dsMax">
+          <extended_shader>
+            <apply_reflection_dimming>0</apply_reflection_dimming>
+            <dim_level>0</dim_level>
+            <falloff_type>0</falloff_type>
+            <index_of_refraction>1.5</index_of_refraction>
+            <opacity_type>0</opacity_type>
+            <reflection_level>3</reflection_level>
+            <wire_size>1</wire_size>
+            <wire_units>0</wire_units>
+          </extended_shader>
+          <shader>
+            <ambient_diffuse_lock>1</ambient_diffuse_lock>
+            <ambient_diffuse_texture_lock>1</ambient_diffuse_texture_lock>
+            <diffuse_specular_lock>0</diffuse_specular_lock>
+            <soften>0.1</soften>
+            <use_self_illum_color>0</use_self_illum_color>
+          </shader>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="Ranger-material" name="Ranger">
+      <instance_effect url="#Ranger"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="geom-E-Brake" name="E-Brake">
+      <mesh>
+        <source id="geom-E-Brake-positions">
+          <float_array id="geom-E-Brake-positions-array" count="84">-4.436031 52.43837 24.90236 -5.363733 52.43837 24.90236 -4.436031 51.73194 29.12798 -5.363732 51.73195 29.12798 -4.43603 53.64604 25.12393 -5.363731 53.64604 25.12393 -4.436031 53.03102 29.25457 -5.363731 53.03102 29.25457 -4.709724 53.17915 21.8145 -5.090038 53.17915 21.8145 -5.090037 54.09749 21.09446 -4.709723 54.09748 21.09446 -5.126755 53.90207 24.14202 -4.673005 53.90207 24.14202 -4.709721 56.0443 19.38332 -5.090034 56.0443 19.38332 -5.126752 57.45955 23.90976 -4.673002 57.45954 23.90976 -4.673006 52.80811 24.33491 -5.126756 52.80811 24.33491 -4.679759 52.18629 28.58521 -4.679759 52.01762 29.6805 -5.120003 52.01762 29.6805 -5.120004 52.18629 28.58521 -4.679759 52.75941 28.69036 -5.120003 52.75941 28.69036 -5.120003 52.6341 29.74058 -4.679759 52.6341 29.74058</float_array>
+          <technique_common>
+            <accessor source="#geom-E-Brake-positions-array" count="28" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-E-Brake-normals">
+          <float_array id="geom-E-Brake-normals-array" count="378">0.6847272 -0.6415895 -0.3457044 0.573832 -0.6499814 0.498238 -0.5738346 -0.6499786 0.4982385 -0.5738346 -0.6499786 0.4982385 -0.684728 -0.6415884 -0.3457049 0.6847272 -0.6415895 -0.3457044 0.7450805 0.6665368 0.02416382 -0.7450798 0.6665376 0.02416348 -0.5800611 0.5013086 0.6420427 -0.5800611 0.5013086 0.6420427 0.5800614 0.5013083 0.6420426 0.7450805 0.6665368 0.02416382 -0.684728 -0.6415884 -0.3457049 -0.5738346 -0.6499786 0.4982385 -0.5800611 0.5013086 0.6420427 -0.5800611 0.5013086 0.6420427 -0.7450798 0.6665376 0.02416348 -0.684728 -0.6415884 -0.3457049 -0.5738346 -0.6499786 0.4982385 0.573832 -0.6499814 0.498238 0.5800614 0.5013083 0.6420426 0.5800614 0.5013083 0.6420426 -0.5800611 0.5013086 0.6420427 -0.5738346 -0.6499786 0.4982385 0.573832 -0.6499814 0.498238 0.6847272 -0.6415895 -0.3457044 0.7450805 0.6665368 0.02416382 0.7450805 0.6665368 0.02416382 0.5800614 0.5013083 0.6420426 0.573832 -0.6499814 0.498238 -0.684728 -0.6415884 -0.3457049 -0.6806273 -0.6167613 -0.3954136 0.6806272 -0.6167619 -0.3954127 0.6806272 -0.6167619 -0.3954127 0.6847272 -0.6415895 -0.3457044 -0.684728 -0.6415884 -0.3457049 -0.7450798 0.6665376 0.02416348 -0.8710811 0.3561919 0.3381495 -0.6806273 -0.6167613 -0.3954136 -0.6806273 -0.6167613 -0.3954136 -0.684728 -0.6415884 -0.3457049 -0.7450798 0.6665376 0.02416348 0.7450805 0.6665368 0.02416382 0.8710468 0.3554844 0.3389812 -0.8710811 0.3561919 0.3381495 -0.8710811 0.3561919 0.3381495 -0.7450798 0.6665376 0.02416348 0.7450805 0.6665368 0.02416382 0.7450805 0.6665368 0.02416382 0.6847272 -0.6415895 -0.3457044 0.6806272 -0.6167619 -0.3954127 0.6806272 -0.6167619 -0.3954127 0.8710468 0.3554844 0.3389812 0.7450805 0.6665368 0.02416382 0.5901141 0.7686406 -0.2468944 -0.5907079 0.7687438 -0.2451477 -0.5688637 0.6787571 0.4644167 -0.5688637 0.6787571 0.4644167 0.5681114 0.6791568 0.4647532 0.5901141 0.7686406 -0.2468944 -0.9999387 -0.005329336 -0.009709261 -0.8710811 0.3561919 0.3381495 -0.5688637 0.6787571 0.4644167 -0.5688637 0.6787571 0.4644167 -0.5907079 0.7687438 -0.2451477 -0.9999387 -0.005329336 -0.009709261 -0.8710811 0.3561919 0.3381495 0.8710468 0.3554844 0.3389812 0.5681114 0.6791568 0.4647532 0.5681114 0.6791568 0.4647532 -0.5688637 0.6787571 0.4644167 -0.8710811 0.3561919 0.3381495 0.8710468 0.3554844 0.3389812 0.9998595 -0.01088616 -0.01274466 0.5901141 0.7686406 -0.2468944 0.5901141 0.7686406 -0.2468944 0.5681114 0.6791568 0.4647532 0.8710468 0.3554844 0.3389812 -0.8284167 -0.5526419 -0.09117381 0.8284162 -0.5526427 -0.09117366 0.6806272 -0.6167619 -0.3954127 0.6806272 -0.6167619 -0.3954127 -0.6806273 -0.6167613 -0.3954136 -0.8284167 -0.5526419 -0.09117381 -0.8710811 0.3561919 0.3381495 -0.9999387 -0.005329336 -0.009709261 -0.8284167 -0.5526419 -0.09117381 -0.8284167 -0.5526419 -0.09117381 -0.6806273 -0.6167613 -0.3954136 -0.8710811 0.3561919 0.3381495 0.8284162 -0.5526427 -0.09117366 0.9998595 -0.01088616 -0.01274466 0.8710468 0.3554844 0.3389812 0.8710468 0.3554844 0.3389812 0.6806272 -0.6167619 -0.3954127 0.8284162 -0.5526427 -0.09117366 0.7005696 -0.7052696 -0.1086137 0.5744795 -0.6464092 0.5021241 -0.5744793 -0.6464092 0.5021242 -0.5744793 -0.6464092 0.5021242 -0.7005703 -0.705269 -0.1086135 0.7005696 -0.7052696 -0.1086137 0.7208049 0.6882565 0.08211839 -0.7208043 0.6882571 0.08211846 -0.5784951 0.5112801 0.6355597 -0.5784951 0.5112801 0.6355597 0.5784953 0.5112801 0.6355594 0.7208049 0.6882565 0.08211839 -0.7005703 -0.705269 -0.1086135 -0.5744793 -0.6464092 0.5021242 -0.5784951 0.5112801 0.6355597 -0.5784951 0.5112801 0.6355597 -0.7208043 0.6882571 0.08211846 -0.7005703 -0.705269 -0.1086135 -0.5744793 -0.6464092 0.5021242 0.5744795 -0.6464092 0.5021241 0.5784953 0.5112801 0.6355594 0.5784953 0.5112801 0.6355594 -0.5784951 0.5112801 0.6355597 -0.5744793 -0.6464092 0.5021242 0.5744795 -0.6464092 0.5021241 0.7005696 -0.7052696 -0.1086137 0.7208049 0.6882565 0.08211839 0.7208049 0.6882565 0.08211839 0.5784953 0.5112801 0.6355594 0.5744795 -0.6464092 0.5021241</float_array>
+          <technique_common>
+            <accessor source="#geom-E-Brake-normals-array" count="126" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-E-Brake-map1">
+          <float_array id="geom-E-Brake-map1-array" count="159">0.04501905 0.2151686 0 0.06404236 0.214849 0 0.0640247 0.2191212 0 0.04500538 0.2186452 0 0.04453841 0.2100626 0 0.04429638 0.2058263 0 0.06315739 0.2047471 0 0.06339999 0.2089835 0 0.06333508 0.2249807 0 0.04448316 0.2237477 0 0.9261661 0.3285561 0 0.9335784 0.3285561 0 0.9335784 0.3389361 0 0.9261661 0.3389361 0 0.03051907 0.2160779 0 0.02644333 0.2128422 0 0.03979752 0.2230398 0 0.0398465 0.2107318 0 0.03987441 0.2071652 0 0.04195926 0.2182499 0 0.8602867 0.678394 0 0.8605784 0.6406009 0 0.8636118 0.6406009 0 0.8639035 0.678394 0 0.04197007 0.2155392 0 0.8603728 0.6888918 0 0.8603728 0.6801106 0 0.8639035 0.6801106 0 0.8639035 0.6888918 0 0.914421 0.665 0 0.914421 0.6614782 0 0.9228227 0.6614782 0 0.9228227 0.665 0 0.9434989 0.3561187 0 0.9438264 0.3649465 0 0.9388891 0.3648543 0 0.9388645 0.3564236 0 0.8945416 0.6813082 0 0.8945416 0.6777985 0 0.8994787 0.6777985 0 0.8994787 0.6813082 0 0.9234741 0.3821673 0 0.9234689 0.3733336 0 0.9281124 0.373465 0 0.9284031 0.381891 0 0.02641088 0.220824 0 0.03519331 0.2382982 0 0.0169479 0.227525 0 0.01703333 0.2060672 0 0.03536246 0.1954373 0 0.03051337 0.2176207 0 0.041744 0.223628 0 0.03713921 0.238886 0</float_array>
+          <technique_common>
+            <accessor source="#geom-E-Brake-map1-array" count="53" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="geom-E-Brake-vertices">
+          <input semantic="POSITION" source="#geom-E-Brake-positions"/>
+        </vertices>
+        <triangles material="Ranger" count="42">
+          <input semantic="VERTEX" source="#geom-E-Brake-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#geom-E-Brake-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#geom-E-Brake-map1" offset="2" set="0"/>
+          <p>0 0 0 2 1 1 3 2 2 3 3 2 1 4 3 0 5 0 4 6 4 5 7 5 7 8 6 7 9 6 6 10 7 4 11 4 1 12 3 3 13 2 7 14 8 7 15 8 5 16 9 1 17 3 3 18 10 2 19 11 6 20 12 6 21 12 7 22 13 3 23 10 2 24 1 0 25 0 4 26 4 4 27 4 6 28 7 2 29 1 1 30 3 19 31 19 18 32 24 18 33 24 0 34 0 1 35 3 5 36 9 12 37 16 19 38 19 19 39 19 1 40 3 5 41 9 4 42 4 13 43 17 12 44 18 12 45 18 5 46 5 4 47 4 4 48 4 0 49 0 18 50 24 18 51 24 13 52 17 4 53 4 14 54 21 15 55 22 16 56 23 16 57 23 17 58 20 14 59 21 10 60 45 12 61 16 16 62 46 16 63 46 15 64 47 10 65 45 12 66 16 13 67 51 17 68 52 17 69 52 16 70 46 12 71 16 13 72 17 11 73 15 14 74 48 14 75 48 17 76 49 13 77 17 9 78 50 8 79 14 18 80 24 18 81 24 19 82 19 9 83 50 12 84 16 10 85 45 9 86 50 9 87 50 19 88 19 12 89 16 8 90 14 11 91 15 13 92 17 13 93 17 18 94 24 8 95 14 20 96 25 21 97 26 22 98 27 22 99 27 23 100 28 20 101 25 24 102 29 25 103 30 26 104 31 26 105 31 27 106 32 24 107 29 23 108 33 22 109 34 26 110 35 26 111 35 25 112 36 23 113 33 22 114 37 21 115 38 27 116 39 27 117 39 26 118 40 22 119 37 21 120 41 20 121 42 24 122 43 24 123 43 27 124 44 21 125 41</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_lights>
+    <light id="EnvironmentAmbientLight" name="EnvironmentAmbientLight">
+      <technique_common>
+        <ambient>
+          <color>0 0 0</color>
+        </ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+  <library_images>
+    <image id="Ranger_Diffuse_tga">
+      <init_from>../materials/textures/Ranger_Diffuse.png</init_from>
+    </image>
+    <image id="Ranger_Spec_tga">
+      <init_from>../materials/textures/Ranger_Diffuse.png</init_from>
+    </image>
+  </library_images>
+  <library_visual_scenes>
+    <visual_scene id="MaxScene">
+      <node name="EnvironmentAmbientLight">
+        <instance_light url="#EnvironmentAmbientLight"/>
+      </node>
+      <node id="node-E-Brake" name="E-Brake">
+        <translate>-4.905825 21.86132 41.58615</translate>
+        <scale>1.004074 1.004074 1.004074</scale>
+        <node>
+          <matrix>1 0 0 4.89988 0 1 0 -56.1607 0 0 1 -21.65351 0 0 0 1</matrix>
+          <instance_geometry url="#geom-E-Brake">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="Ranger" target="#Ranger-material">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="0"/>
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#MaxScene"/>
+  </scene>
+</COLLADA>
+

@@ -11,6 +11,9 @@
 #include "ros/subscribe_options.h"
 #include "std_msgs/Float64.h"
 
+
+
+
 namespace gazebo
 {
   /// \brief A plugin to control wheels.
@@ -35,20 +38,8 @@ namespace gazebo
       // Get the first joint.
       this->joint_left_wheel = _model->GetJoint("chassis_to_front_left_wheel");
 
-      // Get the second joint.
+      //// Get the second joint.
       this->joint_right_wheel = _model->GetJoint("chassis_to_front_right_wheel");
-
-
-      // Setup a P-controller, with a gain of 0.1.
-      this->pid = common::PID(0.1, 0, 0);
-
-      // Apply the P-controller to the first joint.
-      this->model->GetJointController()->SetVelocityPID(
-          this->joint_left_wheel->GetScopedName(), this->pid);
-
-      // Apply the P-controller to the second joint.
-      this->model->GetJointController()->SetVelocityPID(
-          this->joint_right_wheel->GetScopedName(), this->pid);
 
       // Default to zero velocity
       double velocity = 0;
@@ -57,7 +48,9 @@ namespace gazebo
       if (_sdf->HasElement("velocity"))
         velocity = _sdf->Get<double>("velocity");
 
-      this->SetVelocity(velocity);
+			this->joint_right_wheel->SetVelocity(0,velocity);
+			this->joint_left_wheel->SetVelocity(0,velocity);
+
 
       // Create the node
       this->node = transport::NodePtr(new transport::Node());
@@ -90,7 +83,7 @@ namespace gazebo
 			// Create a named topic, and subscribe to it.
 			ros::SubscribeOptions so =
 				ros::SubscribeOptions::create<std_msgs::Float64>(
-						"/" + this->model->GetName() + "/velocity_cmd",
+						"/" + this->model->GetName() + "/velocity_master_cmd",
 						1,
 						boost::bind(&CommandeRouesPlugin::OnRosMsg, this, _1),
 						ros::VoidPtr(), &this->rosQueue);
@@ -101,27 +94,13 @@ namespace gazebo
 				std::thread(std::bind(&CommandeRouesPlugin::QueueThread, this));
     }
 
-
-    /// \brief Set the velocity of the wheel
-    /// \param[in] _vel New target velocity
-    public: void SetVelocity(const double &_vel)
-    {
-      // Set the joint's target velocity.
-      this->model->GetJointController()->SetVelocityTarget(
-          this->joint_left_wheel->GetScopedName(), (-1)*_vel);
-
-			this->model->GetJointController()->SetVelocityTarget(
-          this->joint_right_wheel->GetScopedName(), (-1)*_vel);
-    }
-
-
-
 		/// \brief Handle an incoming message from ROS
 		/// \param[in] _msg A float value that is used to set the velocity
-		/// of the Velodyne.
 		public: void OnRosMsg(const std_msgs::Float64ConstPtr &_msg)
 		{
-			this->SetVelocity(_msg->data);
+
+			this->model->SetLinearVel(math::Vector3(_msg->data, 0, 0));
+
 		}
 
 		/// \brief ROS helper function that processes messages
@@ -134,15 +113,14 @@ namespace gazebo
 			}
 		}
 
-
-
-
     /// \brief Handle incoming message
     /// \param[in] _msg Repurpose a vector3 message. This function will
     /// only use the x component.
     private: void OnMsg(ConstVector3dPtr &_msg)
     {
-      this->SetVelocity(_msg->x());
+
+			this->model->SetLinearVel(math::Vector3(_msg->x(), 0, 0));
+
     }
 
     /// \brief A node used for transport
@@ -159,9 +137,7 @@ namespace gazebo
 
     /// \brief Pointer to the second joint.
     private: physics::JointPtr joint_right_wheel;
-
-    /// \brief A PID controller for the joint.
-    private: common::PID pid;
+    private: physics::JointPtr joint_chassis;
 
 
 		/// \brief A node use for ROS transport

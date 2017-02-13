@@ -1,0 +1,690 @@
+<?xml version="1.0"?>
+<robot name="polaris_ranger_ev">
+
+  <!-- links -->
+    <link name="chassis">
+      <inertial>
+        <mass value="720"/>
+        <inertia ixx="140" ixy="0" iyy="550" ixz="0" iyz="0" izz="550"/>
+      </inertial>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_ranger.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+
+      <collision name="chassis_bottom">
+        <geometry>
+          <box size="1.5 1.34 0.06"/>
+        </geometry>
+      </collision>
+
+      <collision name="cargo_bottom">
+        <geometry>
+          <box size="0.9 1.2 0.01"/>
+        </geometry>
+      </collision>
+
+      <collision name="cargo_front">
+        <geometry>
+          <box size="0.05 1.2 0.25"/>
+        </geometry>
+      </collision>
+
+      <collision name="cargo_back">
+        <geometry>
+          <box size="0.05 1.2 0.25"/>
+        </geometry>
+      </collision>
+
+      <collision name="cargo_left">
+        <geometry>
+          <box size="0.9 0.05 0.25"/>
+        </geometry>
+      </collision>
+
+      <collision name="cargo_right">
+        <geometry>
+          <box size="0.9 0.05 0.25"/>
+        </geometry>
+      </collision>
+
+      <collision name="seat">
+        <geometry>
+          <box size="0.6 1.22 0.5"/>
+        </geometry>
+      </collision>
+
+      <collision name="mud_seat">
+        <geometry>
+          <box size="0.6 1.15 0.1"/>
+        </geometry>
+      </collision>
+
+      <collision name="seat_back">
+        <geometry>
+          <box size="0.06 1 0.4"/>
+        </geometry>
+      </collision>
+
+      <collision name="engine">
+        <geometry>
+          <box size="0.58 1 0.8"/>
+        </geometry>
+      </collision>
+
+      <collision name="handle_left_middle">
+        <geometry>
+          <cylinder radius="0.02" length="0.17"/>
+        </geometry>
+      </collision>
+
+      <collision name="handle_right_middle">
+        <geometry>
+          <cylinder radius="0.02" length="0.17"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_top_left">
+        <geometry>
+          <cylinder radius="0.03" length="0.68"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_top_right">
+        <geometry>
+          <cylinder radius="0.03" length="0.68"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_top_front">
+        <geometry>
+          <cylinder radius="0.03" length="1.22"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_top_back">
+        <geometry>
+          <cylinder radius="0.03" length="1.22"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_front_left">
+        <geometry>
+          <cylinder radius="0.03" length="1.04"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_front_right">
+        <geometry>
+          <cylinder radius="0.03" length="1.04"/>
+        </geometry>
+      </collision>
+
+      <collision name="fender_front_right">
+        <geometry>
+          <cylinder radius="0.03" length="0.72"/>
+        </geometry>
+      </collision>
+
+      <collision name="fender_front_left">
+        <geometry>
+          <cylinder radius="0.03" length="0.72"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_left">
+        <geometry>
+          <cylinder radius="0.03" length="0.9"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_right">
+        <geometry>
+          <cylinder radius="0.03" length="0.9"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_midleft">
+        <geometry>
+          <cylinder radius="0.023" length="0.9"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_midright">
+        <geometry>
+          <cylinder radius="0.023" length="0.9"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_upper_left">
+        <geometry>
+          <cylinder radius="0.03" length="0.29"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_upper_right">
+        <geometry>
+          <cylinder radius="0.03" length="0.29"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_upper_midleft">
+        <geometry>
+          <cylinder radius="0.023" length="0.29"/>
+        </geometry>
+      </collision>
+
+      <collision name="rollcage_back_upper_midright">
+        <geometry>
+          <cylinder radius="0.023" length="0.29"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <gazebo reference="chassis">
+      <maxContacts>10</maxContacts>
+      <selfCollide>false</selfCollide>
+
+      <sensor name="seat_contact" type="contact">
+        <always_on>1</always_on>
+        <update_rate>1000</update_rate>
+        <contact>
+          <collision>mud_seat</collision>
+          <topic>__default_topic__</topic>
+        </contact>
+      </sensor>
+    </gazebo>
+
+<!-- ****************************************************************************** -->
+
+    <link name="rear_right_wheel">
+      <inertial>
+        <mass value="12"/>
+        <inertia ixx="0.5" ixy="0" iyy="0.5" ixz="0" iyz="0" izz="1"/>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder radius="0.32" length="0.23"/>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_rear_wheel_right.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+          <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="rear_right_wheel">
+      <maxContacts>1</maxContacts>
+      <mu1>1</mu1>
+      <mu2>1</mu2>
+      <fdir1>0 0 1</fdir1>
+      <minDepth>0.005</minDepth>
+      <kp>1e+08</kp>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ****************************************************************************** -->
+
+    <link name="rear_left_wheel">
+      <inertial>
+        <mass value="12"/>
+        <inertia ixx="0.5" ixy="0" iyy="0.5" ixz="0" iyz="0" izz="1"/>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder radius="0.32" length="0.23"/>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_rear_wheel_left.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="rear_left_wheel">
+      <maxContacts>1</maxContacts>
+      <mu1>1</mu1>
+      <mu2>1</mu2>
+      <fdir1>0 0 1</fdir1>
+      <minDepth>0.005</minDepth>
+      <kp>1e+08</kp>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="front_right_wheel">
+      <inertial>
+        <mass value="12"/>
+        <inertia ixx="0.5" ixy="0" iyy="0.5" ixz="0" iyz="0" izz="1"/>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder radius="0.32" length="0.23"/>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_front_wheel_right.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="front_right_wheel">
+      <maxContacts>1</maxContacts>
+      <mu1>1</mu1>
+      <mu2>1</mu2>
+      <fdir1>0 0 1</fdir1>
+      <minDepth>0.005</minDepth>
+      <kp>1e+08</kp>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="front_right_wheel_steering_block">
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="1" ixy="0" iyy="1" ixz="0" iyz="0" izz="1"/>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder radius="0.05" length="0.01"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <gazebo reference="front_right_wheel_steering_block">
+      <maxContacts>10</maxContacts>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="front_left_wheel">
+      <inertial>
+        <mass value="12"/>
+        <inertia ixx="0.5" ixy="0" iyy="0.5" ixz="0" iyz="0" izz="1"/>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder radius="0.32" length="0.23"/>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_front_wheel_left.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="front_left_wheel">
+      <maxContacts>1</maxContacts>
+      <mu1>1</mu1>
+      <mu2>1</mu2>
+      <fdir1>0 0 1</fdir1>
+      <minDepth>0.005</minDepth>
+      <kp>1e+08</kp>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="front_left_wheel_steering_block">
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="1" ixy="0" iyy="1" ixz="0" iyz="0" izz="1"/>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder radius="0.05" length="0.01"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <gazebo reference="front_left_wheel_steering_block">
+      <maxContacts>10</maxContacts>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="gas_pedal">
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      </inertial>
+
+      <collision name="gas_pedal_collision">
+        <geometry>
+          <box size="0.1069 0.077 0.01"/>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_pedal_gas.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="gas_pedal">
+      <gravity>false</gravity>
+      <maxContacts>10</maxContacts>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="brake_pedal">
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      </inertial>
+      <collision name="brake_pedal_collision">
+        <geometry>
+          <box size="0.063 0.08 0.01"/>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_pedal_brake.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="brake_pedal">
+      <gravity>false</gravity>
+      <maxContacts>10</maxContacts>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="steering_wheel">
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="0.012" ixy="0" ixz="0" iyy="0.012" iyz="0" izz="0.024"/>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_steering_wheel.dae" scale="1 1 1"/>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_steering_wheel.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="steering_wheel">
+      <maxContacts>10</maxContacts>
+      <minDepth>0.003</minDepth>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="hand_brake">
+      <inertial>
+        <mass value="0.5"/>
+        <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.05"/>
+      </inertial>
+
+      <collision name="hand_brake_collision">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_e_brake.dae"/>
+        </geometry>
+      </collision>
+
+      <visual name="hand_brake_visual">
+        <geometry>
+          <mesh filename="package://car_description/meshes/polaris_e_brake.dae" scale="1 1 1"/>
+        </geometry>
+        <material name="Polaris/Diffuse">
+            <texture filename="package://car_description/materials/textures/Ranger_Diffuse.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="hand_brake">
+      <maxContacts>10</maxContacts>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <link name="FNR_switch">
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.1" ixy="0" ixz="0" iyy="6e-05" iyz="0" izz="0.1"/>
+      </inertial>
+
+      <collision name="FNR_switch">
+        <geometry>
+          <box size="0.02 0.04 0.08"/>
+        </geometry>
+      </collision>
+
+      <visual name="FNR_switch_F">
+        <!-- <transparency>0</transparency> -->
+        <geometry>
+          <box size="0.02 0.04 0.08"/>
+        </geometry>
+        <material name="FNR_switch_F">
+            <texture filename="package://car_description/materials/textures/FNR_switch_F.png"/>
+        </material>
+      </visual>
+
+      <visual name="FNR_switch_R">
+        <!-- <transparency>1</transparency> -->
+        <geometry>
+          <box size="0.0199 0.0399 0.0799"/>
+        </geometry>
+        <material name="FNR_switch_R">
+            <texture filename="package://car_description/materials/textures/FNR_switch_R.png"/>
+        </material>
+      </visual>
+    </link>
+
+    <gazebo reference="FNR_switch">
+      <maxContacts>10</maxContacts>
+      <selfCollide>false</selfCollide>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+<!-- ***************************************************************************** -->
+
+<!-- joints -->
+
+    <joint name="front_left_steering_joint" type="continuous">
+      <parent link="chassis"/>
+      <child link="front_left_wheel_steering_block"/>
+      <axis xyz="0 0 1"/>
+      <dynamics damping="50"/>
+    </joint>
+
+    <gazebo reference="front_left_steering_joint">
+      <cfmDamping>true</cfmDamping>
+      <stopCfm>0</stopCfm>
+      <stopErp>0.9</stopErp>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="front_left_wheel_joint" type="continuous">
+      <parent link="front_left_wheel_steering_block"/>
+      <child link="front_left_wheel"/>
+      <axis xyz="0 1 0.05"/>
+    </joint>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="front_right_steering_joint" type="continuous">
+      <parent link="chassis"/>
+      <child link="front_right_wheel_steering_block"/>
+      <axis xyz="0 0 1"/>
+      <dynamics damping="50"/>
+    </joint>
+
+    <gazebo reference="front_right_steering_joint">
+      <cfmDamping>true</cfmDamping>
+      <stopCfm>0</stopCfm>
+      <stopErp>0.9</stopErp>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="front_right_wheel_joint" type="continuous">
+      <parent link="front_right_wheel_steering_block"/>
+      <child link="front_right_wheel"/>
+      <axis xyz="0 1 -0.05"/>
+    </joint>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="rear_left_wheel_joint" type="continuous">
+      <parent link="chassis"/>
+      <child link="rear_left_wheel"/>
+      <axis xyz="0 1 0.05"/>
+    </joint>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="rear_right_wheel_joint" type="continuous">
+      <parent link="chassis"/>
+      <child link="rear_right_wheel"/>
+      <axis xyz="0 1 -0.05"/>
+    </joint>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="rear_differential_joint" type="continuous">
+      <parent link="rear_left_wheel"/>
+      <child link="rear_right_wheel"/>
+      <axis xyz="0 1 0"/>
+      <dynamics damping="70"/>
+    </joint>
+
+    <gazebo reference="rear_differential_joint">
+      <cfmDamping>true</cfmDamping>
+      <stopCfm>1000</stopCfm>
+      <stopErp>0</stopErp>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="gas_joint" type="prismatic">
+      <parent link="chassis"/>
+      <child link="gas_pedal"/>
+      <axis xyz="1 0 -1"/>
+      <limit lower="0" upper="0.08" effort="100" velocity="100"/>
+      <!-- effort and velocity arbitrarly set -->
+      <dynamics damping="3"/>
+    </joint>
+
+    <gazebo reference="gas_joint">
+      <cfmDamping>true</cfmDamping>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="brake_joint" type="prismatic">
+      <parent link="chassis"/>
+      <child link="brake_pedal"/>
+      <axis xyz="1 0 -0.6"/>
+      <limit lower="0" upper="0.08" effort="100" velocity="100"/>
+      <!-- effort and velocity arbitrarly set -->
+      <dynamics damping="3"/>
+    </joint>
+
+    <gazebo reference="brake_joint">
+      <cfmDamping>true</cfmDamping>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="steering_joint" type="continuous">
+      <parent link="chassis"/>
+      <child link="steering_wheel"/>
+      <axis xyz="-1 0 0.84365"/>
+      <dynamics damping="1"/>
+    </joint>
+
+    <gazebo reference="steering_joint">
+      <cfmDamping>true</cfmDamping>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="hand_brake_joint" type="revolute">
+      <parent link="chassis"/>
+      <child link="hand_brake"/>
+      <axis xyz="0 -1 0"/>
+      <limit lower="0" upper="0.6" effort="50" velocity="50"/>
+      <!-- effort and velocity arbitrarly set -->
+      <dynamics damping="1"/>
+    </joint>
+
+    <gazebo reference="hand_brake_joint">
+      <cfmDamping>true</cfmDamping>
+    </gazebo>
+
+<!-- ***************************************************************************** -->
+
+    <joint name="FNR_switch_joint" type="revolute">
+      <parent link="chassis"/>
+      <child link="FNR_switch"/>
+      <axis xyz="0 -1 0"/>
+      <limit lower="-0.3" upper="0.3" effort="50" velocity="50"/>
+      <!-- effort and velocity arbitrarly set -->
+      <dynamics damping="0.01"/>
+    </joint>
+
+    <gazebo reference="FNR_switch_joint">
+      <cfmDamping>true</cfmDamping>
+    </gazebo>
+
+<!-- FIN -->
+</robot>

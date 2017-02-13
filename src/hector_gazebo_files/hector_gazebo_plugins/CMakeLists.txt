@@ -96,12 +96,21 @@ target_link_libraries(hector_servo_plugin ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES}
 
 
 # Build our plugin
-add_library(commande_roues_plugin src/commande_roues_plugin.cc)
-target_link_libraries(commande_roues_plugin ${GAZEBO_libraries} ${roscpp_LIBRARIES})
+add_library(commande_roues_follower_plugin src/commande_roues_follower_plugin.cc)
+target_link_libraries(commande_roues_follower_plugin ${GAZEBO_libraries} ${roscpp_LIBRARIES})
+
+# Build our plugin
+add_library(commande_roues_master_plugin src/commande_roues_master_plugin.cc)
+target_link_libraries(commande_roues_master_plugin ${GAZEBO_libraries} ${roscpp_LIBRARIES})
 
 # Build the stand-alone test program
-add_executable(velocity src/velocity_cmd.cc)
-target_link_libraries(velocity ${GAZEBO_LIBRARIES})
+add_executable(velocity_master_cmd src/velocity_master_cmd.cc)
+target_link_libraries(velocity_master_cmd ${GAZEBO_LIBRARIES})
+# Build the stand-alone test program
+add_executable(velocity_follower_cmd src/velocity_follower_cmd.cc)
+target_link_libraries(velocity_follower_cmd ${GAZEBO_LIBRARIES})
+
+
 
 #############
 ## Install ##
@@ -126,8 +135,10 @@ install(TARGETS
   hector_gazebo_ros_gps
   hector_gazebo_ros_sonar
   hector_servo_plugin	
-	commande_roues_plugin
-	velocity
+	commande_roues_follower_plugin
+	commande_roues_master_plugin
+	velocity_follower_cmd
+	velocity_master_cmd
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
