@@ -45,6 +45,8 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/Bool.h>
 
+#include "sensors/velOrder.h"
+
 #include "math.h"
 #include <stdio.h>
 #include <string>
@@ -101,7 +103,7 @@ std::string setpoint_topic;
 std::string pid_enable_topic;
 std::string node_name = "pid_node";
 
-std_msgs::Float64 control_msg;
+sensors::velOrder control_msg;
 std_msgs::Float64 state_msg;
 
 // Diagnostic objects
