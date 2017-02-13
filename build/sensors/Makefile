@@ -66,6 +66,17 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
@@ -121,17 +132,6 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -196,6 +196,21 @@ sensors_generate_messages_eus/fast:
 .PHONY : sensors_generate_messages_eus/fast
 
 # Convenience name for target.
+sensors/CMakeFiles/distanceSecurityCalculator.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/distanceSecurityCalculator.dir/rule
+.PHONY : sensors/CMakeFiles/distanceSecurityCalculator.dir/rule
+
+# Convenience name for target.
+distanceSecurityCalculator: sensors/CMakeFiles/distanceSecurityCalculator.dir/rule
+
+.PHONY : distanceSecurityCalculator
+
+# fast build rule for target.
+distanceSecurityCalculator/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/distanceSecurityCalculator.dir/build.make sensors/CMakeFiles/distanceSecurityCalculator.dir/build
+.PHONY : distanceSecurityCalculator/fast
+
+# Convenience name for target.
 sensors/CMakeFiles/sensors_geneus.dir/rule:
 	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/sensors_geneus.dir/rule
 .PHONY : sensors/CMakeFiles/sensors_geneus.dir/rule
@@ -224,6 +239,21 @@ sensors_gencpp: sensors/CMakeFiles/sensors_gencpp.dir/rule
 sensors_gencpp/fast:
 	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/sensors_gencpp.dir/build.make sensors/CMakeFiles/sensors_gencpp.dir/build
 .PHONY : sensors_gencpp/fast
+
+# Convenience name for target.
+sensors/CMakeFiles/getDataRrbot.dir/rule:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f CMakeFiles/Makefile2 sensors/CMakeFiles/getDataRrbot.dir/rule
+.PHONY : sensors/CMakeFiles/getDataRrbot.dir/rule
+
+# Convenience name for target.
+getDataRrbot: sensors/CMakeFiles/getDataRrbot.dir/rule
+
+.PHONY : getDataRrbot
+
+# fast build rule for target.
+getDataRrbot/fast:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/getDataRrbot.dir/build.make sensors/CMakeFiles/getDataRrbot.dir/build
+.PHONY : getDataRrbot/fast
 
 # Convenience name for target.
 sensors/CMakeFiles/sensors_generate_messages.dir/rule:
@@ -432,6 +462,33 @@ src/control.cpp.s:
 	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/control.dir/build.make sensors/CMakeFiles/control.dir/src/control.cpp.s
 .PHONY : src/control.cpp.s
 
+src/distanceSecurityCalculator.o: src/distanceSecurityCalculator.cpp.o
+
+.PHONY : src/distanceSecurityCalculator.o
+
+# target to build an object file
+src/distanceSecurityCalculator.cpp.o:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/distanceSecurityCalculator.dir/build.make sensors/CMakeFiles/distanceSecurityCalculator.dir/src/distanceSecurityCalculator.cpp.o
+.PHONY : src/distanceSecurityCalculator.cpp.o
+
+src/distanceSecurityCalculator.i: src/distanceSecurityCalculator.cpp.i
+
+.PHONY : src/distanceSecurityCalculator.i
+
+# target to preprocess a source file
+src/distanceSecurityCalculator.cpp.i:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/distanceSecurityCalculator.dir/build.make sensors/CMakeFiles/distanceSecurityCalculator.dir/src/distanceSecurityCalculator.cpp.i
+.PHONY : src/distanceSecurityCalculator.cpp.i
+
+src/distanceSecurityCalculator.s: src/distanceSecurityCalculator.cpp.s
+
+.PHONY : src/distanceSecurityCalculator.s
+
+# target to generate assembly for a file
+src/distanceSecurityCalculator.cpp.s:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/distanceSecurityCalculator.dir/build.make sensors/CMakeFiles/distanceSecurityCalculator.dir/src/distanceSecurityCalculator.cpp.s
+.PHONY : src/distanceSecurityCalculator.cpp.s
+
 src/getData.o: src/getData.cpp.o
 
 .PHONY : src/getData.o
@@ -458,6 +515,33 @@ src/getData.s: src/getData.cpp.s
 src/getData.cpp.s:
 	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/getData.dir/build.make sensors/CMakeFiles/getData.dir/src/getData.cpp.s
 .PHONY : src/getData.cpp.s
+
+src/getDataRrbot.o: src/getDataRrbot.cpp.o
+
+.PHONY : src/getDataRrbot.o
+
+# target to build an object file
+src/getDataRrbot.cpp.o:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/getDataRrbot.dir/build.make sensors/CMakeFiles/getDataRrbot.dir/src/getDataRrbot.cpp.o
+.PHONY : src/getDataRrbot.cpp.o
+
+src/getDataRrbot.i: src/getDataRrbot.cpp.i
+
+.PHONY : src/getDataRrbot.i
+
+# target to preprocess a source file
+src/getDataRrbot.cpp.i:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/getDataRrbot.dir/build.make sensors/CMakeFiles/getDataRrbot.dir/src/getDataRrbot.cpp.i
+.PHONY : src/getDataRrbot.cpp.i
+
+src/getDataRrbot.s: src/getDataRrbot.cpp.s
+
+.PHONY : src/getDataRrbot.s
+
+# target to generate assembly for a file
+src/getDataRrbot.cpp.s:
+	cd /home/dloche/ROS_code/build && $(MAKE) -f sensors/CMakeFiles/getDataRrbot.dir/build.make sensors/CMakeFiles/getDataRrbot.dir/src/getDataRrbot.cpp.s
+.PHONY : src/getDataRrbot.cpp.s
 
 src/sensor.o: src/sensor.cpp.o
 
@@ -495,8 +579,11 @@ help:
 	@echo "... list_install_components"
 	@echo "... sensors_generate_messages_lisp"
 	@echo "... sensors_generate_messages_eus"
+	@echo "... distanceSecurityCalculator"
 	@echo "... sensors_geneus"
 	@echo "... sensors_gencpp"
+	@echo "... rebuild_cache"
+	@echo "... getDataRrbot"
 	@echo "... sensors_generate_messages"
 	@echo "... test"
 	@echo "... sensors_genlisp"
@@ -514,13 +601,18 @@ help:
 	@echo "... getData"
 	@echo "... install/strip"
 	@echo "... edit_cache"
-	@echo "... rebuild_cache"
 	@echo "... src/control.o"
 	@echo "... src/control.i"
 	@echo "... src/control.s"
+	@echo "... src/distanceSecurityCalculator.o"
+	@echo "... src/distanceSecurityCalculator.i"
+	@echo "... src/distanceSecurityCalculator.s"
 	@echo "... src/getData.o"
 	@echo "... src/getData.i"
 	@echo "... src/getData.s"
+	@echo "... src/getDataRrbot.o"
+	@echo "... src/getDataRrbot.i"
+	@echo "... src/getDataRrbot.s"
 	@echo "... src/sensor.o"
 	@echo "... src/sensor.i"
 	@echo "... src/sensor.s"

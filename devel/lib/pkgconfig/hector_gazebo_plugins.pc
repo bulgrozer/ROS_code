@@ -1,0 +1,8 @@
+prefix=/home/dloche/ROS_code/devel
+
+Name: hector_gazebo_plugins
+Description: Description of hector_gazebo_plugins
+Version: 0.3.8
+Cflags: -I/home/dloche/ROS_code/devel/include -I/home/dloche/ROS_code/src/hector_gazebo_files/hector_gazebo_plugins/include
+Libs: -L/home/dloche/ROS_code/devel/lib 
+Requires: roscpp std_msgs geometry_msgs nav_msgs tf message_runtime

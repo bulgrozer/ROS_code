@@ -35,8 +35,12 @@ b3a31a421be0219b08a03f0078384d97 /home/dloche/ROS_code/devel/include/baxter_main
 4f13f3349efd9058d913f8c752c1e07e /home/dloche/ROS_code/devel/include/baxter_maintenance_msgs/UpdateSource.h
 0df4015751e6a88c4000d4522cda59de /home/dloche/ROS_code/devel/include/baxter_maintenance_msgs/UpdateSources.h
 7a8b363d43157cf7c2fbcaca01e10da6 /home/dloche/ROS_code/devel/include/baxter_maintenance_msgs/UpdateStatus.h
+a1537a26a96c7f96571aae1db5e67a6d /home/dloche/ROS_code/devel/include/hector_gazebo_plugins/GNSSConfig.h
+633f3547efe0867c426a635c7d66846e /home/dloche/ROS_code/devel/include/hector_gazebo_plugins/SensorModelConfig.h
+dd48cd9fca0088d06569633b3c62b47c /home/dloche/ROS_code/devel/include/hector_gazebo_plugins/SetBias.h
 5e73400f44d37f095959c83648f9966c /home/dloche/ROS_code/devel/include/sensors/AddTwoInts.h
 d8ec464f7a885a93cbd6db0e74f2c089 /home/dloche/ROS_code/devel/include/sensors/Num.h
+1d15db17edc15bbc671891c4b3705b7f /home/dloche/ROS_code/devel/include/tjp_pid/PidConfig.h
 eb7cf36d2cebf1732d885898b881c51f /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/baxter_core_msgs/msg/_AnalogIOState.py
 e8838a03961268b636643547fbb23778 /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/baxter_core_msgs/msg/_AnalogIOStates.py
 8bfdaf5b5960e6f50b7b36d88afbd071 /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/baxter_core_msgs/msg/_AnalogOutputCommand.py
@@ -76,6 +80,8 @@ fbd2cfad0bdbc4b2b28f2fc72230d585 /home/dloche/ROS_code/devel/lib/python2.7/dist-
 50b2ea06c6bbfefdb36ac028bfddd3d4 /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/baxter_maintenance_msgs/msg/_UpdateSources.py
 81e7e2616484d68771bc658e56da15cf /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/baxter_maintenance_msgs/msg/_UpdateStatus.py
 c676249a3576647fb729f7d039eb5d3e /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/baxter_maintenance_msgs/msg/__init__.py
+3db8c06c248b58daff056c286b590a05 /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/hector_gazebo_plugins/srv/_SetBias.py
+160c5a787f1075f35a1d255ebcf0752b /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/hector_gazebo_plugins/srv/__init__.py
 11a31cfd157e1f8298088eb1111f4397 /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/sensors/msg/_Num.py
 7b277fa62fea7de45c8bc8d75576062b /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/sensors/msg/__init__.py
 5e080c7931c4f07ed67b6be6bc6980b5 /home/dloche/ROS_code/devel/lib/python2.7/dist-packages/sensors/srv/_AddTwoInts.py
@@ -116,6 +122,7 @@ dd6ea7ebe785640252629b1a6a76c460 /home/dloche/ROS_code/devel/share/common-lisp/r
 c0c96dd0e0fd7d79cf69fa5e25b811c9 /home/dloche/ROS_code/devel/share/common-lisp/ros/baxter_maintenance_msgs/msg/UpdateSource.lisp
 ec0a70008631690338affa3c865ffe8f /home/dloche/ROS_code/devel/share/common-lisp/ros/baxter_maintenance_msgs/msg/UpdateSources.lisp
 9fef00302bc0d3aa0792c84dfc165edd /home/dloche/ROS_code/devel/share/common-lisp/ros/baxter_maintenance_msgs/msg/UpdateStatus.lisp
+baa6e16ca36cc3869882f559282edb13 /home/dloche/ROS_code/devel/share/common-lisp/ros/hector_gazebo_plugins/srv/SetBias.lisp
 0795182696b5d5894e8999d638739092 /home/dloche/ROS_code/devel/share/common-lisp/ros/sensors/msg/Num.lisp
 97db5d798c87a3f44cb468b4bc63b345 /home/dloche/ROS_code/devel/share/common-lisp/ros/sensors/srv/AddTwoInts.lisp
 e6f7068d755a74c503539601da06a167 /home/dloche/ROS_code/devel/share/gennodejs/ros/baxter_core_msgs/msg/AnalogIOState.js
@@ -154,6 +161,7 @@ dccd6632a4619fd706446bd73144d48e /home/dloche/ROS_code/devel/share/gennodejs/ros
 bcde6a1f88aa6e7ee72d7208d83ddb33 /home/dloche/ROS_code/devel/share/gennodejs/ros/baxter_maintenance_msgs/msg/UpdateSource.js
 81ab1d31c72b7401a877c20fe9091efd /home/dloche/ROS_code/devel/share/gennodejs/ros/baxter_maintenance_msgs/msg/UpdateSources.js
 bc4139fd7baea816772392063412beb2 /home/dloche/ROS_code/devel/share/gennodejs/ros/baxter_maintenance_msgs/msg/UpdateStatus.js
+3530afc81e92e7e8543ba0390e448f97 /home/dloche/ROS_code/devel/share/gennodejs/ros/hector_gazebo_plugins/srv/SetBias.js
 082c165a23c8a422438b6025998115b0 /home/dloche/ROS_code/devel/share/gennodejs/ros/sensors/msg/Num.js
 3db6a35a3e9021b8445ecdae907ca3da /home/dloche/ROS_code/devel/share/gennodejs/ros/sensors/srv/AddTwoInts.js
 cafd3623bf14b8427cfb49febcf835e7 /home/dloche/ROS_code/devel/share/roseus/ros/baxter_core_msgs/manifest.l
@@ -194,6 +202,8 @@ cc7a2afa9eefc39ff2faba168838f644 /home/dloche/ROS_code/devel/share/roseus/ros/ba
 3c4cbda154abd160c77ed2b1f8123c1e /home/dloche/ROS_code/devel/share/roseus/ros/baxter_maintenance_msgs/msg/UpdateSource.l
 09b47d0fbf4358e227f6716b1f9405e4 /home/dloche/ROS_code/devel/share/roseus/ros/baxter_maintenance_msgs/msg/UpdateSources.l
 43aabd42906f9885ee5eb859a4d8aa54 /home/dloche/ROS_code/devel/share/roseus/ros/baxter_maintenance_msgs/msg/UpdateStatus.l
+504b66876eaeaae3a285b6e2cbf38edd /home/dloche/ROS_code/devel/share/roseus/ros/hector_gazebo_plugins/manifest.l
+bd84bee685610b00a1159396172f6ab9 /home/dloche/ROS_code/devel/share/roseus/ros/hector_gazebo_plugins/srv/SetBias.l
 79f54a8b9d5d0d5980b0905d9bcd6943 /home/dloche/ROS_code/devel/share/roseus/ros/sensors/manifest.l
 41c2df3db030240c50d91fab061ffa53 /home/dloche/ROS_code/devel/share/roseus/ros/sensors/msg/Num.l
 040e7e667762f8cca4790a4e540eae04 /home/dloche/ROS_code/devel/share/roseus/ros/sensors/srv/AddTwoInts.l
@@ -244,6 +254,13 @@ a78fa50c295e3733a6a12a535c8ecd8a baxter_maintenance_msgs/CMakeFiles/_baxter_main
 51786340b3312cc9a8299559d98657d4 baxter_maintenance_msgs/CMakeFiles/baxter_maintenance_msgs_generate_messages_lisp
 51786340b3312cc9a8299559d98657d4 baxter_maintenance_msgs/CMakeFiles/baxter_maintenance_msgs_generate_messages_nodejs
 51786340b3312cc9a8299559d98657d4 baxter_maintenance_msgs/CMakeFiles/baxter_maintenance_msgs_generate_messages_py
+4f68c11d7b94aec0c4f55dbff79def72 hector_gazebo_files/hector_gazebo_plugins/CMakeFiles/_hector_gazebo_plugins_generate_messages_check_deps_SetBias
+f8ddefd5d09294e9f8acf367dc8cedd6 hector_gazebo_files/hector_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_gencfg
+f8ddefd5d09294e9f8acf367dc8cedd6 hector_gazebo_files/hector_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_cpp
+f8ddefd5d09294e9f8acf367dc8cedd6 hector_gazebo_files/hector_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_eus
+f8ddefd5d09294e9f8acf367dc8cedd6 hector_gazebo_files/hector_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_lisp
+f8ddefd5d09294e9f8acf367dc8cedd6 hector_gazebo_files/hector_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_nodejs
+f8ddefd5d09294e9f8acf367dc8cedd6 hector_gazebo_files/hector_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_py
 6cf06b514ac10d0ce312c475fbe107b7 sensors/CMakeFiles/_sensors_generate_messages_check_deps_AddTwoInts
 c8ac9ac8d85dd9420fc80a4cb006de31 sensors/CMakeFiles/_sensors_generate_messages_check_deps_Num
 9d60c74bf07093eab822f074a97e1461 sensors/CMakeFiles/sensors_generate_messages_cpp
@@ -251,3 +268,4 @@ c8ac9ac8d85dd9420fc80a4cb006de31 sensors/CMakeFiles/_sensors_generate_messages_c
 9d60c74bf07093eab822f074a97e1461 sensors/CMakeFiles/sensors_generate_messages_lisp
 9d60c74bf07093eab822f074a97e1461 sensors/CMakeFiles/sensors_generate_messages_nodejs
 9d60c74bf07093eab822f074a97e1461 sensors/CMakeFiles/sensors_generate_messages_py
+fbc82702933ee802c13622901ec154f8 tjp_pid_control/CMakeFiles/tjp_pid_gencfg
