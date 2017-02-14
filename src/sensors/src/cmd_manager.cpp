@@ -18,7 +18,7 @@ class cmd_managerClass
 
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
-			pub = np.advertise<std_msgs::Float64>("/car_follower_model/velocity_cmd", 1);
+			pub = np.advertise<std_msgs::Float64>("/velCmd_topic", 1);
 		// "/velCmd_topic"
 			/*
 			ros::ServiceClient cmd_pub = np.serviceClient<gazebo_msgs::ApplyJointEffort>("/gazebo/apply_joint_effort");
