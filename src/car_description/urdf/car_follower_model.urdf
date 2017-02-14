@@ -53,15 +53,20 @@
 			<geometry>
 				<cylinder length="0.15" radius="0.4"/>
 			</geometry>
-			<material name="black">
-				<color rgba="0.0 0.0 0.0 1.0"/>
-			</material>
 		</visual>
 		<collision>
 			<origin rpy="0 0 0" xyz="0 0 0"/>
 			<geometry>
 				<cylinder length="0.15" radius="0.4"/>
 			</geometry>
+			<surface>
+        <friction>
+          <ode>
+            <mu>0.2</mu>
+            <mu2>0</mu2>
+          </ode>
+        </friction>
+      </surface>
 		</collision>
 		<inertial>
 			<mass value="10"/>
@@ -84,6 +89,14 @@
 			<geometry>
 				<cylinder length="0.15" radius="0.4"/>
 			</geometry>
+			<surface>
+        <friction>
+          <ode>
+            <mu>0.2</mu>
+            <mu2>0</mu2>
+          </ode>
+        </friction>
+      </surface>
 		</collision>
 		<inertial>
 			<mass value="10"/>
@@ -106,6 +119,14 @@
 			<geometry>
 				<cylinder length="0.15" radius="0.4"/>
 			</geometry>
+			<surface>
+        <friction>
+          <ode>
+            <mu>0.2</mu>
+            <mu2>0</mu2>
+          </ode>
+        </friction>
+      </surface>
 		</collision>
 		<inertial>
 			<mass value="10"/>
@@ -128,6 +149,14 @@
 			<geometry>
 				<cylinder length="0.15" radius="0.4"/>
 			</geometry>
+			<surface>
+        <friction>
+          <ode>
+            <mu>0.2</mu>
+            <mu2>0</mu2>
+          </ode>
+        </friction>
+      </surface>
 		</collision>
 		<inertial>
 			<mass value="10"/>
@@ -246,5 +275,33 @@
 		</joint>
 		<actuator name="right_motor"/>
 	</transmission>
+
+
+	<!-- Couleurs -->
+	<gazebo reference="front_left_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="front_right_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="rear_left_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="rear_right_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="chassis">
+		<material>Gazebo/Orange</material>
+	</gazebo>
+
+	<gazebo reference="toit">
+		<material>Gazebo/Orange</material>
+	</gazebo>
+
+
 
 </robot>

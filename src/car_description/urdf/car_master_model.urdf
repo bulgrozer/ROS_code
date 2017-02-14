@@ -175,4 +175,31 @@
 		<axis xyz = "0 0 1" />
 	</joint>
 
+
+
+	<!-- Couleurs -->
+	<gazebo reference="front_left_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="front_right_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="rear_left_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="rear_right_wheel">
+		<material>Gazebo/Black</material>
+	</gazebo>
+
+	<gazebo reference="chassis">
+		<material>Gazebo/Blue</material>
+	</gazebo>
+
+	<gazebo reference="toit">
+		<material>Gazebo/Blue</material>
+	</gazebo>
+
 </robot>
