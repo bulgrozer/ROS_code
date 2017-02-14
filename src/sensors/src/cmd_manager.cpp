@@ -23,7 +23,7 @@ class cmd_managerClass
 			/*
 			ros::ServiceClient cmd_pub = np.serviceClient<gazebo_msgs::ApplyJointEffort>("/gazebo/apply_joint_effort");
 			*/
-			double lastCmd = 0;
+			//double lastCmd = 0;
 				
 		}
 
@@ -35,15 +35,32 @@ class cmd_managerClass
 	// %Tag(CALLBACK)%
 	void cmdCallback(const sensors::velOrder& cmd)   
 	{
-	
-	  	
-		//ROS_INFO("velocity x: [%f]", vel->twist[1].linear.x);
-		//ROS_INFO("velocity y: [%f]", vel->twist[1].linear.y);
+		std_msgs::Int64 current_priority;
+		std_msgs::Float64 velCmd;
 
-		// compute of distance setpoints
-		  std_msgs::Float64 velCmd;
-	    velCmd.data =  cmd.data;
-			
+		if(cmd.priority >= current_priority)
+		{
+			if(cmd.release == true)
+			{
+				current_priority = 0;
+				pid_enable= true;
+			}
+			else
+			{
+				velCmd.data = cmd.data;
+				current_priority = cmd.priority;
+				if(cmd.priority > 1)
+				{
+					pid_enable = false;
+				}
+			}
+		}
+		else
+		{
+	   		 ROS_INFO("There is a superior priority");
+		}
+
+
 			/*
 			// Application d'un couple en cumulatif 
 			gazebo_msgs::ApplyJointEffort valCmd;
@@ -56,7 +73,7 @@ class cmd_managerClass
 
 
 		// %Tag(PUBLISH)%
-	   pub.publish(velCmd);
+	  	 pub.publish(velCmd);
 		 ROS_INFO("j'ai ecrit : [%f]", velCmd.data );
 
 		// %Tag(SPINONCE)%
