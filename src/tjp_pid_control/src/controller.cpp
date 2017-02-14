@@ -42,7 +42,7 @@
 #include <dynamic_reconfigure/server.h>
 #include <ros/time.h>
 
-#include "sensors/velOrder.msg"
+#include "sensors/velOrder.h"
 
 void setpoint_callback(const std_msgs::Float64& setpoint_msg)
 {

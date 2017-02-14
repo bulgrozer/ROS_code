@@ -213,3 +213,4 @@ target_link_libraries(distanceSecurityCalculator ${catkin_LIBRARIES})
 
 add_executable(cmd_manager src/cmd_manager.cpp)
 target_link_libraries(cmd_manager ${catkin_LIBRARIES})
+add_dependencies(cmd_manager ${catkin_EXPORTED_TARGETS})
