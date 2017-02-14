@@ -1,2 +1,0 @@
-baxter_core_msgs:baxter_description:baxter_gazebo:baxter_maintenance_msgs:car_control:car_description:car_gazebo:hector_gazebo_files/hector_gazebo:hector_gazebo_files/hector_gazebo_plugins:hector_gazebo_files/hector_gazebo_worlds:hector_gazebo_files/hector_sensors_gazebo:rrbot_control:rrbot_description:rrbot_gazebo:sensors:tjp_pid_control
--DCATKIN_DEVEL_PREFIX=/home/dloche/ROS_code/devel -DCMAKE_INSTALL_PREFIX=/home/dloche/ROS_code/install -G Unix Makefiles

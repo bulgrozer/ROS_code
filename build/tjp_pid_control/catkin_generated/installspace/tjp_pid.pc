@@ -1,8 +1,0 @@
-prefix=/home/dloche/ROS_code/install
-
-Name: tjp_pid
-Description: Description of tjp_pid
-Version: 0.0.20
-Cflags: -I/home/dloche/ROS_code/install/include
-Libs: -L/home/dloche/ROS_code/install/lib 
-Requires: roscpp std_msgs message_runtime dynamic_reconfigure diagnostic_updater
