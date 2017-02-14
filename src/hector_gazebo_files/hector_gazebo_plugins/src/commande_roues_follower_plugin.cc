@@ -42,35 +42,13 @@ namespace gazebo
       this->joint_right_wheel = _model->GetJoint("chassis_to_front_right_wheel");
 
 
-      /*// Setup a P-controller, with a gain of 0.1.
-      this->pid = common::PID(1, 0, 0);
-
-      // Apply the P-controller to the first joint.
-      this->model->GetJointController()->SetVelocityPID(
-          this->joint_left_wheel->GetScopedName(), this->pid);
-
-      // Apply the P-controller to the second joint.
-      this->model->GetJointController()->SetVelocityPID(
-          this->joint_right_wheel->GetScopedName(), this->pid);*/
-
-      // Default to zero velocity
-      //double velocity = 0;
-
-      // Check that the velocity element exists, then read the value
-      //if (_sdf->HasElement("velocity"))
-      //  velocity = _sdf->Get<double>("velocity");
-
-			//this->joint_right_wheel->SetVelocity(0,velocity);
-			//this->joint_left_wheel->SetVelocity(0,velocity);
-
-
       // Create the node
       this->node = transport::NodePtr(new transport::Node());
 
       this->node->Init(this->model->GetWorld()->GetName());
       
       // Create a topic name
-      std::string topicName = "/" + this->model->GetName() + "/velocity_cmd";
+      std::string topicName = "/velCmd_topic";
 
 			std::cerr << "\nThe wheel command follower plugin is attach to model[" <<
         _model->GetName() << "]\n";
@@ -105,21 +83,6 @@ namespace gazebo
 			this->rosQueueThread =
 				std::thread(std::bind(&CommandeRouesFollowerPlugin::QueueThread, this));
     }
-
-
-    /// \brief Set the velocity of the wheel
-    /// \param[in] _vel New target velocity
-    /*public: void SetVelocity(const double &_vel)
-    {
-      // Set the joint's target velocity.
-      this->model->GetJointController()->SetVelocityTarget(
-          this->joint_left_wheel->GetScopedName(), (-1)*_vel);
-
-			this->model->GetJointController()->SetVelocityTarget(
-          this->joint_right_wheel->GetScopedName(), (-1)*_vel);
-
-    }*/
-
 
 
 		/// \brief Handle an incoming message from ROS
