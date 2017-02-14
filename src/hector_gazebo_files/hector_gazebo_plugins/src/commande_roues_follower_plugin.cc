@@ -133,7 +133,7 @@ namespace gazebo
 		double speed = this->model->GetRelativeLinearVel().x;
 		double deltaSpeed;
 		double speedCmd;
-		double threshold = 0.05;
+		double threshold = 0.1;
 		deltaSpeed = (-1)*speed + _msg->data;
 		
 		speedCmd = _msg->data;
@@ -146,6 +146,11 @@ namespace gazebo
 		if (deltaSpeed < threshold)
 		{
 			speedCmd = speed - threshold;
+		}
+
+		if (speedCmd <0)
+		{
+			speedCmd = 0;	
 		}		
 
 		//this->model->SetLinearVel(math::Vector3(_msg->data, 0, 0));
