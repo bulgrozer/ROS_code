@@ -1,4 +1,4 @@
-pub_rate: 4.0
+pub_rate: 50.0
 analyzers:
   Temperature_PID:
     type: diagnostic_aggregator/GenericAnalyzer

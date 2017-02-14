@@ -42,6 +42,8 @@
 #include <dynamic_reconfigure/server.h>
 #include <ros/time.h>
 
+#include "sensors/velOrder.h"
+
 void setpoint_callback(const std_msgs::Float64& setpoint_msg)
 {
   setpoint = setpoint_msg.data;
@@ -171,6 +173,8 @@ void plant_state_callback(const std_msgs::Float64& state_msg)
   if (pid_enabled)
   {
     control_msg.data = control_effort;
+		control_msg.priority = 0;
+		control_msg.release = 0;
     control_effort_pub.publish(control_msg);
   }
   else
@@ -333,7 +337,7 @@ int main(int argc, char **argv)
   }
 
   // instantiate publishers & subscribers
-  control_effort_pub = node.advertise<std_msgs::Float64>(topic_from_controller, 1);
+  control_effort_pub = node.advertise<sensors::velOrder>(topic_from_controller, 1);
 
   ros::Subscriber sub = node.subscribe(topic_from_plant, 1, plant_state_callback );
   ros::Subscriber setpoint_sub = node.subscribe(setpoint_topic, 1, setpoint_callback );

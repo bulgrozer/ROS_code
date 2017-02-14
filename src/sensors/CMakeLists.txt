@@ -48,7 +48,8 @@ find_package(gazebo REQUIRED)
 ## Generate messages in the 'msg' folder
  add_message_files(
    FILES
-   Num.msg
+    velOrder.msg
+#   Num.msg
 #   Message2.msg
  )
 
@@ -195,24 +196,21 @@ include_directories(include
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-add_executable(sensor src/sensor.cpp)
-target_link_libraries(sensor ${catkin_LIBRARIES})
-add_dependencies(sensor beginner_tutorials_generate_messages_cpp)
+#add_executable(sensor src/sensor.cpp)
+#target_link_libraries(sensor ${catkin_LIBRARIES})
 
-add_executable(getData src/getData.cpp)
-target_link_libraries(getData ${catkin_LIBRARIES})
-add_dependencies(getData beginner_tutorials_generate_messages_cpp)
+#add_executable(getData src/getData.cpp)
+#target_link_libraries(getData ${catkin_LIBRARIES})
 
-add_executable(getDataRrbot src/getDataRrbot.cpp)
-target_link_libraries(getDataRrbot ${catkin_LIBRARIES})
+#add_executable(getDataRrbot src/getDataRrbot.cpp)
+#target_link_libraries(getDataRrbot ${catkin_LIBRARIES})
 
-add_executable(control src/control.cpp)
-target_link_libraries(control ${catkin_LIBRARIES})
+#add_executable(control src/control.cpp)
+#target_link_libraries(control ${catkin_LIBRARIES})
 
-add_executable(distanceSecurityCalculator src/distanceSecurityCalculator.cpp)
+add_executable(distanceSecurityCalculator src/distanceSecurityCalculatorClass.cpp)
 target_link_libraries(distanceSecurityCalculator ${catkin_LIBRARIES})
 
-add_executable(distanceSecurityCalculatorClass src/distanceSecurityCalculatorClass.cpp)
-target_link_libraries(distanceSecurityCalculatorClass ${catkin_LIBRARIES})
-
-
+add_executable(cmd_manager src/cmd_manager.cpp)
+target_link_libraries(cmd_manager ${catkin_LIBRARIES})
+add_dependencies(cmd_manager ${catkin_EXPORTED_TARGETS})
