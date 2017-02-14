@@ -1,8 +1,10 @@
 // %Tag(FULLTEXT)%
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+
 #include <std_msgs/Float64.h>
 #include "sensors/velOrder.h"
+
+//#include <gazebo_msgs/ApplyJointEffort.h>
 
 
 class cmd_managerClass
@@ -16,7 +18,12 @@ class cmd_managerClass
 
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
-			pub = np.advertise<std_msgs::Float64>("velCmd_topic", 1);
+			pub = np.advertise<std_msgs::Float64>("/car_follower_model/velocity_cmd", 1);
+		// "/velCmd_topic"
+			/*
+			ros::ServiceClient cmd_pub = np.serviceClient<gazebo_msgs::ApplyJointEffort>("/gazebo/apply_joint_effort");
+			*/
+			double lastCmd = 0;
 				
 		}
 
@@ -35,20 +42,26 @@ class cmd_managerClass
 
 		// compute of distance setpoints
 		  std_msgs::Float64 velCmd;
+	    velCmd.data =  cmd.data;
+			
+			/*
+			// Application d'un couple en cumulatif 
+			gazebo_msgs::ApplyJointEffort valCmd;
+			valCmd.request.joint_name = "chassis_to_front_left_wheel";
+			valCmd.request.effort = cmd.data - lastCmd;
+			valCmd.request.duration = ros::Duration(-1,0);
+			
+			cmd_pub.call(valCmd);
+			*/
 
-	    velCmd.data =  cmd.data ;
 
 		// %Tag(PUBLISH)%
-	    	   pub.publish(velCmd);
-		// %EndTag(PUBLISH)%
-
+	   pub.publish(velCmd);
 		 ROS_INFO("j'ai ecrit : [%f]", velCmd.data );
 
 		// %Tag(SPINONCE)%
 		    ros::spinOnce();
-		// %EndTag(SPINONCE)%
-	}
-	// %EndTag(CALLBACK)%
+		}	
 };
 
 

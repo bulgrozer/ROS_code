@@ -11,7 +11,11 @@
 <!-- Spawn the follower car -->
   <node name="spawn_follower_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find car_description)/urdf/car_follower_model.urdf -urdf -x 0 -y 0 -z 1 -model car_follower_model" />
 
+	<node name="distanceSecurityCalculator" pkg="sensors" type="distanceSecurityCalculator" />
 
+	<node name="cmd_manager" pkg="sensors" type="cmd_manager" />
+
+	<include file="$(find tjp_pid)/launch/differential_drive_sim.launch">	</include>
 
 
 </launch>                         
