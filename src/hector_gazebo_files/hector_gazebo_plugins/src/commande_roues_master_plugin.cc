@@ -52,8 +52,8 @@ namespace gazebo
       if (_sdf->HasElement("velocity"))
         velocity = _sdf->Get<double>("velocity");
 
-			this->joint_right_wheel->SetVelocity(0,velocity);
-			this->joint_left_wheel->SetVelocity(0,velocity);
+			//this->joint_right_wheel->SetVelocity(0,velocity);
+		//	this->joint_left_wheel->SetVelocity(0,velocity);
 
 
       // Create the node
@@ -178,7 +178,7 @@ namespace gazebo
 		/// \brief ROS helper function that processes messages
 		private: void QueueThread()
 		{
-			static const double timeout = 0.1;
+			static const double timeout = 0.01;
 			while (this->rosNode->ok())
 			{
 				this->rosQueue.callAvailable(ros::WallDuration(timeout));
@@ -209,8 +209,6 @@ namespace gazebo
 
     /// \brief Pointer to the second joint.
     private: physics::JointPtr joint_right_wheel;
-    private: physics::JointPtr joint_chassis;
-
 
 		/// \brief A node use for ROS transport
 		private: std::unique_ptr<ros::NodeHandle> rosNode;

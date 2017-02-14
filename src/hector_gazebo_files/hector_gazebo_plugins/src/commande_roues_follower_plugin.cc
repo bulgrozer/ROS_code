@@ -54,14 +54,14 @@ namespace gazebo
           this->joint_right_wheel->GetScopedName(), this->pid);*/
 
       // Default to zero velocity
-      double velocity = 0;
+      //double velocity = 0;
 
       // Check that the velocity element exists, then read the value
-      if (_sdf->HasElement("velocity"))
-        velocity = _sdf->Get<double>("velocity");
+      //if (_sdf->HasElement("velocity"))
+      //  velocity = _sdf->Get<double>("velocity");
 
-			this->joint_right_wheel->SetVelocity(0,velocity);
-			this->joint_left_wheel->SetVelocity(0,velocity);
+			//this->joint_right_wheel->SetVelocity(0,velocity);
+			//this->joint_left_wheel->SetVelocity(0,velocity);
 
 
       // Create the node
@@ -118,12 +118,6 @@ namespace gazebo
 			this->model->GetJointController()->SetVelocityTarget(
           this->joint_right_wheel->GetScopedName(), (-1)*_vel);
 
-
-			// recuperation de la vitesse lineaire du vehicule
-			double vel = this->model->GetRelativeLinearVel().x;
-
-			std::cerr << "\nThe speed of the car is equal to :" <<
-        vel << "\n";
     }*/
 
 
@@ -135,8 +129,27 @@ namespace gazebo
 
 		  //this->joint_right_wheel->SetVelocity(0,(-1)*_msg->data);
 			//this->joint_left_wheel->SetVelocity(0,(-1)*_msg->data);
+		
+		double speed = this->model->GetRelativeLinearVel().x;
+		double deltaSpeed;
+		double speedCmd;
+		double threshold = 0.05;
+		deltaSpeed = (-1)*speed + _msg->data;
+		
+		speedCmd = _msg->data;
 
-			this->model->SetLinearVel(math::Vector3(_msg->data, 0, 0));
+		if (deltaSpeed > threshold)
+		{
+			speedCmd = speed + threshold;
+		}
+
+		if (deltaSpeed < threshold)
+		{
+			speedCmd = speed - threshold;
+		}		
+
+		//this->model->SetLinearVel(math::Vector3(_msg->data, 0, 0));
+		this->model->SetLinearVel(math::Vector3(speedCmd, 0, 0));
 
 		}
 
@@ -180,11 +193,9 @@ namespace gazebo
 
     /// \brief Pointer to the second joint.
     private: physics::JointPtr joint_right_wheel;
-    private: physics::JointPtr joint_chassis;
 
     /// \brief A PID controller for the joint.
     private: common::PID pid;
-
 
 		/// \brief A node use for ROS transport
 		private: std::unique_ptr<ros::NodeHandle> rosNode;
