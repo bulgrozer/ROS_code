@@ -106,6 +106,7 @@ target_link_libraries(commande_roues_master_plugin ${GAZEBO_libraries} ${roscpp_
 # Build the stand-alone test program
 add_executable(velocity_master_cmd src/velocity_master_cmd.cc)
 target_link_libraries(velocity_master_cmd ${GAZEBO_LIBRARIES})
+
 # Build the stand-alone test program
 add_executable(velocity_follower_cmd src/velocity_follower_cmd.cc)
 target_link_libraries(velocity_follower_cmd ${GAZEBO_LIBRARIES})

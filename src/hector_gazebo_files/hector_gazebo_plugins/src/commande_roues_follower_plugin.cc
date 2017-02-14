@@ -17,10 +17,10 @@
 namespace gazebo
 {
   /// \brief A plugin to control wheels.
-  class CommandeRouesPlugin : public ModelPlugin
+  class CommandeRouesFollowerPlugin : public ModelPlugin
   {
     /// \brief Constructor
-    public: CommandeRouesPlugin() {}
+    public: CommandeRouesFollowerPlugin() {}
 
     public: virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     {
@@ -72,12 +72,12 @@ namespace gazebo
       // Create a topic name
       std::string topicName = "/" + this->model->GetName() + "/velocity_cmd";
 
-			std::cerr << "\nThe wheel command plugin is attach to model[" <<
+			std::cerr << "\nThe wheel command follower plugin is attach to model[" <<
         _model->GetName() << "]\n";
 
       // Subscribe to the topic, and register a callback
       this->sub = this->node->Subscribe(topicName,
-         &CommandeRouesPlugin::OnMsg, this);
+         &CommandeRouesFollowerPlugin::OnMsg, this);
 
 			// Initialize ros, if it has not already bee initialized.
 			if (!ros::isInitialized())
@@ -95,15 +95,15 @@ namespace gazebo
 			// Create a named topic, and subscribe to it.
 			ros::SubscribeOptions so =
 				ros::SubscribeOptions::create<std_msgs::Float64>(
-						"/" + this->model->GetName() + "/velocity_cmd",
+						topicName,
 						1,
-						boost::bind(&CommandeRouesPlugin::OnRosMsg, this, _1),
+						boost::bind(&CommandeRouesFollowerPlugin::OnRosMsg, this, _1),
 						ros::VoidPtr(), &this->rosQueue);
 			this->rosSub = this->rosNode->subscribe(so);
 
 			// Spin up the queue helper thread.
 			this->rosQueueThread =
-				std::thread(std::bind(&CommandeRouesPlugin::QueueThread, this));
+				std::thread(std::bind(&CommandeRouesFollowerPlugin::QueueThread, this));
     }
 
 
@@ -201,6 +201,6 @@ namespace gazebo
   };
 
   // Tell Gazebo about this plugin, so that Gazebo can call Load on this plugin.
-  GZ_REGISTER_MODEL_PLUGIN(CommandeRouesPlugin)
+  GZ_REGISTER_MODEL_PLUGIN(CommandeRouesFollowerPlugin)
 }
 #endif
