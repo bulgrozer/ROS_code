@@ -53,7 +53,7 @@ namespace gazebo
         velocity = _sdf->Get<double>("velocity");
 
 			//this->joint_right_wheel->SetVelocity(0,velocity);
-		//	this->joint_left_wheel->SetVelocity(0,velocity);
+		  //this->joint_left_wheel->SetVelocity(0,velocity);
 
 
       // Create the node
