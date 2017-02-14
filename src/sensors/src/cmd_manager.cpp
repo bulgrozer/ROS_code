@@ -1,7 +1,8 @@
 // %Tag(FULLTEXT)%
 #include "ros/ros.h"
-
+#include <std_msgs/Int64.h>
 #include <std_msgs/Float64.h>
+#include <std_msgs/Bool.h>
 #include "sensors/velOrder.h"
 
 //#include <gazebo_msgs/ApplyJointEffort.h>
@@ -12,46 +13,59 @@ class cmd_managerClass
 	public:
 	cmd_managerClass()
 		{
-			// SUBSCRIBER)
-			ros::NodeHandle ns;    /*handle for the subscriber*/	 
+			// SUBSCRIBER
 			sub = ns.subscribe("/velOrder_topic",1,&cmd_managerClass::cmdCallback,this);
 
 			// PUBLISHER
-			ros::NodeHandle np;    //handle for the publisher
-			pub = np.advertise<std_msgs::Float64>("/velCmd_topic", 1);
+			pub_cmd = npc.advertise<std_msgs::Float64>("/velCmd_topic", 1);
+			pub_enable = npe.advertise<std_msgs::Bool>("/left_wheel/pid_enable",1);
 		// "/velCmd_topic"
 			/*
 			ros::ServiceClient cmd_pub = np.serviceClient<gazebo_msgs::ApplyJointEffort>("/gazebo/apply_joint_effort");
 			*/
 			//double lastCmd = 0;
-				
+			current_priority.data = 0;
 		}
 
 	private:
-	
+
 	ros::Subscriber sub;
-	ros::Publisher pub;
+	ros::Publisher pub_cmd;
+	ros::Publisher pub_enable;
+	ros::NodeHandle ns;    /*handle for the subscriber*/	 			
+	ros::NodeHandle npc;    //handle for the publisher command
+	ros::NodeHandle npe;    //handle for the publisher command
+
+	std_msgs::Int64 current_priority;
 
 	// %Tag(CALLBACK)%
 	void cmdCallback(const sensors::velOrder& cmd)   
 	{
-		std_msgs::Int64 current_priority;
 		std_msgs::Float64 velCmd;
-
-		if(cmd.priority >= current_priority)
+		if(cmd.priority >= current_priority.data)
 		{
 			if(cmd.release == true)
 			{
-				current_priority = 0;
-				pid_enable= true;
+				current_priority.data = 0;
+				std_msgs::Bool pid_enable;
+				pid_enable.data = true;
+				pub_enable.publish(pid_enable);
+			  ros::spinOnce();
 			}
 			else
 			{
-				velCmd.data = cmd.data;
-				current_priority = cmd.priority;
+				velCmd.data = -cmd.data;
+				current_priority.data = cmd.priority;
+				pub_cmd.publish(velCmd);
+		    ros::spinOnce();
+
+		 		ROS_INFO("j'ai ecrit : [%f]", velCmd.data );
 				if(cmd.priority > 1)
 				{
-					pid_enable = false;
+					std_msgs::Bool pid_enable;
+					pid_enable.data = false;
+					pub_enable.publish(pid_enable);
+		  	  ros::spinOnce();
 				}
 			}
 		}
@@ -72,12 +86,6 @@ class cmd_managerClass
 			*/
 
 
-		// %Tag(PUBLISH)%
-	  	 pub.publish(velCmd);
-		 ROS_INFO("j'ai ecrit : [%f]", velCmd.data );
-
-		// %Tag(SPINONCE)%
-		    ros::spinOnce();
 		}	
 };
 

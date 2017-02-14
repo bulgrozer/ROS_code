@@ -44,8 +44,8 @@
     </node>
 -->
 
-<!--    <node name="distanceSecurityCalculator" pkg="sensors" type="distanceSecurityCalculator" output="screen" />-->
-
+<!--   <node name="distanceSecurityCalculator" pkg="sensors" type="distanceSecurityCalculator" output="screen" />
+-->
    <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
       <rosparam command="delete" param="/diagnostic_aggregator" />
       <rosparam command="load" file="$(find tjp_pid)/config/pid_diags.yaml" />
