@@ -39,21 +39,12 @@ namespace gazebo
       // Store the model pointer for convenience.
       this->model = _model;
 
-      // Get the first joint.
-      this->joint_left_wheel = _model->GetJoint("chassis_to_front_left_wheel");
-
-      //// Get the second joint.
-      this->joint_right_wheel = _model->GetJoint("chassis_to_front_right_wheel");
-
       // Default to zero velocity
       double velocity = 0;
 
       // Check that the velocity element exists, then read the value
       if (_sdf->HasElement("velocity"))
         velocity = _sdf->Get<double>("velocity");
-
-			//this->joint_right_wheel->SetVelocity(0,velocity);
-		  //this->joint_left_wheel->SetVelocity(0,velocity);
 
 
       // Create the node
@@ -125,12 +116,7 @@ namespace gazebo
 			//std::cout << "Time init : " << time_init << std::endl;
 			//std::cout << "Time : " << time << std::endl;
 
-			//while((time >= time_init) && (time < (time_init + 50)))
-			//{
-				///Speed reference
-
-
-				if (time < (time_init + 5))
+				/*if (time < (time_init + 5))
 				{
 						speed = 0;
 				}else if (time < (time_init +10))
@@ -157,6 +143,31 @@ namespace gazebo
 				}else
 				{
 						speed = 0;		
+				}*/
+
+
+
+				speed = 2;
+
+				// Saturation creation
+				double real_speed = this->model->GetRelativeLinearVel().x;
+				double deltaSpeed;
+				double threshold = 0.1;
+				deltaSpeed = (-1)*real_speed + speed;
+
+				if (deltaSpeed > threshold)
+				{
+					speed = real_speed + threshold;
+				}
+
+				if (deltaSpeed < threshold)
+				{
+					speed = real_speed - threshold;
+				}
+
+				if (speed <0)
+				{
+					speed = 0;	
 				}
 
 				msg.data = speed;
@@ -164,7 +175,6 @@ namespace gazebo
 				this->model->SetLinearVel(math::Vector3(msg.data, 0, 0));
 
 				time = this->model->GetWorld()->GetSimTime().Double();
-			//}
 		}
 		
 
@@ -204,12 +214,6 @@ namespace gazebo
     /// \brief Pointer to the model.
     private: physics::ModelPtr model;
 
-    /// \brief Pointer to the first joint.
-    private: physics::JointPtr joint_left_wheel;
-
-    /// \brief Pointer to the second joint.
-    private: physics::JointPtr joint_right_wheel;
-
 		/// \brief A node use for ROS transport
 		private: std::unique_ptr<ros::NodeHandle> rosNode;
 
@@ -221,7 +225,6 @@ namespace gazebo
 
 		/// \brief A thread the keeps running the rosQueue
 		private: std::thread rosQueueThread;
-
 
 		private: UpdateTimer updateTimer;
   	private: event::ConnectionPtr updateConnection;
