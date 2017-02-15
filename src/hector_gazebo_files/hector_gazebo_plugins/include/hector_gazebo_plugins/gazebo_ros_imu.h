@@ -44,6 +44,7 @@
 #include <hector_gazebo_plugins/SetBias.h>
 #include <hector_gazebo_plugins/sensor_model.h>
 #include <hector_gazebo_plugins/update_timer.h>
+#include "std_msgs/Float64.h"
 
 #include <dynamic_reconfigure/server.h>
 
@@ -64,8 +65,14 @@ namespace gazebo
       virtual void Update();
 
    private:
+
+			double former_speed = 0;
+
       /// \brief The parent World
       physics::WorldPtr world;
+
+    	/// \brief Pointer to the model.
+    	physics::ModelPtr model;
 
       /// \brief The link referred to by this plugin
       physics::LinkPtr link;

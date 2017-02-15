@@ -87,9 +87,17 @@ add_library(hector_gazebo_ros_gps src/gazebo_ros_gps.cpp)
 target_link_libraries(hector_gazebo_ros_gps ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
 add_dependencies(hector_gazebo_ros_gps ${PROJECT_NAME}_gencfg)
 
-add_library(hector_gazebo_ros_sonar src/gazebo_ros_sonar.cpp)
-target_link_libraries(hector_gazebo_ros_sonar ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
-add_dependencies(hector_gazebo_ros_sonar ${PROJECT_NAME}_gencfg)
+add_library(gazebo_ros_sonar_1 src/gazebo_ros_sonar_1.cpp)
+target_link_libraries(gazebo_ros_sonar_1 ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
+add_dependencies(gazebo_ros_sonar_1 ${PROJECT_NAME}_gencfg)
+
+add_library(gazebo_ros_sonar_2 src/gazebo_ros_sonar_2.cpp)
+target_link_libraries(gazebo_ros_sonar_2 ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
+add_dependencies(gazebo_ros_sonar_2 ${PROJECT_NAME}_gencfg)
+
+add_library(gazebo_ros_sonar_3 src/gazebo_ros_sonar_3.cpp)
+target_link_libraries(gazebo_ros_sonar_3 ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
+add_dependencies(gazebo_ros_sonar_3 ${PROJECT_NAME}_gencfg)
 
 add_library(hector_servo_plugin src/servo_plugin.cpp)
 target_link_libraries(hector_servo_plugin ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
@@ -134,7 +142,9 @@ install(TARGETS
   hector_gazebo_ros_imu
   hector_gazebo_ros_magnetic
   hector_gazebo_ros_gps
-  hector_gazebo_ros_sonar
+  gazebo_ros_sonar_1
+  gazebo_ros_sonar_2
+  gazebo_ros_sonar_3
   hector_servo_plugin	
 	commande_roues_follower_plugin
 	commande_roues_master_plugin

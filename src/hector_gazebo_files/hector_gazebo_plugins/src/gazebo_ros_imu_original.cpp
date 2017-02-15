@@ -88,10 +88,6 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     link_name_ = link->GetName();
   }
 
-
-  // Store the model pointer for convenience.
-  this->model = _model;
-
   // assert that the body by link_name_ exists
   if (!link)
   {
@@ -101,7 +97,7 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 
   // default parameters
   frame_id_ = link_name_;
-  topic_ = "velMeasure_topic";
+  topic_ = "imu";
 
   if (_sdf->HasElement("frameId"))
     frame_id_ = _sdf->GetElement("frameId")->GetValue()->GetAsString();
@@ -147,12 +143,12 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   }
 
   // fill in constant covariance matrix
-  //imuMsg.angular_velocity_covariance[0] = rateModel.gaussian_noise.x*rateModel.gaussian_noise.x;
-  //imuMsg.angular_velocity_covariance[4] = rateModel.gaussian_noise.y*rateModel.gaussian_noise.y;
-  //imuMsg.angular_velocity_covariance[8] = rateModel.gaussian_noise.z*rateModel.gaussian_noise.z;
-  //imuMsg.linear_acceleration_covariance[0] = accelModel.gaussian_noise.x*accelModel.gaussian_noise.x;
-  //imuMsg.linear_acceleration_covariance[4] = accelModel.gaussian_noise.y*accelModel.gaussian_noise.y;
-  //imuMsg.linear_acceleration_covariance[8] = accelModel.gaussian_noise.z*accelModel.gaussian_noise.z;
+  imuMsg.angular_velocity_covariance[0] = rateModel.gaussian_noise.x*rateModel.gaussian_noise.x;
+  imuMsg.angular_velocity_covariance[4] = rateModel.gaussian_noise.y*rateModel.gaussian_noise.y;
+  imuMsg.angular_velocity_covariance[8] = rateModel.gaussian_noise.z*rateModel.gaussian_noise.z;
+  imuMsg.linear_acceleration_covariance[0] = accelModel.gaussian_noise.x*accelModel.gaussian_noise.x;
+  imuMsg.linear_acceleration_covariance[4] = accelModel.gaussian_noise.y*accelModel.gaussian_noise.y;
+  imuMsg.linear_acceleration_covariance[8] = accelModel.gaussian_noise.z*accelModel.gaussian_noise.z;
 
   // Make sure the ROS node for Gazebo has already been initialized
   if (!ros::isInitialized())
@@ -166,31 +162,30 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 
   // if topic name specified as empty, do not publish (then what is this plugin good for?)
   if (!topic_.empty())
-    //pub_ = node_handle_->advertise<sensor_msgs::Imu>(topic_, 10);
-		pub_ = node_handle_->advertise<std_msgs::Float64>(topic_, 1);
-  //if (!bias_topic_.empty())
-   // bias_pub_ = node_handle_->advertise<sensor_msgs::Imu>(bias_topic_, 10);
+    pub_ = node_handle_->advertise<sensor_msgs::Imu>(topic_, 10);
+  if (!bias_topic_.empty())
+    bias_pub_ = node_handle_->advertise<sensor_msgs::Imu>(bias_topic_, 10);
 
 #ifdef DEBUG_OUTPUT
-  //debugPublisher = rosnode_->advertise<geometry_msgs::PoseStamped>(topic_ + "/pose", 10);
+  debugPublisher = rosnode_->advertise<geometry_msgs::PoseStamped>(topic_ + "/pose", 10);
 #endif // DEBUG_OUTPUT
 
   // advertise services for calibration and bias setting
-/*  if (!serviceName.empty())
+  if (!serviceName.empty())
     srv_ = node_handle_->advertiseService(serviceName, &GazeboRosIMU::ServiceCallback, this);
 
   accelBiasService = node_handle_->advertiseService(topic_ + "/set_accel_bias", &GazeboRosIMU::SetAccelBiasCallback, this);
-  rateBiasService  = node_handle_->advertiseService(topic_ + "/set_rate_bias", &GazeboRosIMU::SetRateBiasCallback, this);*/
+  rateBiasService  = node_handle_->advertiseService(topic_ + "/set_rate_bias", &GazeboRosIMU::SetRateBiasCallback, this);
 
   // setup dynamic_reconfigure servers
-/*  if (!topic_.empty()) {
+  if (!topic_.empty()) {
     dynamic_reconfigure_server_accel_.reset(new dynamic_reconfigure::Server<SensorModelConfig>(ros::NodeHandle(*node_handle_, topic_ + "/accel")));
     dynamic_reconfigure_server_rate_.reset(new dynamic_reconfigure::Server<SensorModelConfig>(ros::NodeHandle(*node_handle_, topic_ + "/rate")));
     dynamic_reconfigure_server_yaw_.reset(new dynamic_reconfigure::Server<SensorModelConfig>(ros::NodeHandle(*node_handle_, topic_ + "/yaw")));
     dynamic_reconfigure_server_accel_->setCallback(boost::bind(&SensorModel3::dynamicReconfigureCallback, &accelModel, _1, _2));
     dynamic_reconfigure_server_rate_->setCallback(boost::bind(&SensorModel3::dynamicReconfigureCallback, &rateModel, _1, _2));
     dynamic_reconfigure_server_yaw_->setCallback(boost::bind(&SensorModel::dynamicReconfigureCallback, &yawModel, _1, _2));
-  }*/
+  }
 
 #ifdef USE_CBQ
   // start custom queue for imu
@@ -301,7 +296,7 @@ void GazeboRosIMU::Update()
   );
   orientationError.Normalize();
   rot = orientationError * rot;
-/*
+
   // copy data into pose message
   imuMsg.header.frame_id = frame_id_;
   imuMsg.header.stamp.sec = cur_time.sec;
@@ -332,34 +327,12 @@ void GazeboRosIMU::Update()
     imuMsg.orientation_covariance[0] = -1;
     imuMsg.orientation_covariance[4] = -1;
   }
-*/
-
-
-	// Speed sensor
-	 
-	double new_speed = accel.x*dt + former_speed;
-	// Real speed
-	double speed = this->model->GetRelativeLinearVel().x;
-
-//std::cout << "Sensor speed value : " << new_speed << std::endl;
-//std::cout << "Real speed value : " << speed << std::endl;
-
-	former_speed = new_speed;
-
-	if (new_speed < 0.01)
-	{
-	new_speed = 0;
-	}
-
-	std_msgs::Float64 speedToSend;
-	speedToSend.data = new_speed;
-	pub_.publish(speedToSend);
 
   // publish to ros
-  //pub_.publish(imuMsg);
-  //ROS_DEBUG_NAMED("gazebo_ros_imu", "Publishing IMU data at t = %f", cur_time.Double());
+  pub_.publish(imuMsg);
+  ROS_DEBUG_NAMED("gazebo_ros_imu", "Publishing IMU data at t = %f", cur_time.Double());
 
-/*  // publish bias
+  // publish bias
   if (bias_pub_) {
     biasMsg.header = imuMsg.header;
     biasMsg.orientation.x = orientationError.x;
@@ -372,7 +345,7 @@ void GazeboRosIMU::Update()
     biasMsg.linear_acceleration.x = accelModel.getCurrentBias().x;
     biasMsg.linear_acceleration.y = accelModel.getCurrentBias().y;
     biasMsg.linear_acceleration.z = accelModel.getCurrentBias().z;
-    //bias_pub_.publish(biasMsg);
+    bias_pub_.publish(biasMsg);
   }
 
   // debug output
@@ -389,10 +362,9 @@ void GazeboRosIMU::Update()
     debugPose.pose.position.x = pose.pos.x;
     debugPose.pose.position.y = pose.pos.y;
     debugPose.pose.position.z = pose.pos.z;
-    //debugPublisher.publish(debugPose);
+    debugPublisher.publish(debugPose);
   }
 #endif // DEBUG_OUTPUT
-*/
 }
 
 #ifdef USE_CBQ

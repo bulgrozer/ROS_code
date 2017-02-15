@@ -16,7 +16,7 @@ class distanceSecurityClass
 		{
 			// SUBSCRIBER)
 			ros::NodeHandle ns;    /*handle for the subscriber*/	 
-			sub = ns.subscribe("/gazebo/link_states",1,&distanceSecurityClass::sensorCallback,this);
+			sub = ns.subscribe("/velMeasure_topic",1,&distanceSecurityClass::sensorCallback,this);
 
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
@@ -29,12 +29,12 @@ class distanceSecurityClass
 	ros::Publisher pub;
 
 	// %Tag(CALLBACK)%
-	void sensorCallback(const gazebo_msgs::LinkStates::ConstPtr& vel)   
+	void sensorCallback(const std_msgs::Float64::ConstPtr& vel)   
 	{
 	
 	  	
-		ROS_INFO("velocity x: [%f]", vel->twist[1].linear.x);
-		ROS_INFO("velocity y: [%f]", vel->twist[1].linear.y);
+		ROS_INFO("velocity x: [%lf]", vel->data);
+		//ROS_INFO("velocity y: [%f]", vel->twist[1].linear.y);
 
 		// compute of distance setpoints
 		  std_msgs::Float64 d_setpoint;
@@ -45,7 +45,7 @@ class distanceSecurityClass
 	    	   pub.publish(d_setpoint);
 		// %EndTag(PUBLISH)%
 
-		 ROS_INFO("j'ai ecrit : [%f]", d_setpoint );
+		 ROS_INFO("j'ai ecrit : [%lf]", d_setpoint );
 
 		// %Tag(SPINONCE)%
 		    ros::spinOnce();
