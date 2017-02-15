@@ -46,17 +46,17 @@
 
 <!--   <node name="distanceSecurityCalculator" pkg="sensors" type="distanceSecurityCalculator" output="screen" />
 -->
-   <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
-      <rosparam command="delete" param="/diagnostic_aggregator" />
-      <rosparam command="load" file="$(find tjp_pid)/config/pid_diags.yaml" />
-   </node>
 
    <!-- rqt_plot is a resource hog, so if you're seeing high CPU usage, don't launch rqt_plot  -->
     <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot"
     args="/distanceOrder_topic/data /distanceMesure_topic/data
-           /car_follower_model/velocity_cmd/data" />
+           /velCmd/data" />
 
-    <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
-    <node name="rqt_robot_monitor" pkg="rqt_robot_monitor" type="rqt_robot_monitor" />
+   <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
+   <node name="rqt_robot_monitor" pkg="rqt_robot_monitor" type="rqt_robot_monitor" />
 
+   <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+      <rosparam command="delete" param="/diagnostic_aggregator" />
+      <rosparam command="load" file="$(find tjp_pid)/config/pid_diags.yaml" />
+   </node>
 </launch>
