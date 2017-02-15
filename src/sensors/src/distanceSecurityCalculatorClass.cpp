@@ -45,7 +45,7 @@ class distanceSecurityClass
 	    	   pub.publish(d_setpoint);
 		// %EndTag(PUBLISH)%
 
-		 ROS_INFO("j'ai ecrit : [%lf]", d_setpoint );
+		 //ROS_INFO("j'ai ecrit : [%lf]", d_setpoint );
 
 		// %Tag(SPINONCE)%
 		    ros::spinOnce();
