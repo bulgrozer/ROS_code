@@ -33,13 +33,13 @@ class distanceSecurityClass
 	{
 	
 	  	
-		ROS_INFO("velocity x: [%lf]", vel->data);
+		//ROS_INFO("velocity x: [%lf]", vel->data);
 		//ROS_INFO("velocity y: [%f]", vel->twist[1].linear.y);
 
 		// compute of distance setpoints
-		  std_msgs::Float64 d_setpoint;
-
-	     	   d_setpoint.data =  5 ;
+					std_msgs::Float64 d_setpoint;
+					std::cout << "Vitesse : " << vel->data << std::endl;
+					d_setpoint.data = 2 + (60*vel->data*3.6 + (vel->data*3.6) * (vel->data/3.6))/200 ;
 
 		// %Tag(PUBLISH)%
 	    	   pub.publish(d_setpoint);

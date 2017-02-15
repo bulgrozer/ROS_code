@@ -108,7 +108,7 @@ namespace gazebo
 
 		if (deltaSpeed < threshold)
 		{
-			speedCmd = speed - threshold;
+			speedCmd = speed - (threshold+0.3);
 		}
 
 		if (speedCmd <0)
