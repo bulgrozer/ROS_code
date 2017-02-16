@@ -27,28 +27,39 @@ class distanceSecurityClass
 	private:
 	ros::Subscriber sub;
 	ros::Publisher pub;
+	double previous_vel = 0;
+	float dt = 0.01;
+	float threshold = 10;
 
 	// %Tag(CALLBACK)%
 	void sensorCallback(const std_msgs::Float64::ConstPtr& vel)   
 	{
-	
-	  	
-		//ROS_INFO("velocity x: [%lf]", vel->data);
-		//ROS_INFO("velocity y: [%f]", vel->twist[1].linear.y);
+
+		// Temporal redundancy of IMU sensor's data
+		
+		if (vel->data - previous_vel > threshold*dt+0.5)
+		{	
+			ROS_ERROR("Error with the IMU sensor's data");
+		}
+
+		if (vel->data - previous_vel < (-1)*(threshold*dt+0.5))
+		{	
+			ROS_ERROR("Error with the IMU sensor's data");
+		}
+
+		previous_vel = vel->data;
 
 		// compute of distance setpoints
-					std_msgs::Float64 d_setpoint;
-					std::cout << "Vitesse : " << vel->data << std::endl;
-					d_setpoint.data = 2 + (60*vel->data*3.6 + (vel->data*3.6) * (vel->data/3.6))/200 ;
+		std_msgs::Float64 d_setpoint;
+		//std::cout << "Vitesse : " << vel->data << std::endl;
+		d_setpoint.data = 2 + (60*vel->data*3.6 + (vel->data*3.6) * (vel->data/3.6))/200 ;
 
 		// %Tag(PUBLISH)%
-	    	   pub.publish(d_setpoint);
+	  pub.publish(d_setpoint);
 		// %EndTag(PUBLISH)%
 
-		 //ROS_INFO("j'ai ecrit : [%lf]", d_setpoint );
-
 		// %Tag(SPINONCE)%
-		    ros::spinOnce();
+		ros::spinOnce();
 		// %EndTag(SPINONCE)%
 	}
 	// %EndTag(CALLBACK)%
@@ -57,15 +68,19 @@ class distanceSecurityClass
 
 int main(int argc, char **argv)
 {
-  
-  ros::init(argc, argv, "distanceSecurityCalculator");
-  distanceSecurityClass distanceSetPoint;
- 
-// %Tag(SPIN)%
-  ros::spin();
-// %EndTag(SPIN)%
+	ros::Rate r(10);		// 10 Hz
 
+	while (ros::ok())
+	{
 
+		ros::init(argc, argv, "distanceSecurityCalculator");
+		distanceSecurityClass distanceSetPoint;
+	 
+		// %Tag(SPIN)%
+		ros::spinOnce();
+		// %EndTag(SPIN)%
+
+	}
 	
   return 0;
 }

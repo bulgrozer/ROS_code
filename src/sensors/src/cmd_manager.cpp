@@ -93,14 +93,21 @@ class cmd_managerClass
 int main(int argc, char **argv)
 {
   
-  ros::init(argc, argv, "cmd_manager");
-  cmd_managerClass cmd_manager;
- 
-// %Tag(SPIN)%
-  ros::spin();
-// %EndTag(SPIN)%
 
+	ros::Rate r(10);		// 10 Hz
 
+	while (ros::ok())
+	{
+	
+
+		ros::init(argc, argv, "cmd_manager");
+		cmd_managerClass cmd_manager;
+	 
+		// %Tag(SPIN)%
+		ros::spinOnce();
+		// %EndTag(SPIN)%
+
+	}
 	
   return 0;
 }

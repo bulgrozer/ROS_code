@@ -1,0 +1,68 @@
+#include "GPIO.h"
+#include <stdio.h>
+#include <stdlib..h>
+#include <wirinPi.h>
+#include "ros/ros.h"
+#include <std_msgs/Float64.h>
+
+class Ultrasonic
+{
+		public: Ultrasonic() 
+		{
+				GPIOExport(numPinWrite);
+				GPIODirection(numPinWrite,OUT);
+				 	
+				GPIOExport(numPinRead);
+				GPIODirection(numPinRead,IN);
+		}
+
+		public: void dataRequest()
+		{
+				GPIOWrite(numPinWrite,HIGH);
+				usleep(300);
+				GPIOWrite(numPinWrite,LOW);
+				usleep(100);
+		}
+
+		public: void getData()
+		{
+				distance = GPIORead(numPinWrite);
+				//Convertion from time to distance in cm 
+				distance = 17150 * distance;
+		}
+
+	public :
+
+		// PUBLISHER
+			ros::NodeHandle np;   
+			pub = np.advertise<std_msgs::Float64>("ultrason_topic", 1);
+		  pub.publish(distance);
+		  ros::spinOnce();			
+
+
+		private: 
+			int numPinWrite =2;
+			int numPinRead =3;
+			double distance;
+			ros::Publisher pub;	
+
+};
+
+
+int main(int argc, char **argv)
+{
+  
+  ros::init(argc, argv, "ultrasonic_measure");
+  Ultrasonic ultrason;
+ 
+// %Tag(SPIN)%
+  ros::spin();
+// %EndTag(SPIN)%
+
+  return 0;
+}
+
+
+
+
+

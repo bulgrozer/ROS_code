@@ -168,7 +168,7 @@ class measureManagerClass
 		
 		   std_msgs::Float64 d_cmd;
 
-	     	   d_cmd.data = d_final;
+	     d_cmd.data = d_final;
 
 		// %Tag(PUBLISH)%
 	    	   pub.publish(d_cmd);
@@ -188,13 +188,20 @@ class measureManagerClass
 int main(int argc, char **argv)
 {
   
-  ros::init(argc, argv, "Measure_manager");
-  measureManagerClass measure_manager_class;
- 
-// %Tag(SPIN)%
-  ros::spin();
-// %EndTag(SPIN)%
 
+	ros::Rate r(10);		// 10 Hz
+
+	while (ros::ok())
+	{
+	
+  	ros::init(argc, argv, "Measure_manager");
+  	measureManagerClass measure_manager_class;
+ 
+		// %Tag(SPIN)%
+  	ros::spinOnce();
+		// %EndTag(SPIN)%
+
+	}
 
 	
   return 0;

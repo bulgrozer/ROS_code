@@ -87,16 +87,17 @@ void plant_state_callback(const std_msgs::Float64& state_msg)
   if (!prev_time.isZero()) // Not first time through the program  
   {
     delta_t = ros::Time::now() - prev_time;
+		//std::cout << "Now: " << ros::Time::now() << " / Previous: " <<  prev_time << std::endl;
     prev_time = ros::Time::now();
     if (0 == delta_t.toSec())
     {
-      ROS_ERROR("delta_t is 0, skipping this loop. Possible overloaded cpu at time: %f", ros::Time::now().toSec());
+      //ROS_ERROR("delta_t is 0, skipping this loop. Possible overloaded cpu at time: %f", ros::Time::now().toSec());
       return;
     }
   }
   else
   {
-    ROS_INFO("prev_time is 0, doing nothing");
+    //ROS_INFO("prev_time is 0, doing nothing");
     prev_time = ros::Time::now();
     return;
   }
