@@ -217,3 +217,6 @@ add_dependencies(cmd_manager ${catkin_EXPORTED_TARGETS})
 
 add_executable(measureManager src/measureManager.cpp)
 target_link_libraries(measureManager ${catkin_LIBRARIES})
+
+add_executable(ultrasonic_measure src/ultrasonic_measure.cpp)
+target_link_libraries(ultrasonic_measure ${catkin_LIBRARIES})
