@@ -94,20 +94,20 @@ int main(int argc, char **argv)
 {
   
 
-	ros::Rate r(10);		// 10 Hz
+	//ros::Rate r(10);		// 10 Hz
 
-	while (ros::ok())
-	{
+	//while (ros::ok())
+	//{
 	
 
 		ros::init(argc, argv, "cmd_manager");
 		cmd_managerClass cmd_manager;
 	 
 		// %Tag(SPIN)%
-		ros::spinOnce();
+		ros::spin();
 		// %EndTag(SPIN)%
 
-	}
+	//}
 	
   return 0;
 }

@@ -49,6 +49,7 @@ find_package(gazebo REQUIRED)
  add_message_files(
    FILES
     velOrder.msg
+		errorMessage.msg
 #   Num.msg
 #   Message2.msg
  )
@@ -208,9 +209,6 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 #add_executable(control src/control.cpp)
 #target_link_libraries(control ${catkin_LIBRARIES})
 
-add_executable(distanceSecurityCalculator src/distanceSecurityCalculatorClass.cpp)
-target_link_libraries(distanceSecurityCalculator ${catkin_LIBRARIES})
-
 add_executable(cmd_manager src/cmd_manager.cpp)
 target_link_libraries(cmd_manager ${catkin_LIBRARIES})
 add_dependencies(cmd_manager ${catkin_EXPORTED_TARGETS})
@@ -220,3 +218,7 @@ target_link_libraries(measureManager ${catkin_LIBRARIES})
 
 add_executable(ultrasonic_measure src/ultrasonic_measure.cpp)
 target_link_libraries(ultrasonic_measure ${catkin_LIBRARIES})
+
+add_executable(distanceSecurityCalculatorClass src/distanceSecurityCalculatorClass.cpp)
+target_link_libraries(distanceSecurityCalculatorClass ${catkin_LIBRARIES})
+add_dependencies(distanceSecurityCalculatorClass ${catkin_EXPORTED_TARGETS})

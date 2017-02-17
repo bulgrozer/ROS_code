@@ -189,19 +189,19 @@ int main(int argc, char **argv)
 {
   
 
-	ros::Rate r(10);		// 10 Hz
+	//ros::Rate r(10);		// 10 Hz
 
-	while (ros::ok())
-	{
+	//while (ros::ok())
+	//{
 	
   	ros::init(argc, argv, "Measure_manager");
   	measureManagerClass measure_manager_class;
  
 		// %Tag(SPIN)%
-  	ros::spinOnce();
+  	ros::spin();
 		// %EndTag(SPIN)%
 
-	}
+	//}
 
 	
   return 0;
