@@ -158,7 +158,6 @@ namespace gazebo
 				// Saturation creation
 				speed = speedVector[speedVectorIterator];
 				double real_speed = this->model->GetRelativeLinearVel().x; // Get the model's speed
-				double deltaSpeed = speed - real_speed; // Speed variation
 
 				speed = real_speed + ACCELERATION_LIMIT*deltaTime; // Acceleration max limited
 
