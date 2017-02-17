@@ -20,7 +20,19 @@ class distanceSecurityCalculatorClass
 	public:
 	distanceSecurityCalculatorClass()
 		{
-			// SUBSCRIBER)
+			previous_vel = 0;
+			dt = 0.01;
+			threshold = 10;
+			int i;
+			for (i = 0 ; i<10 ; i++)
+			{
+			BUFFER[i] = 0;
+			}
+			j = 0;
+			n = 1;
+			
+
+			// SUBSCRIBER
 			ros::NodeHandle ns;    /*handle for the subscriber*/	 
 			sub = ns.subscribe("/velMeasure_topic",1,&distanceSecurityCalculatorClass::sensorCallback,this);
 
@@ -28,9 +40,9 @@ class distanceSecurityCalculatorClass
 			ros::NodeHandle np;    //handle for the publisher
 			pub = np.advertise<std_msgs::Float64>("distanceOrder_topic", 1);
 
-			previous_vel = 0;
-			dt = 0.01;
-			threshold = 10;
+			// PUBLISHER
+			ros::NodeHandle np_error;    //handle for the publisher
+			pub_error = np_error.advertise<sensors::errorMessage>("error_topic", 1);
 				
 		}
 
@@ -54,7 +66,7 @@ class distanceSecurityCalculatorClass
 
 		if (vel->data - previous_vel > threshold*dt+0.5)
 		{	
-			ROS_ERROR("Error with the IMU sensor's data");
+			//ROS_ERROR("Error with the IMU sensor's data upper limit");
 
 			sensors::errorMessage error;
 			error.error_time = ros::Time::now();
@@ -68,7 +80,7 @@ class distanceSecurityCalculatorClass
 
 		else if (vel->data - previous_vel < (-1)*(threshold*dt+0.5))
 		{	
-			ROS_ERROR("Error with the IMU sensor's data");
+			//ROS_ERROR("Error with the IMU sensor's data lower limit");
 
 			sensors::errorMessage error;
 			error.error_time = ros::Time::now();
@@ -82,9 +94,11 @@ class distanceSecurityCalculatorClass
 		else { 
 
 		BUFFER[j] = vel->data;
-		j = (j + 1) % 10;
+		std::cout << "Vitesse : " << vel->data << std::endl;
+		std::cout << "Vitesse prec : " << previous_vel << std::endl;
+//		j = (j + 1) % 10;
 		
-		int k,n;
+		int k;
 		for(k = 0;k<10;k++)
 		{
 			mean = mean + BUFFER[k];
@@ -93,15 +107,21 @@ class distanceSecurityCalculatorClass
 		mean = mean / n;
 
 		if (n < 10){n++;}
-
+		
 		previous_vel = mean;
 		}
+	
+				std::cout << "Vitesse moyenne : " << mean << std::endl;
 		
-
+		
 		// compute of distance setpoints
 		std_msgs::Float64 d_setpoint;
 		//std::cout << "Vitesse : " << vel->data << std::endl;
 		d_setpoint.data = 2 + (60*mean*3.6 + (mean*3.6) * (mean/3.6))/200 ;
+
+		j++;
+		if (j == 10){j = 0;}
+
 
 		// %Tag(PUBLISH)%
 	  pub.publish(d_setpoint);
@@ -117,19 +137,19 @@ class distanceSecurityCalculatorClass
 
 int main(int argc, char **argv)
 {
-	ros::Rate r(100);		// 100 Hz
+	//ros::Rate r(100);		// 100 Hz
 
-	while (ros::ok())
-	{
+	//while (ros::ok())
+	//{
 
 		ros::init(argc, argv, "distanceSecurityCalculatorClass");
 		distanceSecurityCalculatorClass distanceSetPoint;
-	 
+
 		// %Tag(SPIN)%
-		ros::spinOnce();
+		ros::spin();
 		// %EndTag(SPIN)%
-		r.sleep();
-	}
+		//r.sleep();
+	//}
 	
   return 0;
 }
