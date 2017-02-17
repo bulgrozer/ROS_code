@@ -97,12 +97,11 @@ class distanceSecurityCalculatorClass
 		previous_vel = mean;
 		}
 		
-		mean = vel->data;
 
 		// compute of distance setpoints
 		std_msgs::Float64 d_setpoint;
 		//std::cout << "Vitesse : " << vel->data << std::endl;
-		d_setpoint.data = 2 + (60*vel->data*3.6 + (vel->data*3.6) * (vel->data/3.6))/200 ;
+		d_setpoint.data = 2 + (60*mean*3.6 + (mean*3.6) * (mean/3.6))/200 ;
 
 		// %Tag(PUBLISH)%
 	  pub.publish(d_setpoint);
