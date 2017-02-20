@@ -3,16 +3,11 @@
 
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
-
-
 #include <thread>
 #include "ros/ros.h"
 #include "ros/callback_queue.h"
 #include "ros/subscribe_options.h"
 #include "std_msgs/Float64.h"
-
-
-
 
 namespace gazebo
 {
@@ -34,13 +29,6 @@ namespace gazebo
 
       // Store the model pointer for convenience.
       this->model = _model;
-
-      // Get the first joint.
-      this->joint_left_wheel = _model->GetJoint("chassis_to_front_left_wheel");
-
-      //// Get the second joint.
-      this->joint_right_wheel = _model->GetJoint("chassis_to_front_right_wheel");
-
 
       // Create the node
       this->node = transport::NodePtr(new transport::Node());
@@ -88,11 +76,7 @@ namespace gazebo
 		/// \brief Handle an incoming message from ROS
 		/// \param[in] _msg A float value that is used to set the velocity
 		public: void OnRosMsg(const std_msgs::Float64ConstPtr &_msg)
-		{
-
-		  //this->joint_right_wheel->SetVelocity(0,(-1)*_msg->data);
-			//this->joint_left_wheel->SetVelocity(0,(-1)*_msg->data);
-		
+		{		
 		double speed = this->model->GetRelativeLinearVel().x;
 		double deltaSpeed;
 		double speedCmd;
@@ -116,7 +100,6 @@ namespace gazebo
 			speedCmd = 0;	
 		}		
 
-		//this->model->SetLinearVel(math::Vector3(_msg->data, 0, 0));
 		this->model->SetLinearVel(math::Vector3(speedCmd, 0, 0));
 
 		}
@@ -131,20 +114,12 @@ namespace gazebo
 			}
 		}
 
-
-
-
     /// \brief Handle incoming message
     /// \param[in] _msg Repurpose a vector3 message. This function will
     /// only use the x component.
     private: void OnMsg(ConstVector3dPtr &_msg)
     {
-
-		  //this->joint_right_wheel->SetVelocity(0,(-1)*_msg->x());
-      //this->joint_left_wheel->SetVelocity(0,(-1)*_msg->x());
-
 			this->model->SetLinearVel(math::Vector3(_msg->x(), 0, 0));
-
     }
 
     /// \brief A node used for transport
@@ -155,15 +130,6 @@ namespace gazebo
 
     /// \brief Pointer to the model.
     private: physics::ModelPtr model;
-
-    /// \brief Pointer to the first joint.
-    private: physics::JointPtr joint_left_wheel;
-
-    /// \brief Pointer to the second joint.
-    private: physics::JointPtr joint_right_wheel;
-
-    /// \brief A PID controller for the joint.
-    private: common::PID pid;
 
 		/// \brief A node use for ROS transport
 		private: std::unique_ptr<ros::NodeHandle> rosNode;
