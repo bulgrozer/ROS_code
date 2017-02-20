@@ -6,8 +6,7 @@
 #include <std_msgs/Float64.h>
 #include <geometry_msgs/Twist.h>
 #include <gazebo_msgs/LinkStates.h>
-
-
+#include <dependency_pkg/watchdog.h>
 
 class measureManagerClass
 {
@@ -29,6 +28,9 @@ class measureManagerClass
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
 			pub = np.advertise<std_msgs::Float64>("distanceCmd_topic", 1);
+			
+                        Watchdog wd_measureManager ;
+                        wd_measureManager.start();
 				
 		}
 

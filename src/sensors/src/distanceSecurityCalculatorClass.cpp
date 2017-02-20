@@ -94,9 +94,6 @@ class distanceSecurityCalculatorClass
 		else { 
 
 		BUFFER[j] = vel->data;
-		std::cout << "Vitesse : " << vel->data << std::endl;
-		std::cout << "Vitesse prec : " << previous_vel << std::endl;
-//		j = (j + 1) % 10;
 		
 		int k;
 		for(k = 0;k<10;k++)
@@ -110,14 +107,11 @@ class distanceSecurityCalculatorClass
 		
 		previous_vel = mean;
 		}
-	
-				std::cout << "Vitesse moyenne : " << mean << std::endl;
-		
-		
+			
 		// compute of distance setpoints
 		std_msgs::Float64 d_setpoint;
 		//std::cout << "Vitesse : " << vel->data << std::endl;
-		d_setpoint.data = 2 + (60*mean*3.6 + (mean*3.6) * (mean/3.6))/200 ;
+		d_setpoint.data = 2 + 1.5*((mean*3.6) * (mean/3.6))/200 ;
 
 		j++;
 		if (j == 10){j = 0;}
