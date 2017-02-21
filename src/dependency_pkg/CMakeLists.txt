@@ -50,7 +50,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
    FILES
-   safetyMsg.msg	 
+   safetyMsg.msg
+   errorMessage.msg	 
 #   Message2.msg
 )
 
@@ -104,8 +105,8 @@ add_message_files(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES dependency_pkg
+  INCLUDE_DIRS include
+  LIBRARIES dependency_pkg
   CATKIN_DEPENDS roscpp std_msgs message_runtime
   DEPENDS system_lib
 )
@@ -196,3 +197,14 @@ catkin_package(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+
+ add_executable(errorManager src/errorManager.cpp)
+ add_dependencies(nodeKiller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ target_link_libraries(errorManager   ${catkin_LIBRARIES} )
+
+
+
+
+
+
