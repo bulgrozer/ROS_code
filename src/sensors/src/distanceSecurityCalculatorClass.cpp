@@ -64,9 +64,9 @@ class distanceSecurityCalculatorClass
 		// Temporal redundancy of IMU sensor's data
 		float mean = 0;
 
-		if (vel->data - previous_vel > threshold*dt+0.5)
+		if ((vel->data - previous_vel) > (threshold*dt+0.5))
 		{	
-			//ROS_ERROR("Error with the IMU sensor's data upper limit");
+			ROS_ERROR("Error with the IMU sensor's data upper limit");
 
 			sensors::errorMessage error;
 			error.error_time = ros::Time::now();
@@ -78,9 +78,9 @@ class distanceSecurityCalculatorClass
 			mean = previous_vel;
 		}
 
-		else if (vel->data - previous_vel < (-1)*(threshold*dt+0.5))
+		else if ((vel->data - previous_vel) < ((-1)*(threshold*dt+0.5)))
 		{	
-			//ROS_ERROR("Error with the IMU sensor's data lower limit");
+			ROS_ERROR("Error with the IMU sensor's data lower limit");
 
 			sensors::errorMessage error;
 			error.error_time = ros::Time::now();
@@ -110,14 +110,15 @@ class distanceSecurityCalculatorClass
 			
 		// compute of distance setpoints
 		std_msgs::Float64 d_setpoint;
-		//std::cout << "Vitesse : " << vel->data << std::endl;
-		d_setpoint.data = 2 + 1.5*((mean*3.6) * (mean/3.6))/200 ;
+		//std::cout << "Vitesse : " << mean << std::endl;
+		d_setpoint.data = 2 + 1.5*((mean*3.6) * (mean*3.6))/200 ;
 
 		j++;
 		if (j == 10){j = 0;}
 
 
 		// %Tag(PUBLISH)%
+		//ROS_INFO("Envoi distanceOrderT");
 	  pub.publish(d_setpoint);
 		// %EndTag(PUBLISH)%
 
