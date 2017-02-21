@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(gazebo REQUIRED)
-find_package(dependency_pkg REQUIRED)
+#find_package(dependency_pkg REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -107,7 +107,7 @@ find_package(dependency_pkg REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES sensors
-   LIBRARIES dependency_pkg
+   #LIBRARIES dependency_pkg
   CATKIN_DEPENDS roscpp std_msgs message_runtime
   DEPENDS 
 	gazebo_ros

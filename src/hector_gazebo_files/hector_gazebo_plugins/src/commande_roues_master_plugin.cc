@@ -55,8 +55,8 @@ namespace gazebo
       
 			// Create a topic name
 			std::string topicName = "/" + this->model->GetName() + "/velocity_master_cmd";
-			std::cerr << "\nThe wheel command master plugin is attach to model[" << _model->GetName() << "]\n";
-			std::cout << "Node initialized in " << this->model->GetWorld()->GetName() << "\nTopic name " << topicName << std::endl; // debug
+			//std::cerr << "\nThe wheel command master plugin is attach to model[" << _model->GetName() << "]\n";
+			//std::cout << "Node initialized in " << this->model->GetWorld()->GetName() << "\nTopic name " << topicName << std::endl; // debug
 
 			// Subscribe to the topic, and register a callback
 			this->sub = this->node->Subscribe(topicName, &CommandeRouesMasterPlugin::OnMsg, this);

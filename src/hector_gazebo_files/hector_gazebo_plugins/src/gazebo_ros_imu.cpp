@@ -135,14 +135,14 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   if (_sdf->HasElement("xyzOffset")) {
     this->offset_.pos = _sdf->Get<math::Vector3>("xyzOffset");
   } else {
-    ROS_INFO("imu plugin missing <xyzOffset>, defaults to 0s");
+    //ROS_INFO("imu plugin missing <xyzOffset>, defaults to 0s");
     this->offset_.pos = math::Vector3(0, 0, 0);
   }
 
   if (_sdf->HasElement("rpyOffset")) {
     this->offset_.rot = _sdf->Get<math::Vector3>("rpyOffset");
   } else {
-    ROS_INFO("imu plugin missing <rpyOffset>, defaults to 0s");
+    //ROS_INFO("imu plugin missing <rpyOffset>, defaults to 0s");
     this->offset_.rot = math::Vector3(0, 0, 0);
   }
 

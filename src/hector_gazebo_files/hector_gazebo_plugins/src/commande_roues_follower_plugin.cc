@@ -38,8 +38,8 @@ namespace gazebo
       // Create a topic name
       std::string topicName = "/velCmd_topic";
 
-			std::cerr << "\nThe wheel command follower plugin is attach to model[" <<
-        _model->GetName() << "]\n";
+			//std::cerr << "\nThe wheel command follower plugin is attach to model[" <<
+        //_model->GetName() << "]\n";
 
       // Subscribe to the topic, and register a callback
       this->sub = this->node->Subscribe(topicName,

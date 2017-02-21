@@ -174,7 +174,7 @@ void plant_state_callback(const std_msgs::Float64& state_msg)
   if (pid_enabled)
   {
     control_msg.data = control_effort;
-		control_msg.priority = 0;
+		control_msg.priority = 1;
 		control_msg.release = 0;
     control_effort_pub.publish(control_msg);
   }
