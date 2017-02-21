@@ -6,7 +6,6 @@
 #include <std_msgs/Float64.h>
 #include <geometry_msgs/Twist.h>
 #include <gazebo_msgs/LinkStates.h>
-<<<<<<< HEAD
 #include "ros/callback_queue.h"
 #include <iostream>
 #include "ros/rate.h"
@@ -15,9 +14,6 @@
 
 #define ERROR_PLUS 1.2
 #define ERROR_MINUS 0.8
-=======
-#include <dependency_pkg/watchdog.h>
->>>>>>> 8fef75d1e2bed7fe4d0aad24b98bdb17986efa20
 
 class measureManagerClass
 {
@@ -43,16 +39,10 @@ class measureManagerClass
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
 			pub = np.advertise<std_msgs::Float64>("distanceCmd_topic", 1);
-<<<<<<< HEAD
 
 			// PUBLISHER
 			ros::NodeHandle np_error;    //handle for the publisher
 			pub_error = np_error.advertise<sensors::errorMessage>("error_topic", 1);
-=======
-			
-                        Watchdog wd_measureManager ;
-                        wd_measureManager.start();
->>>>>>> 8fef75d1e2bed7fe4d0aad24b98bdb17986efa20
 				
 		}
 
