@@ -6,14 +6,24 @@
 #include <std_msgs/Float64.h>
 #include <geometry_msgs/Twist.h>
 #include <gazebo_msgs/LinkStates.h>
+#include "ros/callback_queue.h"
+#include <iostream>
+#include "ros/rate.h"
+#include "sensors/errorMessage.h"
+#include "ros/time.h"
 
-
+#define ERROR_PLUS 1.2
+#define ERROR_MINUS 0.8
 
 class measureManagerClass
 {
 	public:
 	measureManagerClass()
 		{
+			d1 = 0;
+			d2 = 0;
+			d3 = 0;
+
 			// SUBSCRIBER 1
 			ros::NodeHandle ns1;    /*handle for the 1st subscriber*/	 
 			sub1 = ns1.subscribe("/distanceMesure1_topic",1,&measureManagerClass::measureCallback1,this);
@@ -29,6 +39,10 @@ class measureManagerClass
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
 			pub = np.advertise<std_msgs::Float64>("distanceCmd_topic", 1);
+
+			// PUBLISHER
+			ros::NodeHandle np_error;    //handle for the publisher
+			pub_error = np_error.advertise<sensors::errorMessage>("error_topic", 1);
 				
 		}
 
@@ -37,6 +51,7 @@ class measureManagerClass
 	ros::Subscriber sub2;
 	ros::Subscriber sub3;
 	ros::Publisher pub;
+	ros::Publisher pub_error;
 	double d1;
 	double d2;
 	double d3;
@@ -94,11 +109,30 @@ class measureManagerClass
 			if(diff_1 > diff_2)
 			{
 				d_final = (d2+d3)/2;
-			}else
+
+				if ((d1/d2)>ERROR_PLUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 1;
+				} // end if
+
+			} // end if
+			else
 			{
 				d_final = (d2+d1)/2;
-			}
-		}
+
+				if ((d3/d2)<ERROR_MINUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 3;
+				} // end if
+
+			} // end else
+		} // end if first case
 
 		if ((d1>=d3)&&(d3>=d2))
 		{
@@ -107,11 +141,29 @@ class measureManagerClass
 			if(diff_1 > diff_2)
 			{
 				d_final = (d2+d3)/2;
+
+				if ((d1/d3)>ERROR_PLUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 1;
+				} // end if
+
 			}else
 			{
 				d_final = (d1+d3)/2;
+
+				if ((d2/d3)>ERROR_MINUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 2;
+				} // end if
+
 			}
-		}
+		} // end if 2nd case
 
 		if ((d2>=d1)&&(d1>=d3))
 		{
@@ -120,11 +172,28 @@ class measureManagerClass
 			if(diff_1 > diff_2)
 			{
 				d_final = (d1+d3)/2;
+
+				if ((d2/d1)>ERROR_PLUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 2;
+				} // end if
+
 			}else
 			{
 				d_final = (d1+d2)/2;
+
+				if ((d3/d1)>ERROR_MINUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 3;
+				} // end if
 			}
-		}
+		} // end if 3rd case
 
 		if ((d2>=d3)&&(d3>=d1))
 		{
@@ -133,11 +202,28 @@ class measureManagerClass
 			if(diff_1 > diff_2)
 			{
 				d_final = (d1+d3)/2;
+
+				if ((d2/d3)>ERROR_PLUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 2;
+				} // end if
+
 			}else
 			{
 				d_final = (d2+d3)/2;
+
+				if ((d1/d3)>ERROR_MINUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 1;
+				} // end if
 			}
-		}
+		} // end if 4th case
 
 		if ((d3>=d1)&&(d1>=d2))
 		{
@@ -146,11 +232,29 @@ class measureManagerClass
 			if(diff_1 > diff_2)
 			{
 				d_final = (d1+d2)/2;
+
+				if ((d3/d1)>ERROR_PLUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 3;
+				} // end if
+
 			}else
 			{
 				d_final = (d1+d3)/2;
+
+				if ((d2/d1)>ERROR_MINUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 2;
+				} // end if
+
 			}
-		}
+		} // end if 5th case
 
 		if ((d3>=d2)&&(d2>=d1))
 		{
@@ -159,19 +263,38 @@ class measureManagerClass
 			if(diff_1 > diff_2)
 			{
 				d_final = (d2+d1)/2;
+
+				if ((d3/d2)>ERROR_PLUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 3;
+				} // end if
+
 			}else
 			{
 				d_final = (d2+d3)/2;
-			}
-		}
 
+				if ((d1/d2)>ERROR_MINUS)
+				{
+					sensors::errorMessage error;
+					error.error_time = ros::Time::now();
+					error.node_name = "measureManagerClass";
+					error.id = 1;
+				} // end if
+
+			}
+		} // end if 6th case
 		
 		   std_msgs::Float64 d_cmd;
 
 	     d_cmd.data = d_final;
+	     //d_cmd.data = 0;
+		//ROS_INFO("Envoi distanceCmdT");
 
 		// %Tag(PUBLISH)%
-	    	   pub.publish(d_cmd);
+	    pub.publish(d_cmd);
 		// %EndTag(PUBLISH)%
 
 		// %Tag(SPINONCE)%
@@ -189,17 +312,19 @@ int main(int argc, char **argv)
 {
   
 
-	//ros::Rate r(10);		// 10 Hz
+	//ros::Rate r(1000);		// 1000 Hz
 
 	//while (ros::ok())
 	//{
 	
-  	ros::init(argc, argv, "Measure_manager");
+  	ros::init(argc, argv, "measureManagerClass");
   	measureManagerClass measure_manager_class;
  
 		// %Tag(SPIN)%
   	ros::spin();
 		// %EndTag(SPIN)%
+		
+		//r.sleep();
 
 	//}
 

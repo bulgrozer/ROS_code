@@ -42,6 +42,7 @@ class cmd_managerClass
 	void cmdCallback(const sensors::velOrder& cmd)   
 	{
 		std_msgs::Float64 velCmd;
+
 		if(cmd.priority >= current_priority.data)
 		{
 			if(cmd.release == true)
@@ -56,16 +57,17 @@ class cmd_managerClass
 			{
 				velCmd.data = -cmd.data;
 				current_priority.data = cmd.priority;
+
 				pub_cmd.publish(velCmd);
 		    ros::spinOnce();
 
-		 		ROS_INFO("j'ai ecrit : [%f]", velCmd.data );
+		 		//ROS_INFO("j'ai ecrit : [%f]", velCmd.data );
 				if(cmd.priority > 1)
 				{
 					std_msgs::Bool pid_enable;
 					pid_enable.data = false;
 					pub_enable.publish(pid_enable);
-		  	  ros::spinOnce();
+
 				}
 			}
 		}
@@ -86,6 +88,8 @@ class cmd_managerClass
 			*/
 
 
+		 ros::spinOnce();
+
 		}	
 };
 
@@ -100,7 +104,7 @@ int main(int argc, char **argv)
 	//{
 	
 
-		ros::init(argc, argv, "cmd_manager");
+		ros::init(argc, argv, "cmd_managerClass");
 		cmd_managerClass cmd_manager;
 	 
 		// %Tag(SPIN)%

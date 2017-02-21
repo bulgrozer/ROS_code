@@ -126,7 +126,7 @@ void GazeboRosSonar1::Load(sensors::SensorPtr _sensor, sdf::ElementPtr _sdf)
   Reset();
 
   // connect Update function
-  updateTimer.setUpdateRate(10.0);
+  updateTimer.setUpdateRate(1000.0);
   updateTimer.Load(world, _sdf);
   updateConnection = updateTimer.Connect(boost::bind(&GazeboRosSonar1::Update, this));
 

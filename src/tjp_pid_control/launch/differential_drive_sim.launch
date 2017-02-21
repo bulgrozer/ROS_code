@@ -15,7 +15,7 @@
       <remap from="control_effort" to="/velOrder_topic" />
       <remap from="state" to="/distanceCmd_topic" />
 
-     </node>
+		</node>
 
 <!--    <node name="servo_sim_node" pkg="tjp_pid" type="plant_sim" ns="left_wheel" output="screen" >
       <param name="plant_order" value="2" />
@@ -44,10 +44,13 @@
     </node>
 -->
 
-   <node name="distanceSecurityCalculatorClass" pkg="sensors" type="distanceSecurityCalculatorClass" output="screen" />
+  <node name="distanceSecurityCalculatorClass" pkg="sensors" type="distanceSecurityCalculatorClass" output="screen" />
 	
+	<node name="measureManagerClass" pkg="sensors" type="measureManagerClass" output="screen"/>
 
-	<node name="MeasureManager" pkg="sensors" type="measureManager" />
+	<node name="ultrasonic_measure" pkg="sensors" type="ultrasonic_measure" output="screen"/>
+
+	<node name="cmd_managerClass" pkg="sensors" type="cmd_managerClass" output="screen"/>
 
    <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
       <rosparam command="delete" param="/diagnostic_aggregator" />

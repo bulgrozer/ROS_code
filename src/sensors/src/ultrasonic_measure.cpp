@@ -1,4 +1,3 @@
-#include "GPIO.h"
 #include <stdio.h>
 #include <stdlib.h>
 //#include <wiringPi.h>
@@ -6,13 +5,8 @@
 #include <std_msgs/Float64.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "sensors/velOrder.h"
 
-
-#define IN  0
-#define OUT 1
- 
-#define LOW  0
-#define HIGH 1
 
 //*****************************************************************************//
 //** Attention !!! Lire README et faire les commandes décrites à l'intérieur **//
@@ -21,7 +15,30 @@
 
 class Ultrasonic
 {
-		public: Ultrasonic() {distance=0;}
+		public: Ultrasonic() {
+
+			distance=0;
+
+			int i;
+			for (i = 0 ; i<10 ; i++)
+			{
+				BUFFER[i] = 0;
+			}
+			n = 0;
+			j = 0;
+
+			// PUBLISHER
+			ros::NodeHandle np;    //handle for the publisher
+			pub = np.advertise<sensors::velOrder>("velOrder_topic", 1);
+
+			vel_order.priority = 0;
+			vel_order.data = 0;							
+			vel_order.release = true;
+			//pub.publish(vel_order);
+
+
+
+}
 
 		public: int sendData()
 		{
@@ -49,14 +66,35 @@ class Ultrasonic
 				    
 				close(timer_file);
 
-				std_msgs::Float64 distance_msg;
+				distance = distance/58.8235; // distance in centimeters
 
-				distance_msg.data = distance/58000; // distance in centimeters
 
-				// PUBLISHER
-				ros::NodeHandle np;   
-				pub = np.advertise<std_msgs::Float64>("ultrason_topic", 1);
-				pub.publish(distance_msg);
+				// BUFFER
+				float mean = 400;
+				BUFFER[j] = distance;
+				int k;
+				for(k = 0;k<10;k++)
+				{
+					mean = mean + BUFFER[k];
+				}
+
+				mean = mean / n;
+
+				if (n < 10){n++;}
+		
+				j++;
+				if (j == 10){j = 0;}
+
+				//detection of a close object
+				if (mean < 100)
+				{
+					vel_order.priority = 2;
+					vel_order.data = 0;							//emergency brake
+					vel_order.release = false;
+					//pub.publish(vel_order);
+					// counter?
+				}
+
 				ros::spinOnce();	
 		}
 
@@ -64,8 +102,14 @@ class Ultrasonic
 		private: 
 
 			int timer_file, result;
-			unsigned int distance;
-			ros::Publisher pub;	
+			float distance;
+
+			ros::Publisher pub;
+			sensors::velOrder vel_order;
+
+			float BUFFER[10];
+			int j;
+			int n;
 
 };
 
@@ -81,7 +125,10 @@ int main(int argc, char **argv)
 
 		ros::init(argc, argv, "ultrasonic_measure");
 		Ultrasonic ultrason;
-	 
+
+////// Est ce que la fonction a linterieur de la classe est bien lancée ???? /////
+
+
 		// %Tag(SPIN)%
 		ros::spin();
 		// %EndTag(SPIN)%
