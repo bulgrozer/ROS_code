@@ -13,8 +13,9 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system)
 find_package(gazebo REQUIRED)
+find_package(dependency_pkg REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -106,6 +107,7 @@ find_package(gazebo REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES sensors
+   LIBRARIES dependency_pkg
   CATKIN_DEPENDS roscpp std_msgs message_runtime
   DEPENDS 
 	gazebo_ros
@@ -123,11 +125,13 @@ include_directories(include
 	${catkin_INCLUDE_DIRS} 
 	${GAZEBO_INCLUDE_DIRS} 
 	${SDFormat_INCLUDE_DIRS}
+        ${Boost_INCLUDE_DIRS}
+        ${dependency_pkg_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(sensors
-#   src/${PROJECT_NAME}/sensors.cpp
+# add_library(dependency_pkg
+#   src/dependency_pkg/watchdog.h
 # )
 
 ## Add cmake target dependencies of the library
