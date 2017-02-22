@@ -5,7 +5,7 @@
 #include <std_msgs/Float64.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include "sensors/velOrder.h"
+#include "functionnal_pkg/velOrder.h"
 
 
 //*****************************************************************************//
@@ -21,6 +21,8 @@ class realUltrasonicMeasureClass
 		{
 			distance=0;
 
+			//counter = 0;
+
 			int i;
 			for (i = 0 ; i<10 ; i++)
 			{
@@ -31,7 +33,7 @@ class realUltrasonicMeasureClass
 
 			// PUBLISHER
 		
-			pub = np.advertise<sensors::velOrder>("chassis/velOrder_topic", 1);
+			pub = np.advertise<functionnal_pkg::velOrder>("chassis/velOrder_topic", 1);
 
 			// SUBSCRIBER
 			sub = ns.subscribe("distanceOrder_topic",1,&realUltrasonicMeasureClass::cmdCallback,this);
@@ -68,7 +70,7 @@ class realUltrasonicMeasureClass
 				distance = distance/58.8235; // distance in centimeters
 
 */
-				distance = 50 ;
+
 				// BUFFER
 				float mean = 400;
 				BUFFER[j] = distance;
@@ -84,16 +86,27 @@ class realUltrasonicMeasureClass
 		
 				j++;
 				if (j == 10) {j = 0;}
-mean = 10;
+
+			// Test emergency brake !
+			/*if (counter > 5000)
+			{
+				mean = 10;
+			}
+			else
+			{
+				mean = 400;
+				counter++;
+	std::cout << "Compteur : " << counter << std::endl; 
+			}*/
+
+
 				//detection of a close object
 				if (mean < 100)
 				{
-					do{
 					vel_order.priority = 2;
 					vel_order.data = 0;							//emergency brake
 					vel_order.release = false;
-					pub.publish(vel_order);
-					}while(realSpeed < 0.001);
+					//pub.publish(vel_order);
 				}
 
 				ros::spinOnce();	
@@ -115,40 +128,36 @@ void cmdCallback(const std_msgs::Float64& vel)
 			ros::NodeHandle np;    //handle for the publisher
 			ros::NodeHandle ns;    //handle for the subscriber
 
-			sensors::velOrder vel_order;
+			functionnal_pkg::velOrder vel_order;
 		
 			float realSpeed;
 
 			float BUFFER[10];
 			int j;	// pointer to the write cell of the buffer.
 			int n;	// actual buffer size fulfilled with values.
+			//int counter;
 
 };
 
 
 int main(int argc, char **argv)
 {
- 
+ 	ros::init(argc, argv, "realUltrasonicMeasureClass");
+	realUltrasonicMeasureClass realUltrasonic;
 
-	//ros::Rate r(10);		// 10 Hz
+	ros::Rate r(1000);		// 1000 Hz
 
-	//while (ros::ok())
-	//{
+	while (ros::ok())
+	{
 
-		ros::init(argc, argv, "realUltrasonicMeasureClass");
-		realUltrasonicMeasureClass realUltrasonic;
-		sleep(6);
 		realUltrasonic.sendData();
 	
-
-
-
-
 		// %Tag(SPIN)%
-		ros::spin();
+		ros::spinOnce();
 		// %EndTag(SPIN)%
-	
-	//}
+		r.sleep();
+
+	}
 
 
   return 0;

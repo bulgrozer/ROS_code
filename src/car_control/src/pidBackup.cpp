@@ -42,7 +42,7 @@
 #include <dynamic_reconfigure/server.h>
 #include <ros/time.h>
 
-#include "sensors/velOrder.h"
+#include "functionnal_pkg/velOrder.h"
 
 void setpoint_callback(const std_msgs::Float64& setpoint_msg)
 {
@@ -339,7 +339,7 @@ int main(int argc, char **argv)
   }
 
   // instantiate publishers & subscribers
-  control_effort_pub = node.advertise<sensors::velOrder>(topic_from_controller, 1);
+  control_effort_pub = node.advertise<functionnal_pkg::velOrder>(topic_from_controller, 1);
 
   ros::Subscriber sub = node.subscribe(topic_from_plant, 1, plant_state_callback );
 	

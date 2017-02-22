@@ -9,7 +9,7 @@
 #include "ros/callback_queue.h"
 #include <iostream>
 #include "ros/rate.h"
-#include "sensors/errorMsg.h"
+#include "functionnal_pkg/errorMsg.h"
 #include "ros/time.h"
 
 #define ERROR_PLUS 1.2
@@ -42,7 +42,7 @@ class measureManagerClass
 
 			// PUBLISHER
 			ros::NodeHandle np_error;    //handle for the publisher
-			pub_error = np_error.advertise<sensors::errorMsg>("error_topic", 1);
+			pub_error = np_error.advertise<functionnal_pkg::errorMsg>("error_topic", 1);
 				
 		}
 
@@ -218,7 +218,7 @@ class measureManagerClass
 		} // end if 6th case
 		if (errorid != 0)
 		{
-			sensors::errorMsg error;
+			functionnal_pkg::errorMsg error;
 			error.error_time = ros::Time::now();
 			error.node_name = "measureManagerClass";
 			error.id = errorid;

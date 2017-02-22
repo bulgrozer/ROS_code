@@ -2,7 +2,7 @@
 #include "ros/ros.h"
 #include <std_msgs/Float64.h>
 #include <std_msgs/Bool.h>
-#include "sensors/velOrder.h"
+#include "functionnal_pkg/velOrder.h"
 
 //#include <gazebo_msgs/ApplyJointEffort.h>
 
@@ -47,7 +47,7 @@ class cmdManagerClass
 	bool mode;						// true = primary ; false = back up
 	
 	// %Tag(CALLBACK)%
-	void cmdCallback1(const sensors::velOrder& cmd)   
+	void cmdCallback1(const functionnal_pkg::velOrder& cmd)   
 	{
 		
 		if (mode == true)
@@ -63,7 +63,6 @@ class cmdManagerClass
 					std_msgs::Bool pid_enable;
 					pid_enable.data = true;
 					pub_enable.publish(pid_enable);
-					ros::spinOnce();
 				}	// end if
 				else
 				{
@@ -71,8 +70,7 @@ class cmdManagerClass
 					current_priority = cmd.priority;
 
 					pub_cmd.publish(velCmd);
-				  ros::spinOnce();
-
+	
 					if(cmd.priority > 1) // Disable Primary PID
 					{
 						std_msgs::Bool pid_enable;
@@ -92,15 +90,14 @@ class cmdManagerClass
 			{
 			 	ROS_INFO("There is a superior priority");
 			}
-
-			 ros::spinOnce();
 		}  // end if mode
 
 		else{
 			// Nothing happens in back up mode !
 			ROS_INFO("I am in Back_up mode, nothing happens.. Waiting for the master to crash..");
-			ros::spinOnce();
 			}
+
+		ros::spinOnce();
 
 	}	// end function
 

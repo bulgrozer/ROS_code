@@ -11,7 +11,7 @@
 #include "ros/ros.h"
 #include "ros/time.h"
 #include "ros/rate.h"
-#include "sensors/errorMsg.h"
+#include "functionnal_pkg/errorMsg.h"
 
 
 
@@ -42,7 +42,7 @@ class distanceSecurityCalculatorClass
 
 			// PUBLISHER
 			ros::NodeHandle np_error;    //handle for the publisher
-			pub_error = np_error.advertise<sensors::errorMsg>("error_topic", 1);
+			pub_error = np_error.advertise<functionnal_pkg::errorMsg>("error_topic", 1);
 				
 		}
 
@@ -64,15 +64,11 @@ class distanceSecurityCalculatorClass
 		// Temporal redundancy of IMU sensor's data
 		float mean = 0;
 
-		std::cout << "Vitesse reelle : " << vel->data << std::endl;
-		std::cout << "Vitesse precedente : " << previous_vel << std::endl;
-
-
 		if ((vel->data - previous_vel) > (threshold*dt+0.5))
 		{	
 			ROS_ERROR("Error with the IMU sensor's data upper limit");
 
-			sensors::errorMsg error;
+			functionnal_pkg::errorMsg error;
 			error.error_time = ros::Time::now();
 			error.node_name = "distanceSecurityCalculatorClass";
 			error.id = 1;
@@ -86,7 +82,7 @@ class distanceSecurityCalculatorClass
 		{	
 			ROS_ERROR("Error with the IMU sensor's data lower limit");
 
-			sensors::errorMsg error;
+			functionnal_pkg::errorMsg error;
 			error.error_time = ros::Time::now();
 			error.node_name = "distanceSecurityCalculatorClass";
 			error.id = 1;
