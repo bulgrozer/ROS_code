@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "dependency_pkg/safetyMsg.h"
+#include "std_msgs/Bool.h"
 
 using namespace std;
 
