@@ -5,7 +5,7 @@
 #include <string>
 
 #include "ros/ros.h"
-#include "sensors/velOrder.h"
+#include "functionnal_pkg/velOrder.h"
 #include "dependency_pkg/stateMsg.h"
 #include <std_msgs/Float64.h>
 #include <std_msgs/Bool.h>
@@ -37,7 +37,7 @@ class stateRecoverer
 			// Master Publishing setup
 			pubState = npState.advertise<dependency_pkg::stateMsg>("/state_topic",1);
 			// Follower Publishing setup
-			pubVel = npVel.advertise<sensors::velOrder>("velOrder_topic",1);
+			pubVel = npVel.advertise<functionnal_pkg::velOrder>("velOrder_topic",1);
 			pubOrd = npOrd.advertise<std_msgs::Float64>("distanceOrder_topic",1);
 
 			mode = UNKNOWN_MODE; 	// Waiting to know the mode of the Raspberry Pi.
@@ -77,7 +77,7 @@ class stateRecoverer
 
 		void launchMasterMode()
 		{
-			sensors::velOrder vel;
+			functionnal_pkg::velOrder vel;
 			vel.priority = savedState.velPriority;
 			vel.data = savedState.velData;
 			vel.release = savedState.velRelease;
@@ -88,7 +88,7 @@ class stateRecoverer
 			pubOrd.publish(Ord);
 		}
 
-		void updateStateVel_master(const sensors::velOrder& vel)
+		void updateStateVel_master(const functionnal_pkg::velOrder& vel)
 		{
 			savedState.velPriority = vel.priority;
 			savedState.velData = vel.data;

@@ -136,7 +136,7 @@ catkin_package(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
- add_executable(nodeKiller src/nodeReinitialiser.cpp)
+ add_executable(nodeReinitialiser src/nodeReinitialiser.cpp)
  add_executable(errorManager src/errorManager.cpp)
  add_executable(stateRecoverer src/stateRecoverer.cpp)
 
@@ -148,15 +148,15 @@ catkin_package(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
- add_dependencies(nodeKiller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(nodeReinitialiser ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
  add_dependencies(errorManager ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
  add_dependencies(stateRecoverer ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(nodeKiller   ${catkin_LIBRARIES} )
+ target_link_libraries(nodeReinitialiser ${catkin_LIBRARIES} )
  target_link_libraries(errorManager ${catkin_LIBRARIES} )
- target_link_libraries(stateRecoverer   ${catkin_LIBRARIES} )
+ target_link_libraries(stateRecoverer ${catkin_LIBRARIES} )
 
 #############
 ## Install ##
