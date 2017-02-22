@@ -322,7 +322,7 @@ int main(int argc, char **argv)
   node_priv.param<std::string>("topic_from_controller", topic_from_controller, "control_effort");
   node_priv.param<std::string>("topic_from_plant", topic_from_plant, "state");
   node_priv.param<std::string>("setpoint_topic", setpoint_topic, "setpoint");
-  node_priv.param<std::string>("pid_enable_topic", pid_enable_topic, "pid_enable_backup");
+  node_priv.param<std::string>("pid_enable_topic", pid_enable_topic, "pid_enable");
   node_priv.param<double>("max_loop_frequency", max_loop_frequency, 1.0);
   node_priv.param<double>("min_loop_frequency", min_loop_frequency, 1000.0);
 
