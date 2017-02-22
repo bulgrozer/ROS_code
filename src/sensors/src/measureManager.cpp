@@ -38,7 +38,7 @@ class measureManagerClass
 
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
-			pub = np.advertise<std_msgs::Float64>("distanceCmd_topic", 1);
+			pub = np.advertise<std_msgs::Float64>("chassis/distanceCmd_topic", 1);
 
 			// PUBLISHER
 			ros::NodeHandle np_error;    //handle for the publisher

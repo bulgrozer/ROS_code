@@ -21,7 +21,7 @@ class errorManager
 		{
 			// SUBSCRIBER
 			ros::NodeHandle ns;
-			sub = ns.subscribe("/error_topic",1,&errorManager::errorCallback,this);
+			sub = ns.subscribe("error_topic",1,&errorManager::errorCallback,this);
 
 
 			// PUBLISHER

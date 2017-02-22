@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-
+<group ns="Raspi1">
 <!-- PID Back up -->		
 
     <node name="pid_back_up" pkg="tjp_pid" type="pidBackup" ns="chassis" output="screen" >
@@ -14,8 +14,8 @@
       <param name="diagnostic_period" value="0.25" />
       <param name="max_loop_frequency" value="100.0" />
       <param name="min_loop_frequency" value="100.0" />
-      <remap from="setpoint" to="/distanceOrder_topic" />
-      <remap from="control_effort" to="/velOrder_topic" />
+      <remap from="setpoint" to="distanceOrder_topic" />
+      <remap from="control_effort" to="velOrder_topic" />
       <remap from="state" to="/distanceMesure1_topic" />
 
 		</node>
@@ -33,38 +33,11 @@
       <param name="diagnostic_period" value="0.25" />
       <param name="max_loop_frequency" value="100.0" />
       <param name="min_loop_frequency" value="100.0" />
-      <remap from="setpoint" to="/distanceOrder_topic" />
-      <remap from="control_effort" to="/velOrder_topic" />
-      <remap from="state" to="/distanceCmd_topic" />
+      <remap from="setpoint" to="distanceOrder_topic" />
+      <remap from="control_effort" to="velOrder_topic" />
+      <remap from="state" to="distanceCmd_topic" />
 
 		</node>
-
-<!--    <node name="servo_sim_node" pkg="tjp_pid" type="plant_sim" ns="left_wheel" output="screen" >
-      <param name="plant_order" value="2" />
-    </node>
-
-    <node name="controller" pkg="tjp_pid" type="controller" ns="right_wheel" output="screen" >
-      <param name="node_name" value="right_wheel_pid" />
-      <param name="Kp" value="4.0" />
-      <param name="Ki" value="0.0" />
-      <param name="Kd" value="0.3" />
-      <param name="upper_limit" value="10" />
-      <param name="lower_limit" value="-10" />
-      <param name="windup_limit" value="10" />
-      <param name="diagnostic_period" value="0.25" />
-      <param name="max_loop_frequency" value="100.0" />
-      <param name="min_loop_frequency" value="100.0" />
-      <remap from="setpoint" to="/distanceOrder_topic" />
-      <remap from="control_effort" to="/velOrder_topic" />
-      <remap from="state" to="/distanceMesure_topic" />
-     </node>
--->
-<!--
-    <node name="servo_sim_node" pkg="tjp_pid" type="plant_sim" ns="right_wheel" output="screen" >
-      <param name="plant_order" value="2" />
-      <param name="reverse_acting" value="true" />
-    </node>
--->
 
   <node name="distanceSecurityCalculatorClass" pkg="sensors" type="distanceSecurityCalculatorClass" output="screen" />
 	
@@ -74,11 +47,11 @@
 
 	<node name="cmdManagerClass" pkg="sensors" type="cmdManagerClass" output="screen"/>
 
-   <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+  <!-- <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
       <rosparam command="delete" param="/diagnostic_aggregator" />
       <rosparam command="load" file="$(find tjp_pid)/config/pid_diags.yaml" />
    </node>
-
+-->
    <!-- rqt_plot is a resource hog, so if you're seeing high CPU usage, don't launch rqt_plot  -->
     <!--node name="rqt_plot" pkg="rqt_plot" type="rqt_plot"
     args="/distanceOrder_topic/data /distanceCmd_topic/data
@@ -86,5 +59,5 @@
 
     <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
     <node name="rqt_robot_monitor" pkg="rqt_robot_monitor" type="rqt_robot_monitor" /-->
-
+</group>
 </launch>

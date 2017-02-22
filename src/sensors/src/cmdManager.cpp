@@ -13,13 +13,13 @@ class cmdManagerClass
 	cmdManagerClass()
 		{
 			// SUBSCRIBER
-			sub = ns.subscribe("/velOrder_topic",1,&cmdManagerClass::cmdCallback1,this);
-			sub_mode = ns_mode.subscribe("/redundancyMode_topic",1,&cmdManagerClass::cmdCallback2,this);
+			sub = ns.subscribe("chassis/velOrder_topic",1,&cmdManagerClass::cmdCallback1,this);
+			sub_mode = ns_mode.subscribe("redundancyMode_topic",1,&cmdManagerClass::cmdCallback2,this);
 
 			// PUBLISHERS
 			pub_cmd = npc.advertise<std_msgs::Float64>("/velCmd_topic", 1);
-			pub_enable = npe.advertise<std_msgs::Bool>("/chassis/pid_enable",1);
-			pub_enable_backup = npeb.advertise<std_msgs::Bool>("/chassis/pid_enable_backup",1);
+			pub_enable = npe.advertise<std_msgs::Bool>("chassis/pid_enable",1);
+			pub_enable_backup = npeb.advertise<std_msgs::Bool>("chassis/pid_enable_backup",1);
 
 			current_priority = 0;
 

@@ -17,7 +17,7 @@ Watchdog::Watchdog( std::string name, double timeout, boost::function<void()> ca
     timer_      = n_.createTimer(ros::Duration(timeout_), &Watchdog::CB_timer_event, this, oneshot_, autostart_);
 	// PUBLISHER ERROR
 	ros::NodeHandle np_error;    
-	pub_error = np_error.advertise<dependency_pkg::safetyMsg>("nodeWarning_topic", 1);
+	pub_error = np_error.advertise<dependency_pkg::safetyMsg>("nodeDemand_topic", 1);
 	// PUBLISHER ARDUINO
 	ros::NodeHandle np_arduinor;    
 	pub_arduino = np_arduino.advertise<dependency_pkg::safetyMsg>("arduino", 1)

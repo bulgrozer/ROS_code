@@ -33,12 +33,12 @@ class stateRecoverer
 			savedState.disData = 0;
 			savedState.velRelease = 1;
 			
-			subMod = nsMod.subscribe("/redundancyMode_topic",1,&stateRecoverer::updateMode,this);
+			subMod = nsMod.subscribe("redundancyMode_topic",1,&stateRecoverer::updateMode,this);
 			// Master Publishing setup
 			pubState = npState.advertise<dependency_pkg::stateMsg>("/state_topic",1);
 			// Follower Publishing setup
-			pubVel = npVel.advertise<sensors::velOrder>("/velOrder_topic",1);
-			pubOrd = npOrd.advertise<std_msgs::Float64>("/distanceOrder_topic",1);
+			pubVel = npVel.advertise<sensors::velOrder>("velOrder_topic",1);
+			pubOrd = npOrd.advertise<std_msgs::Float64>("distanceOrder_topic",1);
 
 			mode = UNKNOWN_MODE; 	// Waiting to know the mode of the Raspberry Pi.
 		}
@@ -52,8 +52,8 @@ class stateRecoverer
 			{
 				if (m.data == MASTER_MODE)
 				{
-					subVel = nsVel.subscribe("/velOrder_topic",1,&stateRecoverer::updateStateVel_master,this);
-					subOrd = nsOrd.subscribe("/distanceOrder_topic",1,&stateRecoverer::updateStateOrd_master,this);
+					subVel = nsVel.subscribe("velOrder_topic",1,&stateRecoverer::updateStateVel_master,this);
+					subOrd = nsOrd.subscribe("distanceOrder_topic",1,&stateRecoverer::updateStateOrd_master,this);
 					if (mode == FOLLOWER_MODE)
 					{	// Shutdown : passage de Master a Follower.
 						subState.shutdown();
@@ -63,7 +63,7 @@ class stateRecoverer
 				}
 				else if (m.data == FOLLOWER_MODE)
 				{
-					subState = nsState.subscribe("/state_topic",1,&stateRecoverer::updateSavedState_follower,this);
+					subState = nsState.subscribe("state_topic",1,&stateRecoverer::updateSavedState_follower,this);
 					if (mode == MASTER_MODE)
 					{	// debut du mode degrade.
 						subVel.shutdown();

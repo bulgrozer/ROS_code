@@ -31,7 +31,7 @@ class realUltrasonicMeasureClass
 
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
-			pub = np.advertise<sensors::velOrder>("velOrder_topic", 1);
+			pub = np.advertise<sensors::velOrder>("chassis/velOrder_topic", 1);
 
 			vel_order.priority = 0;
 			vel_order.data = 0;							

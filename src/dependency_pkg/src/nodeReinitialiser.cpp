@@ -16,8 +16,8 @@ class nodeInitialiser
 
 		nodeInitialiser()
 		{
-			subKnode = nsKnode.subscribe("/nodeDemand_topic",1000,&nodeInitialiser::killCallBack,this);
-			pubWmode = npWmode.advertise<std_msgs::Bool>("/redundancyMode_topic",1);
+			subKnode = nsKnode.subscribe("nodeDemand_topic",1000,&nodeInitialiser::killCallBack,this);
+			pubWmode = npWmode.advertise<std_msgs::Bool>("redundancyMode_topic",1);
 		}
 
 	private :

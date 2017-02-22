@@ -38,7 +38,7 @@ class distanceSecurityCalculatorClass
 
 			// PUBLISHER
 			ros::NodeHandle np;    //handle for the publisher
-			pub = np.advertise<std_msgs::Float64>("distanceOrder_topic", 1);
+			pub = np.advertise<std_msgs::Float64>("chassis/distanceOrder_topic", 1);
 
 			// PUBLISHER
 			ros::NodeHandle np_error;    //handle for the publisher
