@@ -13,20 +13,21 @@ class nodeInitialiser
 {
 	public :
 
-		nodeInitialiser()
+	void nodeInitialiser()
 		{
-			sub = ns.subscribe("/nodeDemand_topic",1000,&nodeInitialiser::killCallBack,this);
-
+			subKnode = nsKnode.subscribe("/nodeDemand_topic",1000,&nodeInitialiser::killCallBack,this);
+			pubWmode = npWmode.advertise<std_msgs::Bool>("/redundancyMode_topic",1);
 		}
 
 	private :
-		ros::NodeHandle ns;
-		ros::Subscriber sub;
-
+		ros::NodeHandle nsKnode, npWmode;
+		ros::Subscriber subKnode;
+		ros::Publisher pubWmode;
 		void killCallBack(const dependency_pkg::safetyMsg& nodeMsg)	
 		{
-			if (nodeMsg.nodeState == 0) 
+			if (nodeMsg.nodeState == 0 && nodeMsg.password = "0000") 
 			{
+				pubWmode.publish(false);	// Ask to pass as Secondary system.
 				string systemCmd = "rosnode kill" + nodeMsg.nodeName;
 			  system(systemCmd.c_str());
 			}

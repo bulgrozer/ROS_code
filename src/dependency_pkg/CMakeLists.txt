@@ -50,9 +50,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
    FILES
-   safetyMsg.msg
-   errorMessage.msg	 
-#   Message2.msg
+   safetyMsg.msg	 
+   stateMsg.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -136,6 +135,7 @@ catkin_package(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(nodeKiller src/nodeReinitialiser.cpp)
+ add_executable(errorManager src/errorManager.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -149,6 +149,7 @@ catkin_package(
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(nodeKiller   ${catkin_LIBRARIES} )
+ target_link_libraries(errorManager ${catkin_LIBRARIES} )
 
 #############
 ## Install ##
@@ -197,14 +198,3 @@ catkin_package(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-
- add_executable(errorManager src/errorManager.cpp)
- add_dependencies(nodeKiller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
- target_link_libraries(errorManager   ${catkin_LIBRARIES} )
-
-
-
-
-
-
