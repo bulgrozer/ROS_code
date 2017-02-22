@@ -11,7 +11,7 @@
 #include "ros/ros.h"
 #include "ros/time.h"
 #include "ros/rate.h"
-#include "sensors/errorMessage.h"
+#include "sensors/errorMsg.h"
 
 
 
@@ -42,7 +42,7 @@ class distanceSecurityCalculatorClass
 
 			// PUBLISHER
 			ros::NodeHandle np_error;    //handle for the publisher
-			pub_error = np_error.advertise<sensors::errorMessage>("error_topic", 1);
+			pub_error = np_error.advertise<sensors::errorMsg>("error_topic", 1);
 				
 		}
 
@@ -68,7 +68,7 @@ class distanceSecurityCalculatorClass
 		{	
 			ROS_ERROR("Error with the IMU sensor's data upper limit");
 
-			sensors::errorMessage error;
+			sensors::errorMsg error;
 			error.error_time = ros::Time::now();
 			error.node_name = "distanceSecurityCalculatorClass";
 			error.id = 1;
@@ -82,7 +82,7 @@ class distanceSecurityCalculatorClass
 		{	
 			ROS_ERROR("Error with the IMU sensor's data lower limit");
 
-			sensors::errorMessage error;
+			sensors::errorMsg error;
 			error.error_time = ros::Time::now();
 			error.node_name = "distanceSecurityCalculatorClass";
 			error.id = 1;

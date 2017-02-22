@@ -14,7 +14,7 @@ class nodeInitialiser
 {
 	public :
 
-	void nodeInitialiser()
+		nodeInitialiser()
 		{
 			subKnode = nsKnode.subscribe("/nodeDemand_topic",1000,&nodeInitialiser::killCallBack,this);
 			pubWmode = npWmode.advertise<std_msgs::Bool>("/redundancyMode_topic",1);
@@ -26,9 +26,11 @@ class nodeInitialiser
 		ros::Publisher pubWmode;
 		void killCallBack(const dependency_pkg::safetyMsg& nodeMsg)	
 		{
-			if (nodeMsg.nodeState == 0 && nodeMsg.password = "0000") 
+			if (nodeMsg.nodeState == 0 && nodeMsg.password == 0) 
 			{
-				pubWmode.publish(false);	// Ask to pass as Secondary system.
+				std_msgs::Bool ans;
+				ans.data = false;
+				pubWmode.publish(ans);	// Ask to pass as Secondary system.
 				string systemCmd = "rosnode kill" + nodeMsg.nodeName;
 			  system(systemCmd.c_str());
 			}

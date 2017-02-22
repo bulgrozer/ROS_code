@@ -1,6 +1,6 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include "dependency_pkg/errorMessage.h"
+#include "dependency_pkg/errorMsg.h"
 #include "dependency_pkg/safetyMsg.h"
 #include <time.h>
 
@@ -43,7 +43,7 @@ class errorManager
 	dependency_pkg::safetyMsg killMsg;
 
 	// CALLBACK
-	void errorCallback(const dependency_pkg::errorMessage& err)
+	void errorCallback(const dependency_pkg::errorMsg& err)
 
 	{
 		for (i=0; i < sizeof(TAB) ; i++)

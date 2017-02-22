@@ -5,9 +5,10 @@
 #include <string>
 
 #include "ros/ros.h"
-#include "sensors/velOrder.msg"
-#include "dependency_pkg/stateMsg.msg"
-#include <std_msgs/Fload64.h>
+#include "sensors/velOrder.h"
+#include "dependency_pkg/stateMsg.h"
+#include <std_msgs/Float64.h>
+#include <std_msgs/Bool.h>
 
 #define FOLLOWER_MODE		0
 #define MASTER_MODE			1
@@ -18,14 +19,14 @@ using namespace std;
 class stateRecoverer
 {
 	private :
-		stateMsg savedState;		
+		dependency_pkg::stateMsg savedState;		
 		ros::Subscriber subVel, subOrd, subState, subMod;
 		ros::Publisher  pubVel, pubOrd, pubState;
 		ros::NodeHandle nsVel, nsOrd, nsMod, nsState, npVel, npOrd, npState;
 		int mode;
 
 	public :
-		stateRecoverer::stateRecoverer()
+		stateRecoverer()
 		{
 			savedState.velPriority = 0;
 			savedState.velData = 0;
@@ -45,79 +46,80 @@ class stateRecoverer
 
 
 	private :
-		void stateRecoverer::updateMode(const std_msgs::bool& m)
+		void updateMode(const std_msgs::Bool& m)
 		{
-			if (m != this.mode)
+			if (m.data  != mode)
 			{
-				if (m == MASTER_MODE)
+				if (m.data == MASTER_MODE)
 				{
 					subVel = nsVel.subscribe("/velOrder_topic",1,&stateRecoverer::updateStateVel_master,this);
 					subOrd = nsOrd.subscribe("/distanceOrder_topic",1,&stateRecoverer::updateStateOrd_master,this);
-					if (this.mode == FOLLOWER_MODE)
+					if (mode == FOLLOWER_MODE)
 					{	// Shutdown : passage de Master a Follower.
 						subState.shutdown();
-						this.launchMasterMode();
+						launchMasterMode();
 					}
-
+					mode = MASTER_MODE;
 				}
-				else if (m == FOLLOWER_MODE)
+				else if (m.data == FOLLOWER_MODE)
 				{
 					subState = nsState.subscribe("/state_topic",1,&stateRecoverer::updateSavedState_follower,this);
-					if (this.mode == MASTER_MODE)
+					if (mode == MASTER_MODE)
 					{	// debut du mode degrade.
 						subVel.shutdown();
 						subOrd.shutdown();
 					}
+					mode = FOLLOWER_MODE;
 				}
-			this.mode = m;
+ 
 			}
 		}
 
-		void stateRecoverer::launchMasterMode()
+		void launchMasterMode()
 		{
-			velOrder vel;
-			vel.Priority = savedState.velPriority;
+			sensors::velOrder vel;
+			vel.priority = savedState.velPriority;
 			vel.data = savedState.velData;
 			vel.release = savedState.velRelease;
 			pubVel.publish(vel);
 
-			Float64 Ord;
+			std_msgs::Float64 Ord;
 			Ord.data = savedState.disData;
 			pubOrd.publish(Ord);
 		}
 
-		void stateRecoverer::updateStateVel_master(const sensors::velOrder& vel)
+		void updateStateVel_master(const sensors::velOrder& vel)
 		{
 			savedState.velPriority = vel.priority;
-			savedState.velDate = vel.data;
-			savedState.velRelease = vel.Release;
+			savedState.velData = vel.data;
+			savedState.velRelease = vel.release;
 
 			if (mode == MASTER_MODE)
 			{
-			dependency_pkg::stateMsg smsg
-			pubState.publish(smsg);
+				dependency_pkg::stateMsg smsg = savedState;
+				pubState.publish(smsg);
 			}
 			else
 				ROS_INFO("ERROR : asked to update saved velocity order from inher values  while the system is in FOLLOWER Mode.");
 		}
 
-		void stateRecoverer::updateStateOrd_master(const std_msgs::Float64& dist)
+		void updateStateOrd_master(const std_msgs::Float64& dist)
 		{
-			savedState.disData = dist;		
+			savedState.disData = dist.data;		
 			
 			if (mode == MASTER_MODE)
 			{
-			dependency_pkg::stateMsg smsg
+			dependency_pkg::stateMsg smsg = savedState;
 			pubState.publish(smsg);
 			}
 			else
 				ROS_INFO("ERROR : asked to update distance Order from inher values  while the system is in FOLLOWER Mode.");
 		}
 
-		void stateRecoverer::updateSavedState_follower(const dependency_pkg::stateMsg& smsg)
+		void updateSavedState_follower(const dependency_pkg::stateMsg& smsg)
 		{
-			if (this.mode == FOLLOWER_MODE)
-				this.savedState = smsg;
+			if (mode == FOLLOWER_MODE)
+				savedState = smsg;
 			else
 				ROS_INFO("ERROR : asked to update savedState from the other system  while the system is in MASTER Mode.");
 		}
@@ -130,11 +132,6 @@ int main(int argc, char **argv)
 	stateRecoverer sR;
 	while (ros::ok())
 	{
-		if (mode == MASTER_MODE)
-		{
-			dependency_pkg::stateMsg smsg = savedState;
-			pubState.publish(smsg);
-		}
 		ros::spinOnce();
 		r.sleep();
 	}

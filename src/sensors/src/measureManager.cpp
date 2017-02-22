@@ -9,7 +9,7 @@
 #include "ros/callback_queue.h"
 #include <iostream>
 #include "ros/rate.h"
-#include "sensors/errorMessage.h"
+#include "sensors/errorMsg.h"
 #include "ros/time.h"
 
 #define ERROR_PLUS 1.2
@@ -42,7 +42,7 @@ class measureManagerClass
 
 			// PUBLISHER
 			ros::NodeHandle np_error;    //handle for the publisher
-			pub_error = np_error.advertise<sensors::errorMessage>("error_topic", 1);
+			pub_error = np_error.advertise<sensors::errorMsg>("error_topic", 1);
 				
 		}
 
@@ -112,7 +112,7 @@ class measureManagerClass
 
 				if ((d1/d2)>ERROR_PLUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 1;
@@ -125,7 +125,7 @@ class measureManagerClass
 
 				if ((d3/d2)<ERROR_MINUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 3;
@@ -144,7 +144,7 @@ class measureManagerClass
 
 				if ((d1/d3)>ERROR_PLUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 1;
@@ -156,7 +156,7 @@ class measureManagerClass
 
 				if ((d2/d3)>ERROR_MINUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 2;
@@ -175,7 +175,7 @@ class measureManagerClass
 
 				if ((d2/d1)>ERROR_PLUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 2;
@@ -187,7 +187,7 @@ class measureManagerClass
 
 				if ((d3/d1)>ERROR_MINUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 3;
@@ -205,7 +205,7 @@ class measureManagerClass
 
 				if ((d2/d3)>ERROR_PLUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 2;
@@ -217,7 +217,7 @@ class measureManagerClass
 
 				if ((d1/d3)>ERROR_MINUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 1;
@@ -235,7 +235,7 @@ class measureManagerClass
 
 				if ((d3/d1)>ERROR_PLUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 3;
@@ -247,7 +247,7 @@ class measureManagerClass
 
 				if ((d2/d1)>ERROR_MINUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 2;
@@ -266,7 +266,7 @@ class measureManagerClass
 
 				if ((d3/d2)>ERROR_PLUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 3;
@@ -278,7 +278,7 @@ class measureManagerClass
 
 				if ((d1/d2)>ERROR_MINUS)
 				{
-					sensors::errorMessage error;
+					sensors::errorMsg error;
 					error.error_time = ros::Time::now();
 					error.node_name = "measureManagerClass";
 					error.id = 1;

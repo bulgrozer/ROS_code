@@ -50,7 +50,7 @@ find_package(gazebo REQUIRED)
  add_message_files(
    FILES
     velOrder.msg
-		errorMessage.msg
+    errorMsg.msg
 #   Num.msg
 #   Message2.msg
  )
