@@ -24,7 +24,7 @@
 		</inertial>
 	</link>
 
-	<link name="toit">
+	<link name="roof">
 		<visual>
 			<origin rpy="0 0 0" xyz="0 0 0"/>
 			<geometry>
@@ -207,7 +207,7 @@
 		      <resolution>0.02</resolution>
 		    </range>
 			</ray>
-			<plugin name="sonar_controller_1" filename="libgazebo_ros_sonar_1.so"/>
+			<plugin name="sonar_controller_1" filename="libsonarSensor1.so"/>
 		</sensor>
 	</gazebo>
 
@@ -253,7 +253,7 @@
 		      <resolution>0.02</resolution>
 		    </range>
 			</ray>
-			<plugin name="sonar_controller_2" filename="libgazebo_ros_sonar_2.so"/>
+			<plugin name="sonar_controller_2" filename="libsonarSensor2.so"/>
 		</sensor>
 	</gazebo>
 
@@ -300,7 +300,7 @@
 		      <resolution>0.02</resolution>
 		    </range>
 			</ray>
-			<plugin name="sonar_controller_3" filename="libgazebo_ros_sonar_3.so"/>
+			<plugin name="sonar_controller_3" filename="libsonarSensor3.so"/>
 		</sensor>
 	</gazebo>
 
@@ -327,21 +327,21 @@
   </link>
 
 	<gazebo>
-			<plugin name="speed_controller" filename="libhector_gazebo_ros_imu.so"/>
+			<plugin name="speed_controller" filename="libimuSensor.so"/>
 	</gazebo>
 
 
 
 <gazebo>
-  <plugin name="wheel_controller_follower" filename="libcommande_roues_follower_plugin.so"/>
+  <plugin name="wheel_controller_follower" filename="libcmdFollowerCar.so"/>
 </gazebo>
 
 
 	<!-- Mise en place des liens -->
 
-	<joint name="chassis_to_toit" type="fixed">
+	<joint name="chassis_to_roof" type="fixed">
 		<parent link="chassis"/>
-		<child link="toit"/>
+		<child link="roof"/>
 		<origin xyz="-0.3 0 0.65"/>
 	</joint>
 
@@ -392,7 +392,7 @@
 	</joint>
 
 	<joint name="toit_to_speed_sensor" type="fixed">
-		<parent link="toit"/>
+		<parent link="roof"/>
 		<child link="speed_sensor"/>
 		<origin rpy="0 0 0" xyz="0.865 0 0.26"/>
 	</joint>

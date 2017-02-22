@@ -146,14 +146,6 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     this->offset_.rot = math::Vector3(0, 0, 0);
   }
 
-  // fill in constant covariance matrix
-  //imuMsg.angular_velocity_covariance[0] = rateModel.gaussian_noise.x*rateModel.gaussian_noise.x;
-  //imuMsg.angular_velocity_covariance[4] = rateModel.gaussian_noise.y*rateModel.gaussian_noise.y;
-  //imuMsg.angular_velocity_covariance[8] = rateModel.gaussian_noise.z*rateModel.gaussian_noise.z;
-  //imuMsg.linear_acceleration_covariance[0] = accelModel.gaussian_noise.x*accelModel.gaussian_noise.x;
-  //imuMsg.linear_acceleration_covariance[4] = accelModel.gaussian_noise.y*accelModel.gaussian_noise.y;
-  //imuMsg.linear_acceleration_covariance[8] = accelModel.gaussian_noise.z*accelModel.gaussian_noise.z;
-
   // Make sure the ROS node for Gazebo has already been initialized
   if (!ros::isInitialized())
   {
@@ -175,22 +167,6 @@ void GazeboRosIMU::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   //debugPublisher = rosnode_->advertise<geometry_msgs::PoseStamped>(topic_ + "/pose", 10);
 #endif // DEBUG_OUTPUT
 
-  // advertise services for calibration and bias setting
-/*  if (!serviceName.empty())
-    srv_ = node_handle_->advertiseService(serviceName, &GazeboRosIMU::ServiceCallback, this);
-
-  accelBiasService = node_handle_->advertiseService(topic_ + "/set_accel_bias", &GazeboRosIMU::SetAccelBiasCallback, this);
-  rateBiasService  = node_handle_->advertiseService(topic_ + "/set_rate_bias", &GazeboRosIMU::SetRateBiasCallback, this);*/
-
-  // setup dynamic_reconfigure servers
-/*  if (!topic_.empty()) {
-    dynamic_reconfigure_server_accel_.reset(new dynamic_reconfigure::Server<SensorModelConfig>(ros::NodeHandle(*node_handle_, topic_ + "/accel")));
-    dynamic_reconfigure_server_rate_.reset(new dynamic_reconfigure::Server<SensorModelConfig>(ros::NodeHandle(*node_handle_, topic_ + "/rate")));
-    dynamic_reconfigure_server_yaw_.reset(new dynamic_reconfigure::Server<SensorModelConfig>(ros::NodeHandle(*node_handle_, topic_ + "/yaw")));
-    dynamic_reconfigure_server_accel_->setCallback(boost::bind(&SensorModel3::dynamicReconfigureCallback, &accelModel, _1, _2));
-    dynamic_reconfigure_server_rate_->setCallback(boost::bind(&SensorModel3::dynamicReconfigureCallback, &rateModel, _1, _2));
-    dynamic_reconfigure_server_yaw_->setCallback(boost::bind(&SensorModel::dynamicReconfigureCallback, &yawModel, _1, _2));
-  }*/
 
 #ifdef USE_CBQ
   // start custom queue for imu
@@ -301,39 +277,6 @@ void GazeboRosIMU::Update()
   );
   orientationError.Normalize();
   rot = orientationError * rot;
-/*
-  // copy data into pose message
-  imuMsg.header.frame_id = frame_id_;
-  imuMsg.header.stamp.sec = cur_time.sec;
-  imuMsg.header.stamp.nsec = cur_time.nsec;
-
-  // orientation quaternion
-  imuMsg.orientation.x = rot.x;
-  imuMsg.orientation.y = rot.y;
-  imuMsg.orientation.z = rot.z;
-  imuMsg.orientation.w = rot.w;
-
-  // pass angular rates
-  imuMsg.angular_velocity.x    = rate.x;
-  imuMsg.angular_velocity.y    = rate.y;
-  imuMsg.angular_velocity.z    = rate.z;
-
-  // pass accelerations
-  imuMsg.linear_acceleration.x    = accel.x;
-  imuMsg.linear_acceleration.y    = accel.y;
-  imuMsg.linear_acceleration.z    = accel.z;
-
-  // fill in covariance matrix
-  imuMsg.orientation_covariance[8] = yawModel.gaussian_noise*yawModel.gaussian_noise;
-  if (gravity_length > 0.0) {
-    imuMsg.orientation_covariance[0] = accelModel.gaussian_noise.x*accelModel.gaussian_noise.x/(gravity_length*gravity_length);
-    imuMsg.orientation_covariance[4] = accelModel.gaussian_noise.y*accelModel.gaussian_noise.y/(gravity_length*gravity_length);
-  } else {
-    imuMsg.orientation_covariance[0] = -1;
-    imuMsg.orientation_covariance[4] = -1;
-  }
-*/
-
 
 	// Speed sensor
 	 
@@ -355,44 +298,6 @@ void GazeboRosIMU::Update()
 	speedToSend.data = new_speed;
 	pub_.publish(speedToSend);
 
-  // publish to ros
-  //pub_.publish(imuMsg);
-  //ROS_DEBUG_NAMED("gazebo_ros_imu", "Publishing IMU data at t = %f", cur_time.Double());
-
-/*  // publish bias
-  if (bias_pub_) {
-    biasMsg.header = imuMsg.header;
-    biasMsg.orientation.x = orientationError.x;
-    biasMsg.orientation.y = orientationError.y;
-    biasMsg.orientation.z = orientationError.z;
-    biasMsg.orientation.w = orientationError.w;
-    biasMsg.angular_velocity.x = rateModel.getCurrentBias().x;
-    biasMsg.angular_velocity.y = rateModel.getCurrentBias().y;
-    biasMsg.angular_velocity.z = rateModel.getCurrentBias().z;
-    biasMsg.linear_acceleration.x = accelModel.getCurrentBias().x;
-    biasMsg.linear_acceleration.y = accelModel.getCurrentBias().y;
-    biasMsg.linear_acceleration.z = accelModel.getCurrentBias().z;
-    //bias_pub_.publish(biasMsg);
-  }
-
-  // debug output
-#ifdef DEBUG_OUTPUT
-  if (debugPublisher) {
-    geometry_msgs::PoseStamped debugPose;
-    debugPose.header = imuMsg.header;
-    debugPose.header.frame_id = "/map";
-    debugPose.pose.orientation.w = imuMsg.orientation.w;
-    debugPose.pose.orientation.x = imuMsg.orientation.x;
-    debugPose.pose.orientation.y = imuMsg.orientation.y;
-    debugPose.pose.orientation.z = imuMsg.orientation.z;
-    math::Pose pose = link->GetWorldPose();
-    debugPose.pose.position.x = pose.pos.x;
-    debugPose.pose.position.y = pose.pos.y;
-    debugPose.pose.position.z = pose.pos.z;
-    //debugPublisher.publish(debugPose);
-  }
-#endif // DEBUG_OUTPUT
-*/
 }
 
 #ifdef USE_CBQ
