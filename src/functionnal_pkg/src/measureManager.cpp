@@ -250,22 +250,22 @@ class measureManagerClass
 int main(int argc, char **argv)
 {
   
+  ros::init(argc, argv, "measureManagerClass");
+  measureManagerClass measure_manager_class;
 
-	//ros::Rate r(1000);		// 1000 Hz
+	ros::Rate r(1000);		// 1000 Hz
 
-	//while (ros::ok())
-	//{
+	while (ros::ok())
+	{
 	
-  	ros::init(argc, argv, "measureManagerClass");
-  	measureManagerClass measure_manager_class;
  
 		// %Tag(SPIN)%
   	ros::spin();
 		// %EndTag(SPIN)%
 		
-		//r.sleep();
+		r.sleep();
 
-	//}
+	}
 
 	
   return 0;
