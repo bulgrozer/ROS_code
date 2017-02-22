@@ -77,7 +77,7 @@ namespace gazebo
 		/// \param[in] _msg A float value that is used to set the velocity
 		public: void OnRosMsg(const std_msgs::Float64ConstPtr &_msg)
 		{		
-		double speed = this->model->GetRelativeLinearVel().x;
+		double speed = this->model->GetRelativeLinearVel().x; // Penser a recuperer vraie valeur vitesse a partir du topic velMeasure_topic.. Pas tres pertinent.
 		double deltaSpeed;
 		double speedCmd;
 		double threshold = 0.001;

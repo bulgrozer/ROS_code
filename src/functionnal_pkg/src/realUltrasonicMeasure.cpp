@@ -30,18 +30,21 @@ class realUltrasonicMeasureClass
 			j = 0;
 
 			// PUBLISHER
-			ros::NodeHandle np;    //handle for the publisher
+		
 			pub = np.advertise<sensors::velOrder>("chassis/velOrder_topic", 1);
+
+			// SUBSCRIBER
+			sub = ns.subscribe("distanceOrder_topic",1,&realUltrasonicMeasureClass::cmdCallback,this);
 
 			vel_order.priority = 0;
 			vel_order.data = 0;							
 			vel_order.release = true;
-			//pub.publish(vel_order);
+			pub.publish(vel_order);
 		}
 
 		 int sendData()
 		{
-				timer_file = open("/dev/us_service", O_RDWR);
+				/*timer_file = open("/dev/us_service", O_RDWR);
 				if (timer_file < 0)
 				{
 				    fputs("open() failed, aborting...\n", stderr);
@@ -64,7 +67,8 @@ class realUltrasonicMeasureClass
 
 				distance = distance/58.8235; // distance in centimeters
 
-
+*/
+				distance = 50 ;
 				// BUFFER
 				float mean = 400;
 				BUFFER[j] = distance;
@@ -79,20 +83,26 @@ class realUltrasonicMeasureClass
 				if (n < 10){n++;}
 		
 				j++;
-				if (j == 0) j = 0;
-
+				if (j == 10) {j = 0;}
+mean = 10;
 				//detection of a close object
 				if (mean < 100)
 				{
+					do{
 					vel_order.priority = 2;
 					vel_order.data = 0;							//emergency brake
 					vel_order.release = false;
-					//pub.publish(vel_order);
-					// counter?
+					pub.publish(vel_order);
+					}while(realSpeed < 0.001);
 				}
 
 				ros::spinOnce();	
 		}
+
+void cmdCallback(const std_msgs::Float64& vel)
+{
+	realSpeed = vel.data;
+}
 
 
 		private: 
@@ -101,7 +111,13 @@ class realUltrasonicMeasureClass
 			float distance;
 
 			ros::Publisher pub;
+			ros::Subscriber sub;
+			ros::NodeHandle np;    //handle for the publisher
+			ros::NodeHandle ns;    //handle for the subscriber
+
 			sensors::velOrder vel_order;
+		
+			float realSpeed;
 
 			float BUFFER[10];
 			int j;	// pointer to the write cell of the buffer.
@@ -121,8 +137,11 @@ int main(int argc, char **argv)
 
 		ros::init(argc, argv, "realUltrasonicMeasureClass");
 		realUltrasonicMeasureClass realUltrasonic;
+		sleep(6);
+		realUltrasonic.sendData();
+	
 
-////// Est ce que la fonction a linterieur de la classe est bien lancée ???? /////
+
 
 
 		// %Tag(SPIN)%

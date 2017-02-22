@@ -64,6 +64,10 @@ class distanceSecurityCalculatorClass
 		// Temporal redundancy of IMU sensor's data
 		float mean = 0;
 
+		std::cout << "Vitesse reelle : " << vel->data << std::endl;
+		std::cout << "Vitesse precedente : " << previous_vel << std::endl;
+
+
 		if ((vel->data - previous_vel) > (threshold*dt+0.5))
 		{	
 			ROS_ERROR("Error with the IMU sensor's data upper limit");

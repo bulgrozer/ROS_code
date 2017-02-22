@@ -39,13 +39,13 @@
 
 		</node>
 
-  <node name="distanceSecurityCalculatorClass" pkg="sensors" type="distanceSecurityCalculatorClass" output="screen" />
+  <node name="distanceSecurityCalculatorClass" pkg="functionnal_pkg" type="distanceSecurityCalculatorClass" output="screen" />
 	
-	<node name="measureManagerClass" pkg="sensors" type="measureManagerClass" output="screen"/>
+	<node name="measureManagerClass" pkg="functionnal_pkg" type="measureManagerClass" output="screen"/>
 
-	<node name="realUltrasonicMeasureClass" pkg="sensors" type="realUltrasonicMeasureClass" output="screen"/>
+	<node name="realUltrasonicMeasureClass" pkg="functionnal_pkg" type="realUltrasonicMeasureClass" output="screen"/>
 
-	<node name="cmdManagerClass" pkg="sensors" type="cmdManagerClass" output="screen"/>
+	<node name="cmdManagerClass" pkg="functionnal_pkg" type="cmdManagerClass" output="screen"/>
 
   <!-- <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
       <rosparam command="delete" param="/diagnostic_aggregator" />
