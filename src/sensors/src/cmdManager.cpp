@@ -19,8 +19,8 @@ class cmdManagerClass
 
 			// PUBLISHERS
 			pub_cmd = npc.advertise<std_msgs::Float64>("/velCmd_topic", 1);
-			pub_enable = npe.advertise<std_msgs::Bool>("/pid_enable",1);
-			pub_enable_backup = npeb.advertise<std_msgs::Bool>("/pid_enable_backup",1);
+			pub_enable = npe.advertise<std_msgs::Bool>("/chassis/pid_enable",1);
+			pub_enable_backup = npeb.advertise<std_msgs::Bool>("/chassis/pid_enable_backup",1);
 
 			current_priority.data = 0;
 
@@ -28,7 +28,7 @@ class cmdManagerClass
 			pid_enable_backup.data = true;
 			pub_enable_backup.publish(pid_enable_backup); // Enable backup from the start
 
-			//mode = true;			// depending on which raspberry it is launched
+			mode = true;			// depending on which raspberry it is launched
 		}
 
 	private:

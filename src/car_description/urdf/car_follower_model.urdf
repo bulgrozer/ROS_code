@@ -437,7 +437,7 @@
 		<material>Gazebo/Orange</material>
 	</gazebo>
 
-	<gazebo reference="toit">
+	<gazebo reference="roof">
 		<material>Gazebo/Orange</material>
 	</gazebo>
 
