@@ -106,12 +106,10 @@ find_package(gazebo REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES sensors
+  LIBRARIES sensors
    #LIBRARIES dependency_pkg
   CATKIN_DEPENDS roscpp std_msgs message_runtime
-  DEPENDS 
-	gazebo_ros
-	system_lib
+  DEPENDS	gazebo_ros system_lib
 )
 
 ###########
@@ -125,8 +123,8 @@ include_directories(include
 	${catkin_INCLUDE_DIRS} 
 	${GAZEBO_INCLUDE_DIRS} 
 	${SDFormat_INCLUDE_DIRS}
-        ${Boost_INCLUDE_DIRS}
-        ${dependency_pkg_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+  ${dependency_pkg_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -199,32 +197,35 @@ include_directories(include
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-include_directories(include ${catkin_INCLUDE_DIRS})
+include_directories(include 
+	${catkin_INCLUDE_DIRS}
+	${SDFormat_INCLUDE_DIRS}	
+	${Boost_INCLUDE_DIRS}
+)
 
 #add_executable(sensor src/sensor.cpp)
 #target_link_libraries(sensor ${catkin_LIBRARIES})
 
 #add_executable(getData src/getData.cpp)
 #target_link_libraries(getData ${catkin_LIBRARIES})
-
 #add_executable(getDataRrbot src/getDataRrbot.cpp)
 #target_link_libraries(getDataRrbot ${catkin_LIBRARIES})
 
 #add_executable(control src/control.cpp)
 #target_link_libraries(control ${catkin_LIBRARIES})
 
-add_executable(cmdManagerClass src/cmdManager.cpp)
-target_link_libraries(cmdManagerClass ${catkin_LIBRARIES})
-add_dependencies(cmdManagerClass ${catkin_EXPORTED_TARGETS})
-
 add_executable(measureManagerClass src/measureManager.cpp)
-target_link_libraries(measureManagerClass ${catkin_LIBRARIES})
-add_dependencies(measureManagerClass ${catkin_EXPORTED_TARGETS})
-
 add_executable(realUltrasonicMeasureClass src/realUltrasonicMeasure.cpp)
-target_link_libraries(realUltrasonicMeasureClass ${catkin_LIBRARIES})
-add_dependencies(realUltrasonicMeasureClass ${catkin_EXPORTED_TARGETS})
-
 add_executable(distanceSecurityCalculatorClass src/distanceSecurityCalculator.cpp)
+add_executable(cmdManagerClass src/cmdManager.cpp)
+
+add_dependencies(cmdManagerClass ${${PROJECT_NAME}_EXPORTED_TARGETS}  ${catkin_LIBRARIES})
+add_dependencies(measureManagerClass ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(realUltrasonicMeasureClass ${${PROJECT_NAME}_EXPORTED_TARGETS}  ${catkin_EXPORTED_TARGETS})
+add_dependencies(distanceSecurityCalculatorClass ${${PROJECT_NAME}_EXPORTED_TARGETS}  ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(cmdManagerClass ${catkin_LIBRARIES})
+target_link_libraries(measureManagerClass ${catkin_LIBRARIES})
+target_link_libraries(realUltrasonicMeasureClass ${catkin_LIBRARIES})
 target_link_libraries(distanceSecurityCalculatorClass ${catkin_LIBRARIES})
-add_dependencies(distanceSecurityCalculatorClass ${catkin_EXPORTED_TARGETS})
+
