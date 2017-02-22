@@ -113,9 +113,7 @@ class distanceSecurityCalculatorClass
 		//std::cout << "Vitesse : " << mean << std::endl;
 		d_setpoint.data = 2 + 1.5*(6*(mean*3.6)/10) ;
 
-		j++;
-		if (j == 10){j = 0;}
-
+		j = (j + 1)%10;
 
 		// %Tag(PUBLISH)%
 		//ROS_INFO("Envoi distanceOrderT");

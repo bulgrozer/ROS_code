@@ -1,6 +1,5 @@
 // %Tag(FULLTEXT)%
 #include "ros/ros.h"
-#include <std_msgs/Int64.h>
 #include <std_msgs/Float64.h>
 #include <std_msgs/Bool.h>
 #include "sensors/velOrder.h"
@@ -22,7 +21,7 @@ class cmdManagerClass
 			pub_enable = npe.advertise<std_msgs::Bool>("/chassis/pid_enable",1);
 			pub_enable_backup = npeb.advertise<std_msgs::Bool>("/chassis/pid_enable_backup",1);
 
-			current_priority.data = 0;
+			current_priority = 0;
 
 			std_msgs::Bool pid_enable_backup;
 			pid_enable_backup.data = true;
@@ -44,24 +43,23 @@ class cmdManagerClass
 	ros::NodeHandle npe;    //handle for the publisher command
 	ros::NodeHandle npeb; // handle for backup publisher
 
-	std_msgs::Int64 current_priority;
-
+	int64_t  current_priority;
 	bool mode;						// true = primary ; false = back up
-
+	
 	// %Tag(CALLBACK)%
 	void cmdCallback1(const sensors::velOrder& cmd)   
 	{
 		
 		if (mode == true)
 		{
-	
+
 			std_msgs::Float64 velCmd;
 
-			if(cmd.priority >= current_priority.data)
+			if(cmd.priority >= current_priority)
 			{
 				if(cmd.release == true)
 				{
-					current_priority.data = 1;
+					current_priority = 1;
 					std_msgs::Bool pid_enable;
 					pid_enable.data = true;
 					pub_enable.publish(pid_enable);
@@ -70,19 +68,19 @@ class cmdManagerClass
 				else
 				{
 					velCmd.data = -cmd.data;
-					current_priority.data = cmd.priority;
+					current_priority = cmd.priority;
 
 					pub_cmd.publish(velCmd);
 				  ros::spinOnce();
 
-					if(cmd.priority > 1) // Primary PID
+					if(cmd.priority > 1) // Disable Primary PID
 					{
 						std_msgs::Bool pid_enable;
 						pid_enable.data = false;
 						pub_enable.publish(pid_enable);
 					} // end if
 
-					if(cmd.priority > 0) // Backup PID
+					if(cmd.priority > 0) // Disable Backup PID
 					{
 						std_msgs::Bool pid_enable_backup;
 						pid_enable_backup.data = false;

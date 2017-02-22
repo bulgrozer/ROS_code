@@ -15,8 +15,10 @@
 
 class realUltrasonicMeasureClass
 {
-		public: realUltrasonicMeasureClass() {
-
+		public: 
+		
+		realUltrasonicMeasureClass()
+		{
 			distance=0;
 
 			int i;
@@ -35,16 +37,10 @@ class realUltrasonicMeasureClass
 			vel_order.data = 0;							
 			vel_order.release = true;
 			//pub.publish(vel_order);
+		}
 
-
-
-}
-
-		public: int sendData()
+		 int sendData()
 		{
-
-
-
 				timer_file = open("/dev/us_service", O_RDWR);
 				if (timer_file < 0)
 				{
@@ -82,8 +78,7 @@ class realUltrasonicMeasureClass
 
 				if (n < 10){n++;}
 		
-				j++;
-				if (j == 10){j = 0;}
+				j = (j + 1)%10;
 
 				//detection of a close object
 				if (mean < 100)
@@ -108,8 +103,8 @@ class realUltrasonicMeasureClass
 			sensors::velOrder vel_order;
 
 			float BUFFER[10];
-			int j;
-			int n;
+			int j;	// pointer to the write cell of the buffer.
+			int n;	// actual buffer size fulfilled with values.
 
 };
 
