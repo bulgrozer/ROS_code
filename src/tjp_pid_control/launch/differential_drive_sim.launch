@@ -3,7 +3,7 @@
 
 <!-- PID Back up -->		
 
-    <node name="pid_back_up" pkg="tjp_pid" type="pidBackup" ns="left_wheel" output="screen" >
+    <node name="pid_back_up" pkg="tjp_pid" type="pidBackup" ns="chassis" output="screen" >
       <param name="node_name" value="pid_backup" />
       <param name="Kp" value="5.0" />
       <param name="Ki" value="0.0" />
@@ -17,13 +17,12 @@
       <remap from="setpoint" to="/distanceOrder_topic" />
       <remap from="control_effort" to="/velOrder_topic" />
       <remap from="state" to="/distanceMesure1_topic" />
-			<remap from="pid_enable" to="/pid_enable_backup" />
 
 		</node>
 
 <!-- PID TJP Controller -->		
 
-    <node name="controller" pkg="tjp_pid" type="controller" ns="left_wheel" output="screen" >
+    <node name="controller" pkg="tjp_pid" type="controller" ns="chassis" output="screen" >
       <param name="node_name" value="pid_main" />
       <param name="Kp" value="5.0" />
       <param name="Ki" value="0.0" />
@@ -71,9 +70,9 @@
 	
 	<node name="measureManagerClass" pkg="sensors" type="measureManagerClass" output="screen"/>
 
-	<node name="ultrasonic_measure" pkg="sensors" type="ultrasonic_measure" output="screen"/>
+	<node name="realUltrasonicMeasureClass" pkg="sensors" type="realUltrasonicMeasureClass" output="screen"/>
 
-	<node name="cmd_managerClass" pkg="sensors" type="cmd_managerClass" output="screen"/>
+	<node name="cmdManagerClass" pkg="sensors" type="cmdManagerClass" output="screen"/>
 
    <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
       <rosparam command="delete" param="/diagnostic_aggregator" />

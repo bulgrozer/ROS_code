@@ -8,18 +8,18 @@
 //#include <gazebo_msgs/ApplyJointEffort.h>
 
 
-class cmd_managerClass
+class cmdManagerClass
 {
 	public:
-	cmd_managerClass()
+	cmdManagerClass()
 		{
 			// SUBSCRIBER
-			sub = ns.subscribe("/velOrder_topic",1,&cmd_managerClass::cmdCallback1,this);
-			sub_mode = ns_mode.subscribe("/redundancyMode_topic",1,&cmd_managerClass::cmdCallback2,this);
+			sub = ns.subscribe("/velOrder_topic",1,&cmdManagerClass::cmdCallback1,this);
+			sub_mode = ns_mode.subscribe("/redundancyMode_topic",1,&cmdManagerClass::cmdCallback2,this);
 
 			// PUBLISHERS
 			pub_cmd = npc.advertise<std_msgs::Float64>("/velCmd_topic", 1);
-			pub_enable = npe.advertise<std_msgs::Bool>("/left_wheel/pid_enable",1);
+			pub_enable = npe.advertise<std_msgs::Bool>("/pid_enable",1);
 			pub_enable_backup = npeb.advertise<std_msgs::Bool>("/pid_enable_backup",1);
 
 			current_priority.data = 0;
@@ -118,8 +118,8 @@ class cmd_managerClass
 int main(int argc, char **argv)
 {
 
-		ros::init(argc, argv, "cmd_managerClass");
-		cmd_managerClass cmd_manager;
+		ros::init(argc, argv, "cmdManagerClass");
+		cmdManagerClass cmd_manager;
 	 
 		// %Tag(SPIN)%
 		ros::spin();

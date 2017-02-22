@@ -13,9 +13,9 @@
 //*****************************************************************************//
 
 
-class Ultrasonic
+class realUltrasonicMeasureClass
 {
-		public: Ultrasonic() {
+		public: realUltrasonicMeasureClass() {
 
 			distance=0;
 
@@ -123,8 +123,8 @@ int main(int argc, char **argv)
 	//while (ros::ok())
 	//{
 
-		ros::init(argc, argv, "ultrasonic_measure");
-		Ultrasonic ultrason;
+		ros::init(argc, argv, "realUltrasonicMeasureClass");
+		realUltrasonicMeasureClass realUltrasonic;
 
 ////// Est ce que la fonction a linterieur de la classe est bien lancée ???? /////
 
