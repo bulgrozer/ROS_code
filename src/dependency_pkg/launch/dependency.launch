@@ -1,11 +1,9 @@
 <?xml version="1.1"?>
 <launch>
-<group ns="Raspi1">
 	<node name="errorManager" pkg="dependency_pkg" type="errorManager" output="screen" />
 
 	<node name="nodeKiller" pkg="dependency_pkg" type="nodeReinitialiser" output="screen" />
 
 	<node name="stateRecoverer" pkg="dependency_pkg" type="stateRecoverer" output="screen" />
 
-</group>
 </launch>

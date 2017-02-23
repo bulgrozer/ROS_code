@@ -127,9 +127,10 @@ class stateRecoverer
 	
 int main(int argc, char **argv)
 {
-	ros::Rate r(5); 	// 5 state savings per second.
 	ros::init(argc, argv, "stateRecoverer");
 	stateRecoverer sR;
+	ros::Rate r(5); 	// 5 state savings per second
+
 	while (ros::ok())
 	{
 		ros::spinOnce();

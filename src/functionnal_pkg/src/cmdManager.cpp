@@ -5,7 +5,8 @@
 #include "functionnal_pkg/velOrder.h"
 
 //#include <gazebo_msgs/ApplyJointEffort.h>
-
+#define FOLLOWER_MODE false
+#define MASTER_MODE true
 
 class cmdManagerClass
 {
@@ -27,7 +28,7 @@ class cmdManagerClass
 			pid_enable_backup.data = true;
 			pub_enable_backup.publish(pid_enable_backup); // Enable backup from the start
 
-			mode = true;			// depending on which raspberry it is launched
+			mode = FOLLOWER_MODE;			// depending on which raspberry is launched
 		}
 
 	private:
@@ -50,7 +51,7 @@ class cmdManagerClass
 	void cmdCallback1(const functionnal_pkg::velOrder& cmd)   
 	{
 		
-		if (mode == true)
+		if (mode == MASTER_MODE)
 		{
 
 			std_msgs::Float64 velCmd;
@@ -104,7 +105,7 @@ class cmdManagerClass
 // %Tag(CALLBACK2)%
 	void cmdCallback2(const std_msgs::Bool& cmd)   
 	{
-			mode = cmd.data; 
+			mode = cmd.data; // TRUE = MASTER_MODE, FALSE = FOLLOWER_MODE
 	}
 
 };
