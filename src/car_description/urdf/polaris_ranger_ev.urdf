@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
-<robot name="polaris_ranger_ev">
+<robot name="our_car_master_model">
+
+  <gazebo>
+    <plugin name="wheel_controller_master" filename="libcmdMasterCar.so"/>
+  </gazebo>
 
   <!-- links -->
     <link name="chassis">
@@ -9,6 +13,7 @@
       </inertial>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_ranger.dae" scale="1 1 1"/>
         </geometry>
@@ -18,187 +23,201 @@
       </visual>
 
       <collision name="chassis_bottom">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="1.5 1.34 0.06"/>
         </geometry>
       </collision>
 
       <collision name="cargo_bottom">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.9 1.2 0.01"/>
         </geometry>
       </collision>
 
       <collision name="cargo_front">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.05 1.2 0.25"/>
         </geometry>
       </collision>
 
       <collision name="cargo_back">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.05 1.2 0.25"/>
         </geometry>
       </collision>
 
       <collision name="cargo_left">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.9 0.05 0.25"/>
         </geometry>
       </collision>
 
       <collision name="cargo_right">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.9 0.05 0.25"/>
         </geometry>
       </collision>
 
       <collision name="seat">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.6 1.22 0.5"/>
         </geometry>
       </collision>
 
       <collision name="mud_seat">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.6 1.15 0.1"/>
         </geometry>
       </collision>
 
       <collision name="seat_back">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.06 1 0.4"/>
         </geometry>
       </collision>
 
       <collision name="engine">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.58 1 0.8"/>
         </geometry>
       </collision>
 
       <collision name="handle_left_middle">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.02" length="0.17"/>
         </geometry>
       </collision>
 
       <collision name="handle_right_middle">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.02" length="0.17"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_top_left">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.68"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_top_right">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.68"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_top_front">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="1.22"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_top_back">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="1.22"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_front_left">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="1.04"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_front_right">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="1.04"/>
         </geometry>
       </collision>
 
       <collision name="fender_front_right">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.72"/>
         </geometry>
       </collision>
 
       <collision name="fender_front_left">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.72"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_left">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.9"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_right">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.9"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_midleft">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.023" length="0.9"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_midright">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.023" length="0.9"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_upper_left">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.29"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_upper_right">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.03" length="0.29"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_upper_midleft">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.023" length="0.29"/>
         </geometry>
       </collision>
 
       <collision name="rollcage_back_upper_midright">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.023" length="0.29"/>
         </geometry>
       </collision>
     </link>
-
-    <gazebo reference="chassis">
-      <maxContacts>10</maxContacts>
-      <selfCollide>false</selfCollide>
-
-      <sensor name="seat_contact" type="contact">
-        <always_on>1</always_on>
-        <update_rate>1000</update_rate>
-        <contact>
-          <collision>mud_seat</collision>
-          <topic>__default_topic__</topic>
-        </contact>
-      </sensor>
-    </gazebo>
 
 <!-- ****************************************************************************** -->
 
@@ -209,12 +228,14 @@
       </inertial>
 
       <collision name="collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.32" length="0.23"/>
         </geometry>
       </collision>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_rear_wheel_right.dae" scale="1 1 1"/>
         </geometry>
@@ -223,16 +244,6 @@
         </material>
       </visual>
     </link>
-
-    <gazebo reference="rear_right_wheel">
-      <maxContacts>1</maxContacts>
-      <mu1>1</mu1>
-      <mu2>1</mu2>
-      <fdir1>0 0 1</fdir1>
-      <minDepth>0.005</minDepth>
-      <kp>1e+08</kp>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ****************************************************************************** -->
 
@@ -243,12 +254,14 @@
       </inertial>
 
       <collision name="collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.32" length="0.23"/>
         </geometry>
       </collision>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_rear_wheel_left.dae" scale="1 1 1"/>
         </geometry>
@@ -257,16 +270,6 @@
         </material>
       </visual>
     </link>
-
-    <gazebo reference="rear_left_wheel">
-      <maxContacts>1</maxContacts>
-      <mu1>1</mu1>
-      <mu2>1</mu2>
-      <fdir1>0 0 1</fdir1>
-      <minDepth>0.005</minDepth>
-      <kp>1e+08</kp>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -277,12 +280,14 @@
       </inertial>
 
       <collision name="collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.32" length="0.23"/>
         </geometry>
       </collision>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_front_wheel_right.dae" scale="1 1 1"/>
         </geometry>
@@ -292,16 +297,6 @@
       </visual>
     </link>
 
-    <gazebo reference="front_right_wheel">
-      <maxContacts>1</maxContacts>
-      <mu1>1</mu1>
-      <mu2>1</mu2>
-      <fdir1>0 0 1</fdir1>
-      <minDepth>0.005</minDepth>
-      <kp>1e+08</kp>
-      <selfCollide>false</selfCollide>
-    </gazebo>
-
 <!-- ***************************************************************************** -->
 
     <link name="front_right_wheel_steering_block">
@@ -309,17 +304,14 @@
         <mass value="1"/>
         <inertia ixx="1" ixy="0" iyy="1" ixz="0" iyz="0" izz="1"/>
       </inertial>
+
       <collision name="collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.05" length="0.01"/>
         </geometry>
       </collision>
     </link>
-
-    <gazebo reference="front_right_wheel_steering_block">
-      <maxContacts>10</maxContacts>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -330,12 +322,14 @@
       </inertial>
 
       <collision name="collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.32" length="0.23"/>
         </geometry>
       </collision>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_front_wheel_left.dae" scale="1 1 1"/>
         </geometry>
@@ -344,16 +338,6 @@
         </material>
       </visual>
     </link>
-
-    <gazebo reference="front_left_wheel">
-      <maxContacts>1</maxContacts>
-      <mu1>1</mu1>
-      <mu2>1</mu2>
-      <fdir1>0 0 1</fdir1>
-      <minDepth>0.005</minDepth>
-      <kp>1e+08</kp>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -364,16 +348,12 @@
       </inertial>
 
       <collision name="collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <cylinder radius="0.05" length="0.01"/>
         </geometry>
       </collision>
     </link>
-
-    <gazebo reference="front_left_wheel_steering_block">
-      <maxContacts>10</maxContacts>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -384,12 +364,14 @@
       </inertial>
 
       <collision name="gas_pedal_collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.1069 0.077 0.01"/>
         </geometry>
       </collision>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_pedal_gas.dae" scale="1 1 1"/>
         </geometry>
@@ -399,12 +381,6 @@
       </visual>
     </link>
 
-    <gazebo reference="gas_pedal">
-      <gravity>false</gravity>
-      <maxContacts>10</maxContacts>
-      <selfCollide>false</selfCollide>
-    </gazebo>
-
 <!-- ***************************************************************************** -->
 
     <link name="brake_pedal">
@@ -412,13 +388,16 @@
         <mass value="0.1"/>
         <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
       </inertial>
+
       <collision name="brake_pedal_collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.063 0.08 0.01"/>
         </geometry>
       </collision>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_pedal_brake.dae" scale="1 1 1"/>
         </geometry>
@@ -427,12 +406,6 @@
         </material>
       </visual>
     </link>
-
-    <gazebo reference="brake_pedal">
-      <gravity>false</gravity>
-      <maxContacts>10</maxContacts>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -443,12 +416,14 @@
       </inertial>
 
       <collision name="collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_steering_wheel.dae" scale="1 1 1"/>
         </geometry>
       </collision>
 
       <visual name="visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 -0.62"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_steering_wheel.dae" scale="1 1 1"/>
         </geometry>
@@ -457,12 +432,6 @@
         </material>
       </visual>
     </link>
-
-    <gazebo reference="steering_wheel">
-      <maxContacts>10</maxContacts>
-      <minDepth>0.003</minDepth>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -473,12 +442,14 @@
       </inertial>
 
       <collision name="hand_brake_collision">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_e_brake.dae"/>
         </geometry>
       </collision>
 
       <visual name="hand_brake_visual">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <mesh filename="package://car_description/meshes/polaris_e_brake.dae" scale="1 1 1"/>
         </geometry>
@@ -487,11 +458,6 @@
         </material>
       </visual>
     </link>
-
-    <gazebo reference="hand_brake">
-      <maxContacts>10</maxContacts>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -502,13 +468,14 @@
       </inertial>
 
       <collision name="FNR_switch">
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.02 0.04 0.08"/>
         </geometry>
       </collision>
 
       <visual name="FNR_switch_F">
-        <!-- <transparency>0</transparency> -->
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.02 0.04 0.08"/>
         </geometry>
@@ -518,7 +485,7 @@
       </visual>
 
       <visual name="FNR_switch_R">
-        <!-- <transparency>1</transparency> -->
+        <origin rpy="0 0 -1.570795" xyz="0 0 0"/>
         <geometry>
           <box size="0.0199 0.0399 0.0799"/>
         </geometry>
@@ -527,11 +494,6 @@
         </material>
       </visual>
     </link>
-
-    <gazebo reference="FNR_switch">
-      <maxContacts>10</maxContacts>
-      <selfCollide>false</selfCollide>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 <!-- ***************************************************************************** -->
@@ -544,12 +506,6 @@
       <axis xyz="0 0 1"/>
       <dynamics damping="50"/>
     </joint>
-
-    <gazebo reference="front_left_steering_joint">
-      <cfmDamping>true</cfmDamping>
-      <stopCfm>0</stopCfm>
-      <stopErp>0.9</stopErp>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -567,12 +523,6 @@
       <axis xyz="0 0 1"/>
       <dynamics damping="50"/>
     </joint>
-
-    <gazebo reference="front_right_steering_joint">
-      <cfmDamping>true</cfmDamping>
-      <stopCfm>0</stopCfm>
-      <stopErp>0.9</stopErp>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -607,12 +557,6 @@
       <dynamics damping="70"/>
     </joint>
 
-    <gazebo reference="rear_differential_joint">
-      <cfmDamping>true</cfmDamping>
-      <stopCfm>1000</stopCfm>
-      <stopErp>0</stopErp>
-    </gazebo>
-
 < ***************************************************************************** -->
 
     <joint name="gas_joint" type="prismatic">
@@ -623,10 +567,6 @@
       <!-- effort and velocity arbitrarly set -->
       <dynamics damping="3"/>
     </joint>
-
-    <gazebo reference="gas_joint">
-      <cfmDamping>true</cfmDamping>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -639,10 +579,6 @@
       <dynamics damping="3"/>
     </joint>
 
-    <gazebo reference="brake_joint">
-      <cfmDamping>true</cfmDamping>
-    </gazebo>
-
 <!-- ***************************************************************************** -->
 
     <joint name="steering_joint" type="continuous">
@@ -651,10 +587,6 @@
       <axis xyz="-1 0 0.84365"/>
       <dynamics damping="1"/>
     </joint>
-
-    <gazebo reference="steering_joint">
-      <cfmDamping>true</cfmDamping>
-    </gazebo>
 
 <!-- ***************************************************************************** -->
 
@@ -667,10 +599,6 @@
       <dynamics damping="1"/>
     </joint>
 
-    <gazebo reference="hand_brake_joint">
-      <cfmDamping>true</cfmDamping>
-    </gazebo>
-
 <!-- ***************************************************************************** -->
 
     <joint name="FNR_switch_joint" type="revolute">
@@ -681,10 +609,6 @@
       <!-- effort and velocity arbitrarly set -->
       <dynamics damping="0.01"/>
     </joint>
-
-    <gazebo reference="FNR_switch_joint">
-      <cfmDamping>true</cfmDamping>
-    </gazebo>
 
 <!-- FIN -->
 </robot>
