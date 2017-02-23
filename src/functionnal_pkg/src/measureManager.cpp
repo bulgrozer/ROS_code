@@ -15,6 +15,8 @@
 #define ERROR_PLUS 1.2
 #define ERROR_MINUS 0.8
 
+#define UPDATE_RATE 1000
+
 class measureManagerClass
 {
 	public:
@@ -253,14 +255,13 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "measureManagerClass");
   measureManagerClass measure_manager_class;
 
-	ros::Rate r(1000);		// 1000 Hz
+	ros::Rate r(UPDATE_RATE);		// in Hz
 
 	while (ros::ok())
 	{
 	
- 
 		// %Tag(SPIN)%
-  	ros::spin();
+  	ros::spinOnce();
 		// %EndTag(SPIN)%
 		
 		r.sleep();
