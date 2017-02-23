@@ -4,9 +4,11 @@
 #include <std_msgs/Bool.h>
 #include "functionnal_pkg/velOrder.h"
 
+
 //#include <gazebo_msgs/ApplyJointEffort.h>
 #define FOLLOWER_MODE false
 #define MASTER_MODE true
+#define UPDATE_RATE 1000
 
 class cmdManagerClass
 {
@@ -114,12 +116,20 @@ class cmdManagerClass
 int main(int argc, char **argv)
 {
 
-		ros::init(argc, argv, "cmdManagerClass");
-		cmdManagerClass cmd_manager;
+	ros::init(argc, argv, "cmdManagerClass");
+	cmdManagerClass cmd_manager;
+
+	ros::Rate r(UPDATE_RATE);		// in Hz
+
+	while (ros::ok())
+	{
 	 
 		// %Tag(SPIN)%
-		ros::spin();
+		ros::spinOnce();
 		// %EndTag(SPIN)%
+
+		r.sleep();
+	}
 
   return 0;
 }
