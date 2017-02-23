@@ -114,10 +114,10 @@ class realUltrasonicMeasureClass
 				ros::spinOnce();	
 		}
 
-void cmdCallback(const std_msgs::Float64& vel)
-{
-	realSpeed = vel.data;
-}
+		void cmdCallback(const std_msgs::Float64& vel)
+		{
+			realSpeed = vel.data;
+		}
 
 
 		private: 
