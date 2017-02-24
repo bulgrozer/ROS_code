@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include "functionnal_pkg/velOrder.h"
 
+#define UPDATE_RATE 1000
+
 
 //*****************************************************************************//
 //** Attention !!! Lire README et faire les commandes décrites à l'intérieur **//
@@ -112,10 +114,10 @@ class realUltrasonicMeasureClass
 				ros::spinOnce();	
 		}
 
-void cmdCallback(const std_msgs::Float64& vel)
-{
-	realSpeed = vel.data;
-}
+		void cmdCallback(const std_msgs::Float64& vel)
+		{
+			realSpeed = vel.data;
+		}
 
 
 		private: 
@@ -145,7 +147,7 @@ int main(int argc, char **argv)
  	ros::init(argc, argv, "realUltrasonicMeasureClass");
 	realUltrasonicMeasureClass realUltrasonic;
 
-	ros::Rate r(1000);		// 1000 Hz
+	ros::Rate r(UPDATE_RATE);		// in Hz
 
 	while (ros::ok())
 	{

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+<group ns="RasPi1">
+	<include file="$(find functionnal_pkg)/launch/functionnal.launch">	</include>
+
+	<include file="$(find dependency_pkg)/launch/dependency.launch"> </include>
+
+</group>
+
+</launch>

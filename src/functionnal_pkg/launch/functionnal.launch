@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+<!-- PID Back up -->		
+  <node name="distanceSecurityCalculatorClass" pkg="functionnal_pkg" type="distanceSecurityCalculatorClass" output="screen" />
+	
+	<node name="measureManagerClass" pkg="functionnal_pkg" type="measureManagerClass" output="screen"/>
+
+	<node name="realUltrasonicMeasureClass" pkg="functionnal_pkg" type="realUltrasonicMeasureClass" output="screen"/>
+
+	<node name="cmdManagerClass" pkg="functionnal_pkg" type="cmdManagerClass" output="screen"/>
+
+<!-- PID TJP Controller -->	
+	<include file="$(find tjp_pid)/launch/differential_drive_sim.launch"> </include>
+
+</launch>

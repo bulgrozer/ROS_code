@@ -4,8 +4,11 @@
 #include <std_msgs/Bool.h>
 #include "functionnal_pkg/velOrder.h"
 
-//#include <gazebo_msgs/ApplyJointEffort.h>
 
+//#include <gazebo_msgs/ApplyJointEffort.h>
+#define FOLLOWER_MODE false
+#define MASTER_MODE true
+#define UPDATE_RATE 1000
 
 class cmdManagerClass
 {
@@ -27,7 +30,7 @@ class cmdManagerClass
 			pid_enable_backup.data = true;
 			pub_enable_backup.publish(pid_enable_backup); // Enable backup from the start
 
-			mode = true;			// depending on which raspberry it is launched
+			mode = FOLLOWER_MODE;			// depending on which raspberry is launched
 		}
 
 	private:
@@ -50,7 +53,7 @@ class cmdManagerClass
 	void cmdCallback1(const functionnal_pkg::velOrder& cmd)   
 	{
 		
-		if (mode == true)
+		if (mode == MASTER_MODE)
 		{
 
 			std_msgs::Float64 velCmd;
@@ -104,7 +107,7 @@ class cmdManagerClass
 // %Tag(CALLBACK2)%
 	void cmdCallback2(const std_msgs::Bool& cmd)   
 	{
-			mode = cmd.data; 
+			mode = cmd.data; // TRUE = MASTER_MODE, FALSE = FOLLOWER_MODE
 	}
 
 };
@@ -113,12 +116,20 @@ class cmdManagerClass
 int main(int argc, char **argv)
 {
 
-		ros::init(argc, argv, "cmdManagerClass");
-		cmdManagerClass cmd_manager;
+	ros::init(argc, argv, "cmdManagerClass");
+	cmdManagerClass cmd_manager;
+
+	ros::Rate r(UPDATE_RATE);		// in Hz
+
+	while (ros::ok())
+	{
 	 
 		// %Tag(SPIN)%
-		ros::spin();
+		ros::spinOnce();
 		// %EndTag(SPIN)%
+
+		r.sleep();
+	}
 
   return 0;
 }

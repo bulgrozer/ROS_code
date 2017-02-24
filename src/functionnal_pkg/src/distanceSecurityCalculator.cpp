@@ -13,6 +13,8 @@
 #include "ros/rate.h"
 #include "functionnal_pkg/errorMsg.h"
 
+#define UPDATE_RATE 1000
+
 
 
 class distanceSecurityCalculatorClass
@@ -111,13 +113,12 @@ class distanceSecurityCalculatorClass
 		// compute of distance setpoints
 		std_msgs::Float64 d_setpoint;
 		//std::cout << "Vitesse : " << mean << std::endl;
-		d_setpoint.data = 2 + 1.5*(6*(mean*3.6)/10) ;
+		d_setpoint.data = 2 + 6*(mean*3.6)/10 ;
 
 		j++;
 		if (j == 10) j = 0;
 
 		// %Tag(PUBLISH)%
-		//ROS_INFO("Envoi distanceOrderT");
 	  pub.publish(d_setpoint);
 		// %EndTag(PUBLISH)%
 
@@ -131,19 +132,18 @@ class distanceSecurityCalculatorClass
 
 int main(int argc, char **argv)
 {
-	//ros::Rate r(100);		// 100 Hz
+	ros::init(argc, argv, "distanceSecurityCalculatorClass");
+	distanceSecurityCalculatorClass distanceSetPoint;
 
-	//while (ros::ok())
-	//{
+	ros::Rate r(UPDATE_RATE);		// in Hz
 
-		ros::init(argc, argv, "distanceSecurityCalculatorClass");
-		distanceSecurityCalculatorClass distanceSetPoint;
-
+	while (ros::ok())
+	{
 		// %Tag(SPIN)%
-		ros::spin();
+		ros::spinOnce();
 		// %EndTag(SPIN)%
-		//r.sleep();
-	//}
+		r.sleep();
+	}
 	
   return 0;
 }
