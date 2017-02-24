@@ -225,14 +225,14 @@ class measureManagerClass
 			error.node_name = "measureManagerClass";
 			error.id = errorid;
 
+			ROS_ERROR("The sonar sensor number [%d] has a failure in one of its data", errorid)
+
 			pub_error.publish(error);
 			ros::spinOnce();
 		}	
 		std_msgs::Float64 d_cmd;
 
 	  d_cmd.data = d_final;
-	  //d_cmd.data = 0;
-		//ROS_INFO("Envoi distanceCmdT");
 
 		// %Tag(PUBLISH)%
 	    pub.publish(d_cmd);
@@ -241,17 +241,13 @@ class measureManagerClass
 		// %Tag(SPINONCE)%
 		  ros::spinOnce();
 		// %EndTag(SPINONCE)%
-
-		 //ROS_INFO("j'ai ecrit d_cmd : [%lf]", d_cmd);
-
-		
+	
 	}
 };
 
 
 int main(int argc, char **argv)
 {
-  
   ros::init(argc, argv, "measureManagerClass");
   measureManagerClass measure_manager_class;
 
@@ -266,9 +262,8 @@ int main(int argc, char **argv)
 		
 		r.sleep();
 
-	}
+	} // end while
 
-	
   return 0;
 }
 // %EndTag(FULLTEXT)%
