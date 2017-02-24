@@ -225,7 +225,7 @@ class measureManagerClass
 			error.node_name = "measureManagerClass";
 			error.id = errorid;
 
-			ROS_ERROR("The sonar sensor number [%d] has a failure in one of its data", errorid)
+			ROS_ERROR("The sonar sensor number [%d] has a failure in one of its data", errorid);
 
 			pub_error.publish(error);
 			ros::spinOnce();
