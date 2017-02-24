@@ -119,7 +119,6 @@ class distanceSecurityCalculatorClass
 		if (j == 10) j = 0;
 
 		// %Tag(PUBLISH)%
-		//ROS_INFO("Envoi distanceOrderT");
 	  pub.publish(d_setpoint);
 		// %EndTag(PUBLISH)%
 
