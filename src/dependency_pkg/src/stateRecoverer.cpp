@@ -1,7 +1,4 @@
 #include <stdio.h>
-#include <unistd.h>			//Used for UART
-#include <fcntl.h>			//Used for UART
-#include <termios.h>
 #include <string>
 
 #include "ros/ros.h"

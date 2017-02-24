@@ -139,7 +139,7 @@ catkin_package(
  add_executable(nodeReinitialiser src/nodeReinitialiser.cpp)
  add_executable(errorManager src/errorManager.cpp)
  add_executable(stateRecoverer src/stateRecoverer.cpp)
-
+ add_executable(watchdogInterface src/watchdogInterface.cpp src/GPIO.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -151,12 +151,13 @@ catkin_package(
  add_dependencies(nodeReinitialiser ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
  add_dependencies(errorManager ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
  add_dependencies(stateRecoverer ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
+ add_dependencies(watchdogInterface ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(nodeReinitialiser ${catkin_LIBRARIES} )
  target_link_libraries(errorManager ${catkin_LIBRARIES} )
  target_link_libraries(stateRecoverer ${catkin_LIBRARIES} )
+ target_link_libraries(watchdogInterface ${catkin_LIBRARIES} )
 
 #############
 ## Install ##
