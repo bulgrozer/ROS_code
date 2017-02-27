@@ -57,7 +57,7 @@ class errorManager
 					if ( (TAB[i].time[j] - TAB[i].time[(j+5)%5]).sec < 1)
 					{
 						j = 0;
-						killMsg.password = 0000 ;
+						killMsg.password = 0;
 						killMsg.nodeName = err.node_name ;
 						killMsg.nodeState = false ;
 						pub.publish(killMsg);
