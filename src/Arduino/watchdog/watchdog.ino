@@ -1,18 +1,20 @@
 
-#define  TJPACTBTN  7
+#define  TJPACTBTN  5
 #define INITIMEOUT 5000
 
 const int aliveRaspy1=8; // impulse signal 
 const int inStateRaspy1=9; // Raspy 1 indicates its state to arduino HIGH=master LOW=follower
 const int outStateRaspy1=10; // arduino imposes the master/follower state to Raspy 1 HIGH=master LOW=follower
-const int redLed1=5;
-const int greenLed1=6;
+const int redLed1=2;
+const int greenLed1=3;
+
+const int yellowLed=4;
 
 const int aliveRaspy2=11; // impulse signal
 const int inStateRaspy2=12; // Raspy 2 indicates its state to arduino HIGH=master LOW=follower
 const int outStateRaspy2=13; // arduino imposes the master/follower state to Raspy 2 HIGH=master LOW=follower
-const int redLed2=2;
-const int greenLed2=3;
+const int redLed2=6;
+const int greenLed2=7;
 
 int timeout = INITIMEOUT;
 int masterRpi = -1;
@@ -33,6 +35,7 @@ void setup() {
   pinMode(greenLed1, OUTPUT);
   pinMode(redLed2, OUTPUT);
   pinMode(greenLed2, OUTPUT);
+  pinMode(yellowLed, OUTPUT);
   
   // initialization
   digitalWrite(outStateRaspy1, LOW); // Raspy1 is not master
@@ -41,17 +44,26 @@ void setup() {
   digitalWrite(greenLed1, LOW);
   digitalWrite(redLed2, LOW);
   digitalWrite(greenLed2, LOW);
+  digitalWrite(yellowLed, LOW);
 }
 
 
 void loop() {
   // put your main code here, to run repeatedly:
    
-   if (digitalRead(TJPACTBTN))
+   if (digitalRead(TJPACTBTN)==HIGH)
    {
     digitalWrite(outStateRaspy1, HIGH); // Raspy1 is master
     masterRpi = 1;
     digitalWrite(outStateRaspy2, LOW); // Raspy2 is follower
+    digitalWrite(yellowLed, HIGH);
+   }
+   else if (digitalRead(TJPACTBTN)==LOW)
+   {
+    
+    digitalWrite(outStateRaspy1, LOW); // Raspy1 is follower
+    digitalWrite(outStateRaspy2, LOW); // Raspy2 is follower
+    digitalWrite(yellowLed, LOW);
    }
 
   if (masterRpi == 1)   
