@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 #include "ros/ros.h"
 #include <std_msgs/Float64.h>
 #include <unistd.h>
@@ -9,7 +9,10 @@
 
 #define UPDATE_RATE 1000
 
+#define TRUE 1
 
+#define TRIG 2
+#define ECHO 3
 //*****************************************************************************//
 //** Attention !!! Lire README et faire les commandes décrites à l'intérieur **//
 //*****************************************************************************//
@@ -21,6 +24,13 @@ class realUltrasonicMeasureClass
 		
 		realUltrasonicMeasureClass()
 		{
+      wiringPiSetup();
+			pinMode(TRIG, OUTPUT);
+			pinMode(ECHO, INPUT);
+												 
+			//TRIG pin must start LOW
+			digitalWrite(TRIG, LOW);
+			delay(30);
 			distance=0;
 
 			//counter = 0;
@@ -47,7 +57,7 @@ class realUltrasonicMeasureClass
 		}
 
 		 int sendData()
-		{
+		{/*
 				timer_file = open("/dev/us_service", O_RDWR);
 				if (timer_file < 0)
 				{
@@ -70,8 +80,19 @@ class realUltrasonicMeasureClass
 				close(timer_file);
 
 				distance = distance/58.8235; // distance in centimeters
+*/
 
-
+        //Send trig pulse
+				digitalWrite(TRIG, HIGH);
+				delayMicroseconds(20);
+				digitalWrite(TRIG, LOW);
+				//Wait for echo start
+				while(digitalRead(ECHO) == LOW);																								        //Wait for echo end
+					long startTime = micros();
+					while(digitalRead(ECHO) == HIGH);
+					long travelTime = micros() - startTime;
+					//Get distance in cm
+				 distance = travelTime / 58;
 
 				// BUFFER
 				float mean = 400;

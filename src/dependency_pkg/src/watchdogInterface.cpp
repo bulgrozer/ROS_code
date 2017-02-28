@@ -18,9 +18,9 @@ class watchdogInterface
 {
 
 #define UPDATE_RATE 100
-#define PIN_ALIVE					1
-#define PIN_WANTED_MODE		2
-#define PIN_ACTUAL_MODE		3
+#define PIN_ALIVE					17
+#define PIN_WANTED_MODE		22
+#define PIN_ACTUAL_MODE		27
 
 #define IN								0
 #define OUT								1
