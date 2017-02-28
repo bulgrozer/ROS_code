@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "GPIO.h"
+#include "wiringPi.h"
 #include <string>
 
 #include "ros/ros.h"
@@ -22,8 +22,6 @@ class watchdogInterface
 #define PIN_WANTED_MODE		22
 #define PIN_ACTUAL_MODE		27
 
-#define IN								0
-#define OUT								1
 #define LOW								0
 #define HIGH							1
 
@@ -43,25 +41,23 @@ class watchdogInterface
 		pub = np.advertise<std_msgs::Bool>("redundancyMode_topic",1);
 		sub = ns.subscribe("redundancyMode_topic",1, &watchdogInterface::modeCallback, this);
 
-		GPIOExport(PIN_ALIVE);
-		GPIOExport(PIN_WANTED_MODE);
-		GPIOExport(PIN_ACTUAL_MODE);
+		wiringPiSetup();
 
-		GPIODirection(PIN_ALIVE,			OUT);
-		GPIODirection(PIN_WANTED_MODE,IN);
-		GPIODirection(PIN_ACTUAL_MODE,OUT);
+		pinMode(PIN_ALIVE,	OUTPUT);
+		pinMode(PIN_WANTED_MODE,INPUT);
+		pinMode(PIN_ACTUAL_MODE,OUTPUT);
 	}
 
 	void alive() 
 	{
-		GPIOWrite(PIN_ALIVE, HIGH);
+		digitalWrite(PIN_ALIVE, HIGH);
 		usleep(50);
-		GPIOWrite(PIN_ALIVE, LOW);
+		digitalWrite(PIN_ALIVE, LOW);
 	}
 
 	void readWantedState()
 	{
-		bool mode = GPIORead(PIN_WANTED_MODE);
+		bool mode = digitalRead(PIN_WANTED_MODE);
 		if (mode != actualMode)
 		{
 			std_msgs::Bool newMode;
@@ -77,7 +73,7 @@ class watchdogInterface
 
 	void modeCallback(const std_msgs::Bool mode)
 	{
-		GPIOWrite(PIN_ACTUAL_MODE, mode.data);
+		digitalWrite(PIN_ACTUAL_MODE, mode.data);
 	}
 
 };
