@@ -108,6 +108,9 @@ class cmdManagerClass
 	void cmdCallback2(const std_msgs::Bool& cmd)   
 	{
 			mode = cmd.data; // TRUE = MASTER_MODE, FALSE = FOLLOWER_MODE
+
+			if (mode == true){ROS_INFO("The Raspberry is switching in Master mode");}
+			else{ROS_INFO("The Raspberry is switching in Follower mode");}
 	}
 
 };
