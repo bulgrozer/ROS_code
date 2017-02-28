@@ -105,6 +105,7 @@ class realUltrasonicMeasureClass
 				//detection of a close object
 				if (mean < 100)
 				{
+					ROS_INFO("There is something in front of the car ! Emergency Brake activated"); 
 					vel_order.priority = 2;
 					vel_order.data = 0;							//emergency brake
 					vel_order.release = false;
