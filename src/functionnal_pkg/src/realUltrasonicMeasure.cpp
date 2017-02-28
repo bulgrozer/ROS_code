@@ -48,7 +48,7 @@ class realUltrasonicMeasureClass
 
 		 int sendData()
 		{
-				/*timer_file = open("/dev/us_service", O_RDWR);
+				timer_file = open("/dev/us_service", O_RDWR);
 				if (timer_file < 0)
 				{
 				    fputs("open() failed, aborting...\n", stderr);
@@ -71,7 +71,7 @@ class realUltrasonicMeasureClass
 
 				distance = distance/58.8235; // distance in centimeters
 
-*/
+
 
 				// BUFFER
 				float mean = 400;
@@ -105,11 +105,10 @@ class realUltrasonicMeasureClass
 				//detection of a close object
 				if (mean < 100)
 				{
-					ROS_INFO("There is something in front of the car ! Emergency Brake activated"); 
 					vel_order.priority = 2;
 					vel_order.data = 0;							//emergency brake
 					vel_order.release = false;
-					//pub.publish(vel_order);
+					pub.publish(vel_order);
 				}
 
 				ros::spinOnce();	
