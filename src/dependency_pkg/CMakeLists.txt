@@ -157,8 +157,7 @@ catkin_package(
  target_link_libraries(nodeReinitialiser ${catkin_LIBRARIES} )
  target_link_libraries(errorManager ${catkin_LIBRARIES} )
  target_link_libraries(stateRecoverer ${catkin_LIBRARIES} )
- target_link_libraries(watchdogInterface ${catkin_LIBRARIES} )
-
+ target_link_libraries(watchdogInterface ${catkin_LIBRARIES} wiringPi )
 #############
 ## Install ##
 #############

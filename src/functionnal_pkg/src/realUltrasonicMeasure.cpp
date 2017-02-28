@@ -11,8 +11,8 @@
 
 #define TRUE 1
 
-#define TRIG 2
-#define ECHO 3
+#define TRIG 8 
+#define ECHO 9
 //*****************************************************************************//
 //** Attention !!! Lire README et faire les commandes décrites à l'intérieur **//
 //*****************************************************************************//

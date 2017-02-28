@@ -226,6 +226,6 @@ add_dependencies(distanceSecurityCalculatorClass ${${PROJECT_NAME}_EXPORTED_TARG
 
 target_link_libraries(cmdManagerClass ${catkin_LIBRARIES})
 target_link_libraries(measureManagerClass ${catkin_LIBRARIES})
-target_link_libraries(realUltrasonicMeasureClass ${catkin_LIBRARIES})
+target_link_libraries(realUltrasonicMeasureClass ${catkin_LIBRARIES} wiringPi)
 target_link_libraries(distanceSecurityCalculatorClass ${catkin_LIBRARIES})
 
