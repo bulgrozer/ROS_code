@@ -22,7 +22,7 @@ const int outStateRaspy2 = 13; // arduino imposes the master/follower state to R
 int timeout;
 int masterRpi = -1;
 int lastState = 0;
-
+int activate;
 
 void setup() {
   // put your setup code here, to run once:
@@ -51,20 +51,24 @@ void setup() {
   digitalWrite(yellowLed, LOW);
 
   timeout = INITIMEOUT;
+  activate = 1;
 }
 
 
 void loop() {
+
   // put your main code here, to run repeatedly:
   //Update LED states following the info from raspis :
   digitalWrite(greenLed1, digitalRead(inStateRaspy1));
   digitalWrite(greenLed2, digitalRead(inStateRaspy2));
 
-  if (digitalRead(TJPACTBTN) == HIGH) // to activate the TJP
+  if (digitalRead(TJPACTBTN) && activate) // to activate the TJP
   {
+    activate = 0;
     digitalWrite(outStateRaspy1, HIGH); // Raspy1 is master
     masterRpi = 1;
     digitalWrite(outStateRaspy2, LOW); // Raspy2 is follower
+    delay(1000);
     digitalWrite(yellowLed, HIGH);
   }
   else if (digitalRead(TJPACTBTN) == LOW) // to disable the TJP
@@ -72,9 +76,11 @@ void loop() {
     digitalWrite(outStateRaspy1, LOW); // Raspy1 is follower
     digitalWrite(outStateRaspy2, LOW); // Raspy2 is follower
     digitalWrite(yellowLed, LOW);
+    activate = 1;
   }
 
   timeout--;
+  if (timeout < 0) timeout = 0;
 
   if (masterRpi == 1)   // Raspy 1 is master
   {
@@ -87,8 +93,7 @@ void loop() {
       timeout = INITIMEOUT;  // reset the timeout when it detects a new rising edge in the impulse signal
       lastState = 1;
     }
-
-
+    
     if (timeout != 0 )  // if the raspy is still alive
     {
       if (digitalRead(inStateRaspy1) == LOW) // if the raspy asks to be a follower
@@ -97,6 +102,8 @@ void loop() {
         digitalWrite(outStateRaspy1, LOW);
         masterRpi = 2;
         lastState = 0;
+        timeout = INITIMEOUT;  // reset the timeout
+
       }
     }
     else // if the raspy has crashed
@@ -106,6 +113,9 @@ void loop() {
       digitalWrite(outStateRaspy1, LOW);
       masterRpi = 2;
       lastState = 0;
+      timeout = INITIMEOUT;  // reset the timeout
+      delay(1000);
+
     }
   }
 
