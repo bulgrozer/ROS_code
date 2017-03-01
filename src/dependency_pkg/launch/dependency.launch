@@ -6,4 +6,6 @@
 
 	<node name="stateRecoverer" pkg="dependency_pkg" type="stateRecoverer" output="screen" />
 
+	<node name="watchdogInterface" pkg="dependency_pkg" type="watchdogInterface" output="screen" />
+
 </launch>

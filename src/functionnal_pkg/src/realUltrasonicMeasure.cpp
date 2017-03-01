@@ -7,9 +7,9 @@
 #include <fcntl.h>
 #include "functionnal_pkg/velOrder.h"
 
-#define UPDATE_RATE 1000
+#define UPDATE_RATE 10
 
-#define TRUE 1
+
 
 #define TRIG 8 
 #define ECHO 9
@@ -84,15 +84,19 @@ class realUltrasonicMeasureClass
 
         //Send trig pulse
 				digitalWrite(TRIG, HIGH);
-				delayMicroseconds(20);
+				delayMicroseconds(10);
 				digitalWrite(TRIG, LOW);
 				//Wait for echo start
+				ROS_INFO("Wait for the echo start");
 				while(digitalRead(ECHO) == LOW);																								        //Wait for echo end
 					long startTime = micros();
+					ROS_INFO("Wait for the echo end");
 					while(digitalRead(ECHO) == HIGH);
+					ROS_INFO("Calculation of the distance");
 					long travelTime = micros() - startTime;
 					//Get distance in cm
 				 distance = travelTime / 58;
+				ROS_INFO("La distance est : %lf", distance);
 
 				// BUFFER
 				float mean = 400;

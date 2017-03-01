@@ -17,10 +17,10 @@ using namespace std;
 class watchdogInterface
 {
 
-#define UPDATE_RATE 100
-#define PIN_ALIVE					17
-#define PIN_WANTED_MODE		22
-#define PIN_ACTUAL_MODE		27
+#define UPDATE_RATE 10
+#define PIN_ALIVE					0
+#define PIN_WANTED_MODE		3
+#define PIN_ACTUAL_MODE		2
 
 #define LOW								0
 #define HIGH							1
@@ -51,6 +51,7 @@ class watchdogInterface
 	void alive() 
 	{
 		digitalWrite(PIN_ALIVE, HIGH);
+		// ROS_INFO("I'm alive");
 		usleep(50);
 		digitalWrite(PIN_ALIVE, LOW);
 	}
@@ -58,6 +59,7 @@ class watchdogInterface
 	void readWantedState()
 	{
 		bool mode = digitalRead(PIN_WANTED_MODE);
+		digitalWrite(PIN_ACTUAL_MODE, mode);
 		if (mode != actualMode)
 		{
 			std_msgs::Bool newMode;
@@ -74,6 +76,7 @@ class watchdogInterface
 	void modeCallback(const std_msgs::Bool mode)
 	{
 		digitalWrite(PIN_ACTUAL_MODE, mode.data);
+		ROS_INFO("I want to be in %i mode", mode.data);
 	}
 
 };
@@ -91,7 +94,8 @@ int main(int argc, char **argv)
 		interface.alive();
 		interface.readWantedState();
 		ros::spinOnce();
-		rate.sleep();
+		//rate.sleep();
+		//usleep(100);
 	}
 
 	return 0;
